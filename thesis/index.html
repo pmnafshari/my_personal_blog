@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>راهنمای کامل پروژه پایان‌نامه — از صفر تا صد</title>
+<style>
+  body {
+    font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif;
+    direction: rtl;
+    text-align: right;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 30px;
+    background: #fafafa;
+    color: #1a1a1a;
+    line-height: 2.2;
+    font-size: 15px;
+    transition: direction 0.3s, text-align 0.3s;
+  }
+  body.en-mode {
+    direction: ltr;
+    text-align: left;
+  }
+  h1 { font-size: 26px; color: #1a3a5c; border-bottom: 3px solid #1a3a5c; padding-bottom: 10px; }
+  h2 { font-size: 22px; color: #2c5f8a; margin-top: 50px; border-bottom: 2px solid #ccc; padding-bottom: 6px; }
+  h3 { font-size: 18px; color: #3a7cb8; margin-top: 35px; }
+  h4 { font-size: 16px; color: #555; margin-top: 25px; }
+  .label { font-weight: bold; color: #555; }
+  .file-ref { background: #eef3f8; padding: 2px 8px; border-radius: 4px; font-family: monospace; direction: ltr; display: inline-block; font-size: 13px; }
+
+  .concept-box {
+    background: #e8f4fd;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-right: 5px solid #2196F3;
+    margin: 20px 0;
+  }
+  body.en-mode .concept-box { border-right: none; border-left: 5px solid #2196F3; }
+  .concept-box h4 { color: #1565C0; margin-top: 0; }
+
+  .why-box {
+    background: #fff8e1;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-right: 5px solid #FFC107;
+    margin: 20px 0;
+  }
+  body.en-mode .why-box { border-right: none; border-left: 5px solid #FFC107; }
+  .why-box h4 { color: #F57F17; margin-top: 0; }
+
+  .important {
+    background: #d4edda;
+    padding: 12px 18px;
+    border-radius: 8px;
+    border-right: 5px solid #28a745;
+    margin: 20px 0;
+  }
+  body.en-mode .important { border-right: none; border-left: 5px solid #28a745; }
+
+  .warning {
+    background: #f8d7da;
+    padding: 12px 18px;
+    border-radius: 8px;
+    border-right: 5px solid #dc3545;
+    margin: 20px 0;
+  }
+  body.en-mode .warning { border-right: none; border-left: 5px solid #dc3545; }
+
+  .analogy {
+    background: #f3e5f5;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-right: 5px solid #9C27B0;
+    margin: 20px 0;
+  }
+  body.en-mode .analogy { border-right: none; border-left: 5px solid #9C27B0; }
+  .analogy h4 { color: #7B1FA2; margin-top: 0; }
+
+  .bio-box {
+    background: #e8f5e9;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-right: 5px solid #4CAF50;
+    margin: 20px 0;
+  }
+  body.en-mode .bio-box { border-right: none; border-left: 5px solid #4CAF50; }
+  .bio-box h4 { color: #2E7D32; margin-top: 0; }
+
+  .journey-box {
+    background: #fff3e0;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-right: 5px solid #FF9800;
+    margin: 20px 0;
+  }
+  body.en-mode .journey-box { border-right: none; border-left: 5px solid #FF9800; }
+  .journey-box h4 { color: #E65100; margin-top: 0; }
+
+  code {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'SF Mono', 'Menlo', monospace;
+    font-size: 13px;
+    direction: ltr;
+    display: inline-block;
+  }
+
+  pre {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-family: 'SF Mono', 'Menlo', monospace;
+    font-size: 13px;
+    direction: ltr;
+    text-align: left;
+    overflow-x: auto;
+    line-height: 1.6;
+  }
+  pre .comment { color: #6a9955; }
+  pre .keyword { color: #c586c0; }
+  pre .string { color: #ce9178; }
+  pre .number { color: #b5cea8; }
+  pre .func { color: #dcdcaa; }
+  pre .class { color: #4ec9b0; }
+
+  ul { padding-right: 25px; }
+  body.en-mode ul { padding-right: 0; padding-left: 25px; }
+  li { margin-bottom: 10px; }
+  table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px; }
+  th { background: #2c5f8a; color: white; padding: 10px 12px; text-align: center; }
+  td { padding: 8px 12px; text-align: center; border-bottom: 1px solid #ddd; }
+  tr:nth-child(even) { background: #f0f4f8; }
+  .good { color: #28a745; font-weight: bold; }
+  .bad { color: #dc3545; font-weight: bold; }
+  .sep { border-top: 2px dashed #ccc; margin: 50px 0; }
+  .plot-container { text-align: center; margin: 20px 0; background: white; padding: 15px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+  .plot-container img { max-width: 100%; height: auto; border-radius: 4px; }
+  .plot-pair { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+  .plot-pair .plot-container { flex: 1; min-width: 400px; }
+  .step-num { display: inline-block; background: #2c5f8a; color: white; width: 30px; height: 30px; border-radius: 50%; text-align: center; line-height: 30px; margin-left: 8px; font-weight: bold; font-size: 14px; }
+  body.en-mode .step-num { margin-left: 0; margin-right: 8px; }
+  .toc { background: white; padding: 20px 30px; border-radius: 10px; border: 1px solid #ddd; margin: 30px 0; }
+  .toc a { color: #2c5f8a; text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .toc li { margin-bottom: 5px; }
+
+  /* Language toggle button */
+  #lang-toggle {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 9999;
+    background: #2c5f8a;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    transition: background 0.2s;
+  }
+  #lang-toggle:hover { background: #1a3a5c; }
+
+  /* Language visibility */
+  .fa { display: inline; }
+  .en { display: none; }
+  body.en-mode .fa { display: none; }
+  body.en-mode .en { display: inline; }
+
+  /* For block-level spans */
+  span.fa.block { display: block; }
+  span.en.block { display: none; }
+  body.en-mode span.fa.block { display: none; }
+  body.en-mode span.en.block { display: block; }
+
+  /* Fix for list items with spans */
+  li .fa { display: inline; }
+  li .en { display: none; }
+  body.en-mode li .fa { display: none; }
+  body.en-mode li .en { display: inline; }
+
+  @media print { body { max-width: 100%; margin: 20px; } #lang-toggle { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- LANGUAGE TOGGLE BUTTON -->
+<button id="lang-toggle" onclick="toggleLanguage()">English &#127468;&#127463;</button>
+
+<script>
+function toggleLanguage() {
+  var body = document.body;
+  var btn = document.getElementById('lang-toggle');
+  if (body.classList.contains('en-mode')) {
+    body.classList.remove('en-mode');
+    body.setAttribute('dir', 'rtl');
+    document.documentElement.setAttribute('lang', 'fa');
+    document.documentElement.setAttribute('dir', 'rtl');
+    btn.innerHTML = 'English &#127468;&#127463;';
+  } else {
+    body.classList.add('en-mode');
+    body.setAttribute('dir', 'ltr');
+    document.documentElement.setAttribute('lang', 'en');
+    document.documentElement.setAttribute('dir', 'ltr');
+    btn.innerHTML = '&#1601;&#1575;&#1585;&#1587;&#1740; &#127470;&#127479;';
+  }
+}
+</script>
+
+<!-- ============================================================ -->
+<h1>
+  <span class="fa">راهنمای کامل پروژه پایان‌نامه — از صفر تا صد</span>
+  <span class="en">Complete Thesis Project Guide — From Zero to Hero</span>
+</h1>
+<p>
+  <span class="label"><span class="fa">عنوان پایان‌نامه:</span><span class="en">Thesis Title:</span></span>
+  <span class="fa">ابزارهای تشخیصی/پیش‌آگهی نوین مبتنی بر داده‌های AFM و یادگیری عمیق</span>
+  <span class="en">Novel Diagnostic/Prognostic Tools Based on AFM Data and Deep Learning</span>
+</p>
+<p>
+  <span class="label"><span class="fa">هدف:</span><span class="en">Goal:</span></span>
+  <span class="fa">تشخیص درجه تومور مغزی (مننژیوما) با استفاده از ترکیب داده‌های میکروسکوپ نیروی اتمی و تصاویر بافت‌شناسی</span>
+  <span class="en">Brain tumor (meningioma) grade classification using a combination of Atomic Force Microscopy data and histology images</span>
+</p>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+<h3><span class="fa">فهرست مطالب</span><span class="en">Table of Contents</span></h3>
+<ol>
+  <li><a href="#part0"><span class="fa">بخش ۰: مبانی مهندسی زیستی — سفر از بیمار تا داده</span><span class="en">Part 0: Bioengineering Foundations — The Journey from Patient to Data</span></a></li>
+  <li><a href="#part1"><span class="fa">بخش ۱: مفاهیم پایه — قبل از هر چیز اینها رو بدون</span><span class="en">Part 1: Fundamentals — Know These First</span></a></li>
+  <li><a href="#part2"><span class="fa">بخش ۲: داده‌ها — با چه چیزی کار می‌کنیم؟</span><span class="en">Part 2: Data — What Are We Working With?</span></a></li>
+  <li><a href="#part3"><span class="fa">بخش ۳: پیش‌پردازش — داده خام رو آماده کن</span><span class="en">Part 3: Preprocessing — Preparing Raw Data</span></a></li>
+  <li><a href="#part4"><span class="fa">بخش ۴: مدل‌ها — مغز سیستم ما</span><span class="en">Part 4: Models — The Brain of Our System</span></a></li>
+  <li><a href="#part5"><span class="fa">بخش ۵: آموزش — مدل چطور یاد می‌گیره؟</span><span class="en">Part 5: Training — How Does the Model Learn?</span></a></li>
+  <li><a href="#part6"><span class="fa">بخش ۶: ارزیابی — از کجا بفهمیم مدل خوب کار می‌کنه؟</span><span class="en">Part 6: Evaluation — How Do We Know the Model Works?</span></a></li>
+  <li><a href="#part7"><span class="fa">بخش ۷: تحلیل پلات‌ها — نتایج رو بخون</span><span class="en">Part 7: Plot Analysis — Reading the Results</span></a></li>
+  <li><a href="#part8"><span class="fa">بخش ۸: سوالات احتمالی استاد + جواب</span><span class="en">Part 8: Potential Examiner Questions + Answers</span></a></li>
+</ol>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- PART 0: BIOENGINEERING FOUNDATIONS -->
+<!-- ============================================================ -->
+<div class="sep"></div>
+<h2 id="part0">
+  <span class="fa">بخش ۰: مبانی مهندسی زیستی — سفر از بیمار تا داده</span>
+  <span class="en">Part 0: Bioengineering Foundations — The Journey from Patient to Data</span>
+</h2>
+
+<!-- ===== MENINGIOMA IN DETAIL ===== -->
+<h3>
+  <span class="fa">۰.۱ مننژیوما — تومور مغزی به زبان ساده</span>
+  <span class="en">0.1 Meningioma — Brain Tumor Explained Simply</span>
+</h3>
+
+<div class="bio-box">
+  <h4><span class="fa">مننژ چیست؟</span><span class="en">What Are the Meninges?</span></h4>
+  <p>
+    <span class="fa">مغز و نخاع شما درون سه لایه محافظ پیچیده شدن که بهشون <strong>مننژ (Meninges)</strong> می‌گن. مثل سه لایه بسته‌بندی حبابی دور یه شیشه ظریف. این سه لایه از بیرون به داخل عبارتند از:</span>
+    <span class="en">Your brain and spinal cord are wrapped inside three protective layers called the <strong>meninges</strong>. Think of them like three layers of bubble wrap around a delicate glass vase. From outermost to innermost, they are:</span>
+  </p>
+  <ul>
+    <li><span class="fa"><strong>سخت‌شامه (Dura Mater):</strong> سخت‌ترین لایه، چسبیده به جمجمه — مثل پوسته سخت یه بادام</span><span class="en"><strong>Dura Mater:</strong> The toughest layer, attached to the skull — like the hard shell of an almond</span></li>
+    <li><span class="fa"><strong>عنکبوتیه (Arachnoid Mater):</strong> لایه میانی، مثل تار عنکبوت — شکننده ولی پر از مایع مغزی‌نخاعی</span><span class="en"><strong>Arachnoid Mater:</strong> The middle layer, like a spider web — delicate but filled with cerebrospinal fluid</span></li>
+    <li><span class="fa"><strong>نرم‌شامه (Pia Mater):</strong> نازک‌ترین لایه، دقیقاً روی سطح مغز — مثل لفاف نایلونی چسبیده به مغز</span><span class="en"><strong>Pia Mater:</strong> The thinnest layer, directly on the brain surface — like plastic wrap hugging the brain</span></li>
+  </ul>
+</div>
+
+<p>
+  <span class="fa"><strong>مننژیوما</strong> تومور‌ی هست که از سلول‌های لایه عنکبوتیه (arachnoid cap cells) رشد می‌کنه. این <strong>شایع‌ترین تومور اولیه مغز</strong> هست — حدود ۳۰ درصد تمام تومورهای مغزی. معمولاً بین مغز و جمجمه رشد می‌کنه و مثل یه توپ آهسته بزرگ‌تر می‌شه و به مغز فشار می‌آره.</span>
+  <span class="en"><strong>Meningioma</strong> is a tumor that grows from cells of the arachnoid layer (arachnoid cap cells). It is the <strong>most common primary brain tumor</strong> — about 30% of all brain tumors. It usually grows between the brain and skull, slowly enlarging like a ball and pressing against the brain.</span>
+</p>
+
+<div class="analogy">
+  <h4><span class="fa">تشبیه ساده</span><span class="en">Simple Analogy</span></h4>
+  <p>
+    <span class="fa">تصور کنید مغز یه توپ فوتبال هست که توی یه کلاه ایمنی (جمجمه) قرار داره. بین توپ و کلاه یه لایه ابری نرم هست (مننژ). مننژیوما مثل یه دکمه‌ست که روی این لایه ابری رشد می‌کنه و کم‌کم توپ رو فشار می‌ده. هر چی بزرگ‌تر بشه، فشار بیشتری به مغز وارد می‌کنه.</span>
+    <span class="en">Imagine the brain is a soccer ball sitting inside a helmet (skull). Between the ball and the helmet there is a soft cushioning layer (meninges). A meningioma is like a button growing on this cushion layer, slowly pressing against the ball. The bigger it gets, the more pressure it puts on the brain.</span>
+  </p>
+</div>
+
+<h4><span class="fa">انواع فرعی مننژیوما</span><span class="en">Meningioma Subtypes</span></h4>
+<p>
+  <span class="fa">مننژیوما زیرنوع‌های متعددی داره که بر اساس شکل سلول‌ها زیر میکروسکوپ تشخیص داده می‌شن:</span>
+  <span class="en">Meningioma has multiple subtypes identified by the shape of cells under a microscope:</span>
+</p>
+<ul>
+  <li><span class="fa"><strong>Meningothelial:</strong> شایع‌ترین نوع — سلول‌ها ورقه‌ورقه و یکنواخت. <em>این نوعی هست که ما روش کار می‌کنیم.</em></span><span class="en"><strong>Meningothelial:</strong> Most common type — cells are sheet-like and uniform. <em>This is the type we work with.</em></span></li>
+  <li><span class="fa"><strong>Transitional:</strong> ترکیبی از الگوهای مختلف — سلول‌ها چرخشی (whorls) ایجاد می‌کنن</span><span class="en"><strong>Transitional:</strong> Mix of different patterns — cells form whorls</span></li>
+  <li><span class="fa"><strong>Psammomatous:</strong> حاوی رسوبات کلسیمی (psammoma bodies) — دانه‌های ریز سنگی</span><span class="en"><strong>Psammomatous:</strong> Contains calcium deposits (psammoma bodies) — tiny stone-like granules</span></li>
+  <li><span class="fa"><strong>Fibrous:</strong> بافت رشته‌ای و فیبری غالب</span><span class="en"><strong>Fibrous:</strong> Dominant fibrous, thread-like tissue</span></li>
+</ul>
+
+<h4><span class="fa">سیستم درجه‌بندی WHO</span><span class="en">WHO Grading System</span></h4>
+<p>
+  <span class="fa">سازمان جهانی بهداشت (WHO) مننژیوما رو به سه درجه تقسیم می‌کنه بر اساس ویژگی‌های سلولی (تعداد میتوز، نفوذ به مغز، نکروز):</span>
+  <span class="en">The World Health Organization (WHO) divides meningiomas into three grades based on cellular features (mitotic count, brain invasion, necrosis):</span>
+</p>
+<table>
+  <tr>
+    <th><span class="fa">درجه WHO</span><span class="en">WHO Grade</span></th>
+    <th><span class="fa">توضیح</span><span class="en">Description</span></th>
+    <th><span class="fa">رفتار بالینی</span><span class="en">Clinical Behavior</span></th>
+    <th><span class="fa">فراوانی</span><span class="en">Frequency</span></th>
+    <th><span class="fa">بقای ۵ ساله</span><span class="en">5-Year Survival</span></th>
+  </tr>
+  <tr>
+    <td><strong>Grade 1</strong></td>
+    <td><span class="fa">خوش‌خیم (Benign)</span><span class="en">Benign</span></td>
+    <td><span class="fa">رشد آهسته، عود کم، اغلب فقط جراحی</span><span class="en">Slow growth, low recurrence, usually surgery only</span></td>
+    <td>~80%</td>
+    <td>>95%</td>
+  </tr>
+  <tr>
+    <td><strong>Grade 2</strong></td>
+    <td><span class="fa">آتیپیک (Atypical)</span><span class="en">Atypical</span></td>
+    <td><span class="fa">رشد سریع‌تر، احتمال عود ۴۰-۵۰٪، ممکنه رادیوتراپی لازم باشه</span><span class="en">Faster growth, 40-50% recurrence risk, may need radiotherapy</span></td>
+    <td>~15-20%</td>
+    <td>~80%</td>
+  </tr>
+  <tr>
+    <td><strong>Grade 3</strong></td>
+    <td><span class="fa">بدخیم (Malignant/Anaplastic)</span><span class="en">Malignant (Anaplastic)</span></td>
+    <td><span class="fa">تهاجمی، عود بالا، نیاز به درمان شدید</span><span class="en">Aggressive, high recurrence, needs aggressive treatment</span></td>
+    <td>~1-3%</td>
+    <td>~50-60%</td>
+  </tr>
+</table>
+
+<div class="why-box">
+  <h4><span class="fa">چرا تفکیک Grade 1 از Grade 2 مهمه؟</span><span class="en">Why Is Distinguishing Grade 1 from Grade 2 Important?</span></h4>
+  <p>
+    <span class="fa">تفاوت درجه مستقیماً روی درمان بیمار تأثیر می‌ذاره. بیمار Grade 1 ممکنه فقط نیاز به جراحی داشته باشه و بعد هر سال یه MRI کنترلی. ولی بیمار Grade 2 احتمالاً بعد از جراحی به <strong>رادیوتراپی</strong> هم نیاز داره و باید هر ۶ ماه پیگیری بشه. تشخیص زودتر و دقیق‌تر = درمان بهتر = عمر بیشتر.</span>
+    <span class="en">The grade difference directly impacts patient treatment. A Grade 1 patient may only need surgery and annual MRI follow-up. But a Grade 2 patient likely needs <strong>radiotherapy</strong> after surgery and must be monitored every 6 months. Earlier and more accurate diagnosis = better treatment = longer survival.</span>
+  </p>
+</div>
+
+<div class="important">
+  <span class="fa"><strong>هدف ما در این پروژه:</strong> ساختن یه سیستم هوش مصنوعی که بتونه از روی داده‌های فیزیکی (AFM) و تصویری (هیستولوژی) بگه یه تومور Grade 1 هست یا Grade 2 — بدون نیاز به پاتولوژیست متخصص.</span>
+  <span class="en"><strong>Our project goal:</strong> Building an AI system that can tell whether a tumor is Grade 1 or Grade 2 based on physical (AFM) and visual (histology) data — without needing an expert pathologist.</span>
+</div>
+
+
+<!-- ===== HISTOLOGY IN DETAIL ===== -->
+<h3>
+  <span class="fa">۰.۲ هیستولوژی — علم مطالعه بافت‌ها</span>
+  <span class="en">0.2 Histology — The Science of Studying Tissues</span>
+</h3>
+
+<div class="analogy">
+  <h4><span class="fa">تشبیه ساده</span><span class="en">Simple Analogy</span></h4>
+  <p>
+    <span class="fa">تصور کنید می‌خواید بفهمید داخل یه ساندویچ چه لایه‌هایی هست. اگه از بیرون نگاه کنید فقط نون می‌بینید. ولی اگه یه برش نازک ازش بزنید و از کنار نگاه کنید، همه لایه‌ها رو می‌بینید: نون، کاهو، پنیر، گوشت. هیستولوژی دقیقاً همین کار رو با بافت بدن می‌کنه.</span>
+    <span class="en">Imagine you want to know what layers are inside a sandwich. Looking from outside you only see bread. But if you cut a thin slice and look from the side, you see all layers: bread, lettuce, cheese, meat. Histology does exactly this with body tissue.</span>
+  </p>
+</div>
+
+<h4><span class="fa">مراحل آماده‌سازی نمونه بافتی</span><span class="en">Tissue Sample Preparation Steps</span></h4>
+<p><span class="fa">از لحظه جراحی تا رسیدن به تصویر دیجیتال:</span><span class="en">From surgery to digital image:</span></p>
+<ul>
+  <li>
+    <span class="fa"><span class="step-num">1</span> <strong>فیکساسیون (Fixation):</strong> بافت بلافاصله بعد از جراحی در محلول فرمالین (۱۰٪) قرار می‌گیره. فرمالین پروتئین‌ها رو «ثابت» می‌کنه تا بافت تجزیه نشه — مثل خشک کردن گل برای نگه‌داشتنش.</span>
+    <span class="en"><span class="step-num">1</span> <strong>Fixation:</strong> The tissue is immediately placed in formalin solution (10%) after surgery. Formalin "fixes" proteins to prevent decomposition — like pressing a flower to preserve it.</span>
+  </li>
+  <li>
+    <span class="fa"><span class="step-num">2</span> <strong>قالب‌گیری پارافینی (Embedding):</strong> بافت ثابت‌شده داخل پارافین (موم) ذوب‌شده غرق می‌شه. وقتی سرد بشه، یه بلوک سخت ایجاد می‌شه — مثل یه قالب ژله که بافت داخلشه.</span>
+    <span class="en"><span class="step-num">2</span> <strong>Paraffin Embedding:</strong> The fixed tissue is immersed in melted paraffin (wax). When cooled, it creates a solid block — like a jello mold with the tissue inside.</span>
+  </li>
+  <li>
+    <span class="fa"><span class="step-num">3</span> <strong>برش (Sectioning):</strong> با دستگاه <strong>میکروتوم</strong>، برش‌های بسیار نازک (۳-۵ میکرومتر — یعنی ۰.۰۰۳ تا ۰.۰۰۵ میلی‌متر!) از بلوک پارافینی برش داده می‌شه. این برش‌ها آنقدر نازکن که نور از توشون رد می‌شه.</span>
+    <span class="en"><span class="step-num">3</span> <strong>Sectioning:</strong> Using a <strong>microtome</strong>, extremely thin slices (3-5 micrometers — that's 0.003 to 0.005 mm!) are cut from the paraffin block. These sections are so thin that light passes through them.</span>
+  </li>
+  <li>
+    <span class="fa"><span class="step-num">4</span> <strong>نصب روی لام (Mounting):</strong> برش نازک روی یه لام شیشه‌ای قرار داده می‌شه و خشک می‌شه.</span>
+    <span class="en"><span class="step-num">4</span> <strong>Mounting:</strong> The thin section is placed on a glass slide and dried.</span>
+  </li>
+  <li>
+    <span class="fa"><span class="step-num">5</span> <strong>رنگ‌آمیزی H&E:</strong> مهم‌ترین مرحله! دو رنگ استفاده می‌شه:</span>
+    <span class="en"><span class="step-num">5</span> <strong>H&E Staining:</strong> The most important step! Two dyes are used:</span>
+    <ul>
+      <li><span class="fa"><strong>هماتوکسیلین (Hematoxylin):</strong> رنگ بنفش/آبی — هسته سلول‌ها رو رنگ می‌کنه (چون به DNA می‌چسبه)</span><span class="en"><strong>Hematoxylin:</strong> Purple/blue dye — stains cell nuclei (because it binds to DNA)</span></li>
+      <li><span class="fa"><strong>ائوزین (Eosin):</strong> رنگ صورتی — سیتوپلاسم و بافت بینابینی رو رنگ می‌کنه</span><span class="en"><strong>Eosin:</strong> Pink dye — stains cytoplasm and connective tissue</span></li>
+    </ul>
+  </li>
+  <li>
+    <span class="fa"><span class="step-num">6</span> <strong>اسکن دیجیتال:</strong> لام رنگ‌شده با اسکنر مخصوص (مثل Hamamatsu NanoZoomer) اسکن می‌شه و تبدیل به یه <strong>Whole Slide Image (WSI)</strong> می‌شه — یه تصویر دیجیتال عظیم با بزرگنمایی ۲۰x یا ۴۰x. اندازه این تصویر ممکنه ۱۰۰,۰۰۰ × ۱۰۰,۰۰۰ پیکسل باشه!</span>
+    <span class="en"><span class="step-num">6</span> <strong>Digital Scanning:</strong> The stained slide is scanned with a specialized scanner (e.g., Hamamatsu NanoZoomer) and converted to a <strong>Whole Slide Image (WSI)</strong> — a massive digital image at 20x or 40x magnification. These images can be 100,000 x 100,000 pixels!</span>
+  </li>
+</ul>
+
+<div class="concept-box">
+  <h4><span class="fa">چرا H&E اینقدر مهمه؟</span><span class="en">Why Is H&E So Important?</span></h4>
+  <p>
+    <span class="fa">رنگ‌آمیزی H&E استاندارد طلایی پاتولوژی هست. پاتولوژیست‌ها سال‌ها آموزش می‌بینن تا از روی الگوی بنفش (هسته‌ها) و صورتی (بافت) تشخیص بدن بافت سالمه یا سرطانی. ساختارهای خاص مننژیوما مثل <strong>whorls</strong> (چرخش‌های حلزونی سلول‌ها) و <strong>psammoma bodies</strong> (رسوبات کلسیمی دایره‌ای) فقط با H&E قابل مشاهده هستن.</span>
+    <span class="en">H&E staining is the gold standard of pathology. Pathologists train for years to diagnose whether tissue is healthy or cancerous based on the purple (nuclei) and pink (tissue) patterns. Specific meningioma structures like <strong>whorls</strong> (spiral cell arrangements) and <strong>psammoma bodies</strong> (circular calcium deposits) are only visible with H&E.</span>
+  </p>
+</div>
+
+
+<!-- ===== AFM IN DETAIL ===== -->
+<h3>
+  <span class="fa">۰.۳ میکروسکوپ نیروی اتمی (AFM) — به زبان بسیار ساده</span>
+  <span class="en">0.3 Atomic Force Microscopy (AFM) — Explained Very Simply</span>
+</h3>
+
+<div class="analogy">
+  <h4><span class="fa">تشبیه اصلی — نابینا و نوک انگشت</span><span class="en">Main Analogy — A Blind Person and Their Fingertip</span></h4>
+  <p>
+    <span class="fa">تصور کنید یه نابینا می‌خواد بفهمه سطح یه میز چه شکلی هست. انگشتش رو آهسته روی سطح حرکت می‌ده. از روی بالا و پایین رفتن انگشت می‌فهمه کجا صاف هست، کجا برجسته هست. از روی مقاومتی که حس می‌کنه می‌فهمه کجا سفته و کجا نرم. AFM دقیقاً همین کار رو ولی در مقیاس <strong>نانومتر</strong> (یک‌میلیاردم متر) انجام می‌ده.</span>
+    <span class="en">Imagine a blind person wants to understand the surface of a table. They slowly move their finger across the surface. From how their finger goes up and down, they know where it's flat and where it's bumpy. From the resistance they feel, they know where it's hard and where it's soft. AFM does exactly this but at the <strong>nanometer</strong> (one-billionth of a meter) scale.</span>
+  </p>
+</div>
+
+<h4><span class="fa">اجزای AFM</span><span class="en">AFM Components</span></h4>
+
+<div class="bio-box">
+  <h4><span class="fa">۱. کنتیلور (Cantilever) — «انگشت» AFM</span><span class="en">1. The Cantilever — AFM's "Finger"</span></h4>
+  <p>
+    <span class="fa">یه تیغه بسیار نازک و کوچک (معمولاً از سیلیکون یا سیلیکون نیترید) به طول حدود ۱۰۰-۲۰۰ میکرومتر. مثل یه تخته شیرجه در استخر — یه سرش ثابته و سر دیگه‌اش آزاده و می‌تونه بالا و پایین بره. در نوک آزاد کنتیلور یه سوزن بسیار تیز (tip) نصب شده با شعاع نوک کمتر از ۱۰ نانومتر — یعنی چند اتم!</span>
+    <span class="en">A very thin, tiny beam (usually made of silicon or silicon nitride) about 100-200 micrometers long. Like a diving board at a swimming pool — one end is fixed and the other end is free and can bounce up and down. At the free end of the cantilever, an extremely sharp tip is mounted with a radius less than 10 nanometers — just a few atoms!</span>
+  </p>
+</div>
+
+<div class="bio-box">
+  <h4><span class="fa">۲. لیزر — «چشم» AFM</span><span class="en">2. The Laser — AFM's "Eye"</span></h4>
+  <p>
+    <span class="fa">یه پرتو لیزر روی سطح بالای کنتیلور تابیده می‌شه. وقتی کنتیلور خم بشه (حتی یک نانومتر!)، پرتو لیزر منعکس‌شده جهتش عوض می‌شه. مثل وقتی یه آینه کوچک رو کمی کج کنید — نقطه نوری روی دیوار خیلی جابجا می‌شه.</span>
+    <span class="en">A laser beam shines on the top surface of the cantilever. When the cantilever bends (even by one nanometer!), the reflected laser beam changes direction. Like when you tilt a small mirror slightly — the light spot on the wall moves a lot.</span>
+  </p>
+</div>
+
+<div class="bio-box">
+  <h4><span class="fa">۳. فوتودتکتور (Photodetector) — «مغز» AFM</span><span class="en">3. The Photodetector — AFM's "Brain"</span></h4>
+  <p>
+    <span class="fa">یه سنسور نوری ۴قسمتی (quadrant photodiode) هست که موقعیت نقطه لیزر منعکس‌شده رو اندازه می‌گیره. اگه نقطه لیزر بره بالا = کنتیلور خم شده بالا = نیروی دافعه (سوزن داره به سطح فشار می‌آره). اگه نقطه لیزر بره پایین = کنتیلور خم شده پایین = نیروی جاذبه (سوزن داره به سطح چسبیده). اختلاف سیگنال بین بالا و پایین فوتودتکتور = <strong>نیرو</strong>ی وارد بر سوزن.</span>
+    <span class="en">A 4-segment light sensor (quadrant photodiode) that measures the position of the reflected laser spot. If the spot goes up = cantilever bent up = repulsive force (tip is pressing against surface). If the spot goes down = cantilever bent down = attractive force (tip is sticking to surface). The signal difference between top and bottom of the photodetector = the <strong>force</strong> on the tip.</span>
+  </p>
+</div>
+
+<div class="bio-box">
+  <h4><span class="fa">۴. پیزواسکنر (Piezo Scanner) — «دست» AFM</span><span class="en">4. The Piezo Scanner — AFM's "Hand"</span></h4>
+  <p>
+    <span class="fa">یه دستگاه خیلی دقیق که می‌تونه سوزن (یا نمونه) رو در سه جهت X، Y و Z با دقت زیر نانومتر حرکت بده. از جنس مواد پیزوالکتریک هست — یعنی وقتی ولتاژ بهش وصل می‌کنی، شکلش عوض می‌شه (و برعکس). این اجازه می‌ده سوزن رو با دقت اتمی بالا و پایین ببریم.</span>
+    <span class="en">A very precise device that can move the tip (or the sample) in X, Y, and Z directions with sub-nanometer precision. It's made of piezoelectric materials — meaning when voltage is applied, it changes shape (and vice versa). This allows moving the tip up and down with atomic-level precision.</span>
+  </p>
+</div>
+
+<div class="concept-box">
+  <h4><span class="fa">چطور همه اینها با هم کار می‌کنن؟</span><span class="en">How Does It All Work Together?</span></h4>
+  <p>
+    <span class="fa">پیزواسکنر سوزن رو به سمت نمونه حرکت می‌ده ← سوزن به سطح نمونه نزدیک می‌شه ← نیروهای بین سوزن و سطح باعث خم شدن کنتیلور می‌شه ← لیزر این خمش رو تشخیص می‌ده ← فوتودتکتور سیگنال لیزر رو به عدد تبدیل می‌کنه ← کامپیوتر نیرو و فاصله رو ثبت می‌کنه ← منحنی نیرو-فاصله تولید می‌شه.</span>
+    <span class="en">The piezo scanner moves the tip toward the sample ← the tip approaches the surface ← forces between tip and surface bend the cantilever ← the laser detects this bending ← the photodetector converts the laser signal to a number ← the computer records force and distance ← a force-distance curve is produced.</span>
+  </p>
+</div>
+
+
+<!-- ===== SPRING CONSTANT AND CALIBRATION ===== -->
+<h3>
+  <span class="fa">۰.۴ ثابت فنر و کالیبراسیون کنتیلور</span>
+  <span class="en">0.4 Spring Constant and Cantilever Calibration</span>
+</h3>
+
+<div class="analogy">
+  <h4><span class="fa">تشبیه ساده</span><span class="en">Simple Analogy</span></h4>
+  <p>
+    <span class="fa">فرض کنید دو فنر دارید: یکی فنر خودکار (نرم) و یکی فنر ماشین (سخت). اگه یه وزنه ۱ کیلویی روی هر دو بذارید، فنر خودکار خیلی فشرده می‌شه ولی فنر ماشین تقریباً تکون نمی‌خوره. <strong>ثابت فنر (k)</strong> عددی هست که نشون می‌ده فنر چقدر سفته. هر چی k بزرگ‌تر، فنر سخت‌تر.</span>
+    <span class="en">Imagine you have two springs: a pen spring (soft) and a car spring (stiff). If you put a 1 kg weight on each, the pen spring compresses a lot but the car spring barely moves. The <strong>spring constant (k)</strong> is a number showing how stiff a spring is. The bigger k is, the stiffer the spring.</span>
+  </p>
+</div>
+
+<div class="concept-box">
+  <h4><span class="fa">قانون هوک: F = k × d</span><span class="en">Hooke's Law: F = k × d</span></h4>
+  <p>
+    <span class="fa">AFM نیرو رو مستقیماً اندازه نمی‌گیره! چیزی که واقعاً اندازه‌گیری می‌شه <strong>خم شدن کنتیلور (d)</strong> هست (از روی جابجایی لیزر). بعد با فرمول <code>F = k × d</code> نیرو محاسبه می‌شه. پس اگه k اشتباه باشه، <strong>همه مقادیر نیرو اشتباه محاسبه می‌شن!</strong></span>
+    <span class="en">AFM doesn't measure force directly! What it actually measures is the <strong>cantilever deflection (d)</strong> (from laser displacement). Then force is calculated using <code>F = k × d</code>. So if k is wrong, <strong>all force values are incorrectly calculated!</strong></span>
+  </p>
+</div>
+
+<h4><span class="fa">روش کالیبراسیون</span><span class="en">Calibration Method</span></h4>
+<p>
+  <span class="fa">قبل از هر آزمایش، کنتیلور باید کالیبره بشه. رایج‌ترین روش <strong>thermal noise method</strong> هست:</span>
+  <span class="en">Before each experiment, the cantilever must be calibrated. The most common method is the <strong>thermal noise method</strong>:</span>
+</p>
+<ul>
+  <li><span class="fa">کنتیلور رو از سطح دور نگه می‌دارن (در هوا)</span><span class="en">The cantilever is held away from the surface (in air)</span></li>
+  <li><span class="fa">نوسانات حرارتی طبیعی کنتیلور رو اندازه می‌گیرن (مولکول‌های هوا بهش ضربه می‌زنن)</span><span class="en">Natural thermal vibrations of the cantilever are measured (air molecules bump into it)</span></li>
+  <li><span class="fa">از تحلیل فرکانسی این نوسانات، k دقیق محاسبه می‌شه</span><span class="en">From frequency analysis of these vibrations, precise k is calculated</span></li>
+</ul>
+
+<div class="warning">
+  <span class="fa"><strong>مشکلی که در پروژه ما پیش اومد:</strong> بعضی نمونه‌ها (مثل 3374A/B) با کنتیلوری اندازه‌گیری شدن که ثابت فنر واقعیش ۱.۵۸۶ N/m بود ولی نرم‌افزار مقدار پیش‌فرض (مثلاً ۰.۲ N/m) رو استفاده کرده بود. یعنی نیروهای ثبت‌شده حدود ۸ برابر کمتر از واقعیت بودن! ما این رو با ضرب کردن نیروها در نسبت <code>k_correct / k_recorded</code> تصحیح کردیم.</span>
+  <span class="en"><strong>Problem encountered in our project:</strong> Some samples (e.g., 3374A/B) were measured with a cantilever whose real spring constant was 1.586 N/m but the software used a default value (e.g., 0.2 N/m). This means recorded forces were about 8x lower than reality! We corrected this by multiplying forces by the ratio <code>k_correct / k_recorded</code>.</span>
+</div>
+
+
+<!-- ===== SETPOINT ===== -->
+<h3>
+  <span class="fa">۰.۵ ستپوینت (Setpoint) — حداکثر فشار مجاز</span>
+  <span class="en">0.5 Setpoint — Maximum Allowed Force</span>
+</h3>
+
+<div class="analogy">
+  <h4><span class="fa">تشبیه ساده</span><span class="en">Simple Analogy</span></h4>
+  <p>
+    <span class="fa">فرض کنید یه خربزه رو با انگشت فشار می‌دید تا ببینید رسیده یا نه. اگه خیلی محکم فشار بدید، خربزه له می‌شه و اطلاعات واقعی سفتیش رو از دست می‌دید. Setpoint مثل یه «حد فشار» هست که به AFM می‌گه: «تا اینجا فشار بده و بعد برگرد. بیشتر از این به بافت آسیب می‌زنه.»</span>
+    <span class="en">Imagine pressing a cantaloupe with your finger to check if it's ripe. If you press too hard, the cantaloupe gets crushed and you lose real information about its firmness. The setpoint is like a "pressure limit" that tells the AFM: "Push up to this point and then retract. More than this will damage the tissue."</span>
+  </p>
+</div>
+
+<div class="concept-box">
+  <h4><span class="fa">در پروژه ما</span><span class="en">In Our Project</span></h4>
+  <p>
+    <span class="fa">Setpoint = <strong>۳۰۰ نانونیوتن (nN)</strong>. این مقدار توسط آزمایشگاه تعیین شده و بهینه‌ست برای بافت مننژیوما: به اندازه کافی فشار می‌ده تا خواص مکانیکی قابل اندازه‌گیری باشه، ولی آنقدر زیاد نیست که بافت آسیب ببینه یا رفتار غیرخطی بده. ما منحنی‌ها رو در این نقطه برش می‌زنیم.</span>
+    <span class="en">Setpoint = <strong>300 nanonewtons (nN)</strong>. This value was determined by the laboratory and is optimal for meningioma tissue: enough force to measure mechanical properties, but not so much that it damages the tissue or causes nonlinear behavior. We cut the curves at this point.</span>
+  </p>
+</div>
+
+
+<!-- ===== FORCE-DISTANCE CURVE ===== -->
+<h3>
+  <span class="fa">۰.۶ منحنی نیرو-فاصله (Force-Distance Curve) — قلب داده ما</span>
+  <span class="en">0.6 The Force-Distance Curve — The Heart of Our Data</span>
+</h3>
+
+<div class="analogy">
+  <h4><span class="fa">تشبیه ساده</span><span class="en">Simple Analogy</span></h4>
+  <p>
+    <span class="fa">تصور کنید با انگشتتون یه بالش رو فشار می‌دید و بعد ولش می‌کنید. اگه یه نمودار بکشید که محور X = فاصله انگشت از سطح بالش و محور Y = نیرویی که حس می‌کنید باشه، یه «منحنی نیرو-فاصله» دارید! وقتی فشار می‌دید (approach)، نیرو زیاد می‌شه. وقتی ول می‌کنید (retract)، انگشتتون یکم به بالش می‌چسبه قبل از جدا شدن.</span>
+    <span class="en">Imagine pressing a pillow with your finger and then releasing. If you draw a graph where X-axis = distance of finger from pillow surface and Y-axis = force you feel, you have a "force-distance curve"! When pressing (approach), force increases. When releasing (retract), your finger sticks to the pillow a bit before separating.</span>
+  </p>
+</div>
+
+<h4><span class="fa">دو فاز اصلی منحنی</span><span class="en">Two Main Phases of the Curve</span></h4>
+
+<div class="bio-box">
+  <h4><span class="fa">فاز ۱: نزدیک شدن (Approach)</span><span class="en">Phase 1: Approach</span></h4>
+  <p><span class="fa">سوزن از بالا به سمت بافت حرکت می‌کنه. چهار مرحله متمایز:</span><span class="en">The tip moves downward toward the tissue. Four distinct stages:</span></p>
+  <ul>
+    <li><span class="fa"><strong>مرحله ۱ — خط پایه (Baseline):</strong> سوزن هنوز دوره، هیچ نیرویی نیست. منحنی صاف و نزدیک صفره.</span><span class="en"><strong>Stage 1 — Baseline:</strong> The tip is still far away, no force detected. The curve is flat and near zero.</span></li>
+    <li><span class="fa"><strong>مرحله ۲ — نیروی جاذبه (Snap-in):</strong> وقتی سوزن خیلی نزدیک می‌شه (چند نانومتر)، نیروی واندروالسی سوزن رو به طرف سطح می‌کشه. مثل وقتی آهنربا ناگهان به فلز می‌چسبه.</span><span class="en"><strong>Stage 2 — Attractive force (Snap-in):</strong> When the tip gets very close (a few nanometers), van der Waals forces pull the tip toward the surface. Like when a magnet suddenly snaps to metal.</span></li>
+    <li><span class="fa"><strong>مرحله ۳ — نقطه تماس (Contact Point):</strong> لحظه برخورد سوزن با سطح. این نقطه <strong>بسیار مهم</strong> هست چون مرز بین «هوا» و «بافت» رو مشخص می‌کنه.</span><span class="en"><strong>Stage 3 — Contact Point:</strong> The moment the tip touches the surface. This point is <strong>extremely important</strong> because it marks the boundary between "air" and "tissue".</span></li>
+    <li><span class="fa"><strong>مرحله ۴ — فرورفتن (Indentation):</strong> سوزن فشار می‌ده و داخل بافت فرو می‌ره. هر چی بافت سخت‌تر، شیب منحنی تندتر (نیروی بیشتر برای فرورفتن کمتر). این بخش اطلاعات اصلی سختی بافت رو داره.</span><span class="en"><strong>Stage 4 — Indentation:</strong> The tip pushes in and penetrates the tissue. The stiffer the tissue, the steeper the curve (more force for less indentation). This part contains the main stiffness information.</span></li>
+  </ul>
+</div>
+
+<div class="bio-box">
+  <h4><span class="fa">فاز ۲: دور شدن (Retract)</span><span class="en">Phase 2: Retract</span></h4>
+  <p>
+    <span class="fa">سوزن بر می‌گرده. ولی منحنی برگشت دقیقاً مثل رفت نیست! تفاوت بخاطر:</span>
+    <span class="en">The tip pulls back. But the retract curve isn't exactly the same as approach! The difference is due to:</span>
+  </p>
+  <ul>
+    <li><span class="fa"><strong>چسبندگی (Adhesion):</strong> بافت به سوزن می‌چسبه و نیروی منفی ایجاد می‌شه — اطلاعات مهم درباره ترکیب شیمیایی سطح</span><span class="en"><strong>Adhesion:</strong> The tissue sticks to the tip creating negative force — important info about surface chemistry</span></li>
+    <li><span class="fa"><strong>هیسترزیس:</strong> انرژی که در حین فشار دادن تلف شده (تغییر شکل دائمی) — نشون‌دهنده ویسکوالاستیسیته بافت</span><span class="en"><strong>Hysteresis:</strong> Energy lost during compression (permanent deformation) — indicates tissue viscoelasticity</span></li>
+  </ul>
+</div>
+
+<div class="why-box">
+  <h4><span class="fa">چرا ما فقط فاز Approach رو استفاده می‌کنیم؟</span><span class="en">Why Do We Only Use the Approach Phase?</span></h4>
+  <p>
+    <span class="fa">فاز approach «خالص‌تر» هست. رفتار الاستیک بافت رو بدون اثرات چسبندگی اندازه می‌گیره. فاز retract شامل اثرات ویسکوز و چسبندگی هست که تفسیرش پیچیده‌تره و noise بیشتری داره. برای مدل‌های یادگیری عمیق ما، سیگنال تمیز approach کافی و ارجح‌تره.</span>
+    <span class="en">The approach phase is "cleaner." It measures the elastic behavior of the tissue without adhesion effects. The retract phase includes viscous and adhesion effects that are harder to interpret and noisier. For our deep learning models, the clean approach signal is sufficient and preferable.</span>
+  </p>
+</div>
+
+
+<!-- ===== FORCE MAP ===== -->
+<h3>
+  <span class="fa">۰.۷ نقشه نیرو (Force Map) — اسکن کامل یک ناحیه</span>
+  <span class="en">0.7 Force Map — Complete Scan of a Region</span>
+</h3>
+
+<div class="analogy">
+  <h4><span class="fa">تشبیه ساده</span><span class="en">Simple Analogy</span></h4>
+  <p>
+    <span class="fa">تصور کنید یه زمین فوتبال رو به ۱۵ ردیف و ۱۵ ستون تقسیم کردید (۲۲۵ مربع). حالا یه نفر می‌ره وسط هر مربع و با پاش زمین رو فشار می‌ده و سفتی زمین رو یادداشت می‌کنه. نتیجه یه «نقشه سفتی» هست: مثلاً وسط چمن نرمه ولی کنار خط‌ها سفته. Force Map دقیقاً همینه ولی برای بافت تومور.</span>
+    <span class="en">Imagine dividing a football field into 15 rows and 15 columns (225 squares). Someone goes to the center of each square, presses the ground with their foot, and records the stiffness. The result is a "stiffness map": e.g., the grass in the middle is soft but near the lines it's hard. A Force Map is exactly this but for tumor tissue.</span>
+  </p>
+</div>
+
+<div class="concept-box">
+  <h4><span class="fa">مشخصات Force Map در پروژه ما</span><span class="en">Force Map Specs in Our Project</span></h4>
+  <ul>
+    <li><span class="fa"><strong>شبکه:</strong> ۱۵ × ۱۵ = <strong>۲۲۵ نقطه اندازه‌گیری</strong> در هر نقشه</span><span class="en"><strong>Grid:</strong> 15 x 15 = <strong>225 measurement points</strong> per map</span></li>
+    <li><span class="fa"><strong>هر نقطه:</strong> یه منحنی نیرو-فاصله کامل (approach + retract)</span><span class="en"><strong>Each point:</strong> A complete force-distance curve (approach + retract)</span></li>
+    <li><span class="fa"><strong>هر نمونه بیمار:</strong> ممکنه ده‌ها force map داشته باشه (مناطق مختلف بافت)</span><span class="en"><strong>Each patient sample:</strong> May have dozens of force maps (different tissue regions)</span></li>
+    <li><span class="fa"><strong>کل دیتاست:</strong> ۱۴۲,۳۴۷ منحنی از ۲۳ نمونه</span><span class="en"><strong>Total dataset:</strong> 142,347 curves from 23 samples</span></li>
+  </ul>
+</div>
+
+
+<!-- ===== MECHANICAL PROPERTIES ===== -->
+<h3>
+  <span class="fa">۰.۸ خواص مکانیکی — چه چیزی از منحنی استخراج می‌شه؟</span>
+  <span class="en">0.8 Mechanical Properties — What Can We Extract from the Curve?</span>
+</h3>
+
+<div class="bio-box">
+  <h4><span class="fa">۱. مدول یانگ (Young's Modulus / Stiffness)</span><span class="en">1. Young's Modulus (Stiffness)</span></h4>
+  <p>
+    <span class="fa">مقاومت بافت در برابر فشار. واحدش <strong>پاسکال (Pa)</strong> هست. بافت نرم مثل مغز ≈ ۱۰۰-۱۰۰۰ Pa، استخوان ≈ ۱۰ گیگاپاسکال. از شیب ناحیه فرورفتن (indentation) محاسبه می‌شه. هر چی شیب تندتر، بافت سخت‌تر.</span>
+    <span class="en">Tissue's resistance to compression. Measured in <strong>Pascals (Pa)</strong>. Soft tissue like brain ≈ 100-1000 Pa, bone ≈ 10 GPa. Calculated from the slope of the indentation region. Steeper slope = stiffer tissue.</span>
+  </p>
+</div>
+
+<div class="bio-box">
+  <h4><span class="fa">۲. چسبندگی (Adhesion)</span><span class="en">2. Adhesion</span></h4>
+  <p>
+    <span class="fa">چقدر بافت به سوزن می‌چسبه. از حداکثر نیروی منفی در فاز retract اندازه‌گیری می‌شه. اطلاعات درباره ترکیب شیمیایی سطح بافت (پروتئین‌ها، چربی‌ها) می‌ده.</span>
+    <span class="en">How much the tissue sticks to the tip. Measured from the maximum negative force during retract. Gives information about the chemical composition of the tissue surface (proteins, lipids).</span>
+  </p>
+</div>
+
+<div class="bio-box">
+  <h4><span class="fa">۳. تغییر شکل (Deformation)</span><span class="en">3. Deformation</span></h4>
+  <p>
+    <span class="fa">چقدر بافت تحت فشار فرو می‌ره (به نانومتر). بافت نرم‌تر = تغییر شکل بیشتر. ترکیب تغییر شکل و نیرو نشون می‌ده بافت الاستیکه (مثل فنر — بر می‌گرده) یا پلاستیکه (مثل خمیر — بر نمی‌گرده).</span>
+    <span class="en">How much the tissue indents under force (in nanometers). Softer tissue = more deformation. The combination of deformation and force shows whether tissue is elastic (like a spring — bounces back) or plastic (like clay — stays deformed).</span>
+  </p>
+</div>
+
+<div class="why-box">
+  <h4><span class="fa">چرا خواص مکانیکی بین درجه‌های تومور فرق می‌کنه؟</span><span class="en">Why Do Mechanical Properties Differ Between Tumor Grades?</span></h4>
+  <p>
+    <span class="fa">سلول‌های سرطانی وقتی بدخیم‌تر می‌شن، تغییرات ساختاری مهمی می‌دن:</span>
+    <span class="en">As cancer cells become more malignant, they undergo important structural changes:</span>
+  </p>
+  <ul>
+    <li><span class="fa"><strong>اسکلت سلولی (Cytoskeleton):</strong> شبکه پروتئینی داخل سلول (اکتین، میوزین) که مثل «استخوان‌بندی» سلول عمل می‌کنه، در تومورهای بدخیم‌تر بهم‌ریخته‌تره → سلول نرم‌تر یا سخت‌تر می‌شه</span><span class="en"><strong>Cytoskeleton:</strong> The protein network inside cells (actin, myosin) acting as the cell's "skeleton" becomes more disorganized in malignant tumors → cells become softer or stiffer</span></li>
+    <li><span class="fa"><strong>ماتریس خارج سلولی (ECM):</strong> «چسب» بین سلول‌ها — در تومورهای Grade 2 بیشتر تولید و بازسازی می‌شه → تغییر سفتی</span><span class="en"><strong>Extracellular Matrix (ECM):</strong> The "glue" between cells — in Grade 2 tumors it's more actively produced and remodeled → changes in stiffness</span></li>
+    <li><span class="fa"><strong>تراکم سلولی:</strong> Grade 2 معمولاً تراکم سلولی بیشتری داره (سلول‌ها سریع‌تر تقسیم می‌شن) → تغییر خواص مکانیکی کلی</span><span class="en"><strong>Cell density:</strong> Grade 2 usually has higher cell density (cells divide faster) → changes in overall mechanical properties</span></li>
+    <li><span class="fa"><strong>رگ‌زایی (Angiogenesis):</strong> تومورهای بدخیم‌تر رگ‌های خونی جدید می‌سازن → تغییر بافت و سختی</span><span class="en"><strong>Angiogenesis:</strong> More malignant tumors create new blood vessels → changes in tissue and stiffness</span></li>
+  </ul>
+  <p>
+    <span class="fa"><strong>نکته مهم:</strong> این تفاوت‌ها آنقدر ظریفن که چشم انسان یا حتی میکروسکوپ نوری نمی‌تونه ببینه. ولی AFM با دقت نانومتر می‌تونه تشخیص بده — و ما به مدل یادگیری عمیق یاد می‌دیم این تفاوت‌ها رو از روی منحنی‌ها پیدا کنه.</span>
+    <span class="en"><strong>Key point:</strong> These differences are so subtle that the human eye or even optical microscopes can't detect them. But AFM with nanometer precision can — and we teach deep learning models to find these differences from the curves.</span>
+  </p>
+</div>
+
+
+<!-- ===== TISSUE PREPARATION FOR AFM ===== -->
+<h3>
+  <span class="fa">۰.۹ آماده‌سازی نمونه برای AFM</span>
+  <span class="en">0.9 Sample Preparation for AFM</span>
+</h3>
+
+<p>
+  <span class="fa">آماده‌سازی نمونه برای AFM با هیستولوژی <strong>متفاوته</strong>. بافت باید «زنده‌تر» نگه داشته بشه:</span>
+  <span class="en">Sample preparation for AFM is <strong>different</strong> from histology. The tissue must be kept more "alive":</span>
+</p>
+<ul>
+  <li>
+    <span class="fa"><span class="step-num">1</span> <strong>برش با کرایواستات (Cryostat):</strong> بافت تازه (بدون فرمالین!) رو فریز می‌کنن و با دستگاه کرایواستات برش‌های ۱۰-۲۰ میکرومتر (ضخیم‌تر از هیستولوژی) می‌زنن</span>
+    <span class="en"><span class="step-num">1</span> <strong>Cryostat Sectioning:</strong> Fresh tissue (no formalin!) is frozen and cut into 10-20 micrometer sections (thicker than histology) using a cryostat</span>
+  </li>
+  <li>
+    <span class="fa"><span class="step-num">2</span> <strong>نصب روی سطح:</strong> برش رو روی یه سطح صاف (معمولاً شیشه یا مایکا) نصب می‌کنن. سطح باید خیلی صاف باشه وگرنه ناهمواری سطح با ناهمواری بافت قاطی می‌شه</span>
+    <span class="en"><span class="step-num">2</span> <strong>Mounting:</strong> The section is mounted on a flat surface (usually glass or mica). The surface must be very flat, otherwise surface roughness gets mixed up with tissue roughness</span>
+  </li>
+  <li>
+    <span class="fa"><span class="step-num">3</span> <strong>محیط مایع:</strong> اندازه‌گیری AFM معمولاً در محلول بافر (مثل PBS) انجام می‌شه تا بافت خشک نشه و خواص مکانیکی واقعیش حفظ بشه</span>
+    <span class="en"><span class="step-num">3</span> <strong>Liquid Environment:</strong> AFM measurement is usually done in buffer solution (e.g., PBS) to keep tissue hydrated and preserve its real mechanical properties</span>
+  </li>
+  <li>
+    <span class="fa"><span class="step-num">4</span> <strong>انتخاب ناحیه:</strong> با میکروسکوپ نوری ناحیه مناسب انتخاب می‌شه (بدون حباب هوا، بدون آرتیفکت، بافت یکدست)</span>
+    <span class="en"><span class="step-num">4</span> <strong>Region Selection:</strong> A suitable region is selected using optical microscopy (no air bubbles, no artifacts, uniform tissue)</span>
+  </li>
+  <li>
+    <span class="fa"><span class="step-num">5</span> <strong>اندازه‌گیری:</strong> Force map (15×15) روی ناحیه انتخاب‌شده گرفته می‌شه. هر نقطه ≈ ۱ ثانیه → یه نقشه ≈ ۴ دقیقه</span>
+    <span class="en"><span class="step-num">5</span> <strong>Measurement:</strong> A force map (15x15) is taken over the selected region. Each point ≈ 1 second → one map ≈ 4 minutes</span>
+  </li>
+</ul>
+
+
+<!-- ===== COMPLETE JOURNEY ===== -->
+<h3>
+  <span class="fa">۰.۱۰ سفر کامل: از بیمار تا داده پردازش‌شده</span>
+  <span class="en">0.10 The Complete Journey: From Patient to Processed Data</span>
+</h3>
+
+<div class="journey-box">
+  <h4><span class="fa">مسیر AFM</span><span class="en">The AFM Path</span></h4>
+  <p>
+    <span class="fa"><span class="step-num">1</span> <strong>جراحی:</strong> نوروسرجن تومور مننژیوما رو از مغز بیمار خارج می‌کنه</span>
+    <span class="en"><span class="step-num">1</span> <strong>Surgery:</strong> Neurosurgeon removes the meningioma tumor from the patient's brain</span>
+  </p>
+  <p>
+    <span class="fa"><span class="step-num">2</span> <strong>تقسیم نمونه:</strong> بخشی از بافت فریز می‌شه (برای AFM)، بخشی در فرمالین (برای هیستولوژی)</span>
+    <span class="en"><span class="step-num">2</span> <strong>Sample Division:</strong> Part of the tissue is frozen (for AFM), part goes in formalin (for histology)</span>
+  </p>
+  <p>
+    <span class="fa"><span class="step-num">3</span> <strong>برش و نصب:</strong> بافت فریز‌شده با کرایواستات برش داده و روی لام نصب می‌شه</span>
+    <span class="en"><span class="step-num">3</span> <strong>Sectioning & Mounting:</strong> Frozen tissue is cryo-sectioned and mounted on a slide</span>
+  </p>
+  <p>
+    <span class="fa"><span class="step-num">4</span> <strong>کالیبراسیون AFM:</strong> ثابت فنر کنتیلور اندازه‌گیری و تأیید می‌شه</span>
+    <span class="en"><span class="step-num">4</span> <strong>AFM Calibration:</strong> Cantilever spring constant is measured and verified</span>
+  </p>
+  <p>
+    <span class="fa"><span class="step-num">5</span> <strong>Force Mapping:</strong> شبکه ۱۵×۱۵ از منحنی‌ها اندازه‌گیری می‌شه (۲۲۵ منحنی در هر نقشه)</span>
+    <span class="en"><span class="step-num">5</span> <strong>Force Mapping:</strong> A 15x15 grid of curves is measured (225 curves per map)</span>
+  </p>
+  <p>
+    <span class="fa"><span class="step-num">6</span> <strong>ذخیره خام:</strong> داده‌ها در فایل HDF5 ذخیره می‌شه (شامل force, height, segment برای هر منحنی)</span>
+    <span class="en"><span class="step-num">6</span> <strong>Raw Storage:</strong> Data is saved in HDF5 files (containing force, height, segment for each curve)</span>
+  </p>
+  <p>
+    <span class="fa"><span class="step-num">7</span> <strong>پیش‌پردازش:</strong> استخراج approach → تصحیح ثابت فنر → برش در setpoint → نرمال‌سازی به ۵۱۲ نقطه</span>
+    <span class="en"><span class="step-num">7</span> <strong>Preprocessing:</strong> Extract approach → correct spring constant → cut at setpoint → normalize to 512 points</span>
+  </p>
+  <p>
+    <span class="fa"><span class="step-num">8</span> <strong>آماده برای مدل:</strong> هر منحنی = یه آرایه ۵۱۲ عددی بین ۰ و ۱ با لیبل Grade 1 یا Grade 2</span>
+    <span class="en"><span class="step-num">8</span> <strong>Model-Ready:</strong> Each curve = an array of 512 numbers between 0 and 1 with a Grade 1 or Grade 2 label</span>
+  </p>
+</div>
+
+<div class="journey-box">
+  <h4><span class="fa">مسیر هیستولوژی</span><span class="en">The Histology Path</span></h4>
+  <p>
+    <span class="fa"><span class="step-num">1</span> بافت فرمالینی → <span class="step-num">2</span> قالب‌گیری پارافینی → <span class="step-num">3</span> برش ۳-۵ میکرومتر → <span class="step-num">4</span> نصب روی لام → <span class="step-num">5</span> رنگ‌آمیزی H&E → <span class="step-num">6</span> اسکن دیجیتال (WSI) → <span class="step-num">7</span> برش به پچ‌های ۲۲۴×۲۲۴ → <span class="step-num">8</span> فیلتر پچ‌های خالی → <span class="step-num">9</span> آماده برای مدل بینایی</span>
+    <span class="en"><span class="step-num">1</span> Formalin tissue → <span class="step-num">2</span> Paraffin embedding → <span class="step-num">3</span> 3-5 μm sectioning → <span class="step-num">4</span> Mounting on slide → <span class="step-num">5</span> H&E staining → <span class="step-num">6</span> Digital scanning (WSI) → <span class="step-num">7</span> Cutting into 224x224 patches → <span class="step-num">8</span> Filtering empty patches → <span class="step-num">9</span> Ready for vision model</span>
+  </p>
+</div>
+
+<div class="important">
+  <span class="fa"><strong>نکته کلیدی:</strong> هر دو مسیر (AFM و هیستولوژی) از <strong>همان بافت</strong> یک بیمار شروع می‌شن. این همان چیزیه که «multimodal» رو ممکن می‌کنه — دو نوع اطلاعات متفاوت (فیزیکی و بصری) از یک منبع.</span>
+  <span class="en"><strong>Key point:</strong> Both paths (AFM and histology) start from the <strong>same tissue</strong> of one patient. This is what makes "multimodal" possible — two different types of information (physical and visual) from one source.</span>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- PART 1: COMPUTER SCIENCE FUNDAMENTALS -->
+<!-- ============================================================ -->
+<div class="sep"></div>
+<h2 id="part1">
+  <span class="fa">بخش ۱: مفاهیم پایه — قبل از هر چیز اینها رو بدون</span>
+  <span class="en">Part 1: Fundamentals — Know These First</span>
+</h2>
+
+<!-- AFM brief -->
+<h3>
+  <span class="fa">۱.۱ میکروسکوپ نیروی اتمی (AFM) چیست؟</span>
+  <span class="en">1.1 What Is Atomic Force Microscopy (AFM)?</span>
+</h3>
+<div class="analogy">
+  <h4><span class="fa">تشبیه ساده</span><span class="en">Simple Analogy</span></h4>
+  <p>
+    <span class="fa">تصور کن یه نابینا با نوک انگشتش روی یه سطح حرکت می‌کنه. از روی اینکه انگشتش کجا بالا و پایین می‌ره و چقدر مقاومت حس می‌کنه، می‌فهمه سطح چه شکلی هست و چقدر سفته. AFM دقیقاً همین کار رو ولی در مقیاس نانومتر انجام می‌ده.</span>
+    <span class="en">Imagine a blind person running their fingertip over a surface. From how their finger goes up and down and how much resistance they feel, they understand the surface shape and stiffness. AFM does exactly this but at the nanometer scale.</span>
+  </p>
+</div>
+<p>
+  <span class="fa">AFM یه سوزن بسیار ریز داره (کمتر از ۱۰ نانومتر) که روی یه تیر نازک (cantilever) نصبه. وقتی این سوزن به سطح نمونه نزدیک می‌شه:</span>
+  <span class="en">AFM has an extremely fine tip (less than 10 nm) mounted on a thin beam (cantilever). When this tip approaches the sample surface:</span>
+</p>
+<ul>
+  <li><span class="fa"><span class="step-num">1</span> <strong>مرحله Approach (نزدیک شدن):</strong> سوزن از بالا به سمت بافت حرکت می‌کنه. اول نیروی جاذبه، بعد نیروی دافعه حس می‌شه</span><span class="en"><span class="step-num">1</span> <strong>Approach Phase:</strong> The tip moves down toward the tissue. First attractive, then repulsive forces are felt</span></li>
+  <li><span class="fa"><span class="step-num">2</span> <strong>نقطه تماس (Contact Point):</strong> لحظه‌ای که سوزن به سطح بافت برخورد می‌کنه — اطلاعات خیلی مهمی داره</span><span class="en"><span class="step-num">2</span> <strong>Contact Point:</strong> The moment the tip touches the tissue surface — carries very important information</span></li>
+  <li><span class="fa"><span class="step-num">3</span> <strong>فرورفتن (Indentation):</strong> سوزن فشار می‌ده و داخل بافت فرو می‌ره — سختی بافت رو نشون می‌ده</span><span class="en"><span class="step-num">3</span> <strong>Indentation:</strong> The tip pushes in and penetrates the tissue — reveals tissue stiffness</span></li>
+  <li><span class="fa"><span class="step-num">4</span> <strong>مرحله Retract (دور شدن):</strong> سوزن بر می‌گرده — چسبندگی بافت رو نشون می‌ده</span><span class="en"><span class="step-num">4</span> <strong>Retract Phase:</strong> The tip pulls back — reveals tissue adhesion</span></li>
+</ul>
+<p>
+  <span class="fa">خروجی AFM یه <strong>منحنی نیرو-فاصله (Force-Distance Curve)</strong> هست: یه نمودار که محور X فاصله سوزن از سطح و محور Y نیروی وارد شده (به نانونیوتن) هست.</span>
+  <span class="en">AFM output is a <strong>Force-Distance Curve</strong>: a graph where X-axis is tip-surface distance and Y-axis is the applied force (in nanonewtons).</span>
+</p>
+
+<div class="concept-box">
+  <h4><span class="fa">چرا AFM برای سرطان مفیده؟</span><span class="en">Why Is AFM Useful for Cancer?</span></h4>
+  <p>
+    <span class="fa">بافت‌های سرطانی خواص مکانیکی متفاوتی از بافت سالم دارن. تومورهای بدخیم‌تر (Grade بالاتر) معمولاً سفت‌تر یا نرم‌تر از حالت عادی هستن. AFM این تفاوت‌ها رو با دقت نانومتر اندازه می‌گیره — چیزی که چشم یا میکروسکوپ نوری نمی‌تونه ببینه.</span>
+    <span class="en">Cancerous tissues have different mechanical properties than healthy tissue. More malignant tumors (higher Grade) are usually stiffer or softer than normal. AFM measures these differences with nanometer precision — something the eye or optical microscope can't see.</span>
+  </p>
+</div>
+
+<!-- Histology brief -->
+<h3>
+  <span class="fa">۱.۲ هیستولوژی (بافت‌شناسی) دیجیتال چیست؟</span>
+  <span class="en">1.2 What Is Digital Histology?</span>
+</h3>
+<p>
+  <span class="fa">یه برش نازک از بافت تومور رو روی لام شیشه‌ای می‌ذارن، رنگ‌آمیزی می‌کنن (معمولاً H&E) و با اسکنر دیجیتال عکس می‌گیرن. نتیجه یه <strong>Whole Slide Image (WSI)</strong> هست — یه تصویر عظیم (ممکنه ۱۰۰,۰۰۰ × ۱۰۰,۰۰۰ پیکسل باشه).</span>
+  <span class="en">A thin tissue section is placed on a glass slide, stained (usually H&E), and scanned digitally. The result is a <strong>Whole Slide Image (WSI)</strong> — a massive image (can be 100,000 x 100,000 pixels).</span>
+</p>
+<p>
+  <span class="fa">ما نمی‌تونیم کل این تصویر رو به مدل بدیم (خیلی بزرگه). پس تصویر رو به <strong>پچ‌های ۲۲۴×۲۲۴ پیکسل</strong> تقسیم می‌کنیم و هر پچ رو جداگانه آنالیز می‌کنیم.</span>
+  <span class="en">We can't feed the entire image to the model (too large). So we divide it into <strong>224x224 pixel patches</strong> and analyze each patch separately.</span>
+</p>
+
+<!-- Meningioma brief -->
+<h3>
+  <span class="fa">۱.۳ مننژیوما چیست؟</span>
+  <span class="en">1.3 What Is Meningioma?</span>
+</h3>
+<p>
+  <span class="fa">مننژیوما شایع‌ترین تومور اولیه مغز هست (حدود ۳۰٪ تومورهای مغزی). از مننژ (پرده دور مغز) منشأ می‌گیره.</span>
+  <span class="en">Meningioma is the most common primary brain tumor (about 30% of brain tumors). It originates from the meninges (membranes around the brain).</span>
+</p>
+<table>
+  <tr><th><span class="fa">درجه WHO</span><span class="en">WHO Grade</span></th><th><span class="fa">توضیح</span><span class="en">Description</span></th><th><span class="fa">رفتار</span><span class="en">Behavior</span></th></tr>
+  <tr><td><strong>Grade 1</strong></td><td><span class="fa">خوش‌خیم</span><span class="en">Benign</span></td><td><span class="fa">رشد آهسته، عود کم</span><span class="en">Slow growth, low recurrence</span></td></tr>
+  <tr><td><strong>Grade 2</strong></td><td><span class="fa">آتیپیک</span><span class="en">Atypical</span></td><td><span class="fa">رشد سریع‌تر، احتمال عود بیشتر</span><span class="en">Faster growth, higher recurrence</span></td></tr>
+  <tr><td><strong>Grade 3</strong></td><td><span class="fa">بدخیم</span><span class="en">Malignant</span></td><td><span class="fa">تهاجمی، نیاز به درمان شدید</span><span class="en">Aggressive, needs intensive treatment</span></td></tr>
+</table>
+<p>
+  <span class="fa"><strong>هدف ما:</strong> تفکیک Grade 1 از Grade 2 با استفاده از داده‌های AFM + هیستولوژی</span>
+  <span class="en"><strong>Our Goal:</strong> Distinguishing Grade 1 from Grade 2 using AFM + histology data</span>
+</p>
+
+<!-- Deep Learning basics -->
+<h3>
+  <span class="fa">۱.۴ یادگیری عمیق — مفاهیم اولیه</span>
+  <span class="en">1.4 Deep Learning — Basic Concepts</span>
+</h3>
+
+<div class="concept-box">
+  <h4><span class="fa">شبکه عصبی چیه؟</span><span class="en">What Is a Neural Network?</span></h4>
+  <p>
+    <span class="fa">یه تابع ریاضی با هزاران پارامتر (وزن) که با دیدن مثال‌ها یاد می‌گیره الگو پیدا کنه. مثل یه بچه که با دیدن صدها عکس گربه و سگ، یاد می‌گیره فرقشون رو بفهمه.</span>
+    <span class="en">A mathematical function with thousands of parameters (weights) that learns to find patterns by seeing examples. Like a child who learns to tell cats from dogs by seeing hundreds of pictures.</span>
+  </p>
+</div>
+
+<h4><span class="fa">اجزای کلیدی:</span><span class="en">Key Components:</span></h4>
+<ul>
+  <li><span class="fa"><strong>Neuron (نورون):</strong> یه واحد محاسباتی ساده. ورودی‌ها رو ضرب در وزن‌ها می‌کنه، جمع می‌زنه و از یه تابع فعال‌سازی رد می‌کنه</span><span class="en"><strong>Neuron:</strong> A simple computation unit. Multiplies inputs by weights, sums them, and passes through an activation function</span></li>
+  <li><span class="fa"><strong>Layer (لایه):</strong> یه ردیف از نورون‌ها. هر لایه یه سطح از ویژگی‌ها رو استخراج می‌کنه</span><span class="en"><strong>Layer:</strong> A row of neurons. Each layer extracts a level of features</span></li>
+  <li><span class="fa"><strong>Loss Function (تابع خطا):</strong> اندازه‌گیری می‌کنه مدل چقدر اشتباه پیش‌بینی کرده</span><span class="en"><strong>Loss Function:</strong> Measures how wrong the model's prediction is</span></li>
+  <li><span class="fa"><strong>Optimizer (بهینه‌ساز):</strong> وزن‌ها رو اصلاح می‌کنه تا خطا کم بشه (مثل Adam)</span><span class="en"><strong>Optimizer:</strong> Adjusts weights to reduce error (e.g., Adam)</span></li>
+  <li><span class="fa"><strong>Epoch:</strong> یه بار دیدن کل دیتاست. اگه ۲۰ epoch آموزش بدیم، مدل کل داده رو ۲۰ بار دیده</span><span class="en"><strong>Epoch:</strong> One pass through the entire dataset. If we train for 20 epochs, the model has seen all data 20 times</span></li>
+  <li><span class="fa"><strong>Batch:</strong> یه زیرمجموعه از داده که در هر قدم آموزش پردازش می‌شه (مثلاً ۱۲۸ نمونه)</span><span class="en"><strong>Batch:</strong> A subset of data processed in each training step (e.g., 128 samples)</span></li>
+</ul>
+
+<div class="concept-box">
+  <h4><span class="fa">CNN (شبکه عصبی کانولوشن) چیه؟</span><span class="en">What Is a CNN (Convolutional Neural Network)?</span></h4>
+  <p>
+    <span class="fa">یه نوع خاص شبکه عصبی که به جای نگاه کردن به کل ورودی یکجا، یه <strong>فیلتر کوچک</strong> (kernel) رو روی ورودی می‌کشه. مثل اینکه یه ذره‌بین کوچک روی تصویر حرکت کنه و در هر موقعیت ویژگی‌های محلی رو ببینه.</span>
+    <span class="en">A special type of neural network that instead of looking at the entire input at once, slides a small <strong>filter</strong> (kernel) across the input. Like moving a small magnifying glass across an image and seeing local features at each position.</span>
+  </p>
+  <ul>
+    <li><span class="fa"><strong>Kernel size = 3:</strong> فیلتر ۳ نقطه‌ای — جزئیات ریز رو می‌بینه</span><span class="en"><strong>Kernel size = 3:</strong> 3-point filter — sees fine details</span></li>
+    <li><span class="fa"><strong>Kernel size = 15:</strong> فیلتر ۱۵ نقطه‌ای — الگوهای بزرگ‌تر رو می‌بینه</span><span class="en"><strong>Kernel size = 15:</strong> 15-point filter — sees larger patterns</span></li>
+  </ul>
+</div>
+
+<div class="concept-box">
+  <h4><span class="fa">Transformer و Attention چیه؟</span><span class="en">What Are Transformers and Attention?</span></h4>
+  <p>
+    <span class="fa">Transformer مثل یه دانش‌آموزه که وقتی یه جمله رو می‌خونه، می‌تونه بین هر دو کلمه‌ای که هر چقدر هم از هم دور باشن ارتباط برقرار کنه. این برخلاف CNN هست که فقط همسایه‌ها رو می‌بینه.</span>
+    <span class="en">A Transformer is like a student reading a sentence who can connect any two words no matter how far apart they are. Unlike CNN which only sees neighbors.</span>
+  </p>
+  <p>
+    <span class="fa"><strong>Attention (توجه):</strong> مکانیزمی هست که مدل یاد می‌گیره به کدوم بخش‌های ورودی بیشتر توجه کنه. مثل وقتی دارید یه متن رو می‌خونید و ناخودآگاه روی کلمات مهم بیشتر تمرکز می‌کنید.</span>
+    <span class="en"><strong>Attention:</strong> A mechanism where the model learns which parts of the input to focus on. Like unconsciously focusing on important words while reading text.</span>
+  </p>
+</div>
+
+<div class="concept-box">
+  <h4><span class="fa">Transfer Learning (یادگیری انتقالی) چیه؟</span><span class="en">What Is Transfer Learning?</span></h4>
+  <p>
+    <span class="fa">فرض کنید یه نفر ۱۰ سال زبان فرانسه یاد گرفته. حالا می‌خواد ایتالیایی یاد بگیره. خیلی سریع‌تر یاد می‌گیره چون دو زبان شبیه هم هستن.</span>
+    <span class="en">Suppose someone learned French for 10 years. Now they want to learn Italian. They learn much faster because the two languages are similar.</span>
+  </p>
+  <p>
+    <span class="fa">Transfer Learning همینه: مدلی که روی ۱۴ میلیون عکس ImageNet آموزش دیده (ویژگی‌های عمومی بصری مثل لبه‌ها و بافت‌ها رو بلده) رو می‌گیریم و فقط لایه آخرش رو برای کار خودمون تنظیم می‌کنیم. این خیلی بهتره از آموزش از صفر، مخصوصاً وقتی داده کم داریم (مثل ۱۵۰۰ پچ ما).</span>
+    <span class="en">Transfer Learning is the same: we take a model trained on 14 million ImageNet images (knows general visual features like edges and textures) and only fine-tune the last layer for our task. This is much better than training from scratch, especially with limited data (like our 1500 patches).</span>
+  </p>
+</div>
+
+<div class="concept-box">
+  <h4><span class="fa">Overfitting (بیش‌برازش) چیه؟</span><span class="en">What Is Overfitting?</span></h4>
+  <p>
+    <span class="fa">وقتی مدل داده آموزشی رو <strong>حفظ</strong> می‌کنه بجای اینکه <strong>الگو</strong> یاد بگیره. مثل دانش‌آموزی که جواب تست‌های قبلی رو حفظ کنه ولی سوال جدید رو بلد نباشه.</span>
+    <span class="en">When the model <strong>memorizes</strong> training data instead of <strong>learning patterns</strong>. Like a student who memorizes previous test answers but can't solve new questions.</span>
+  </p>
+  <p>
+    <span class="fa"><strong>علائم:</strong> دقت Training خیلی بالا (۹۹٪) ولی دقت Validation پایین (۵۰٪)</span>
+    <span class="en"><strong>Symptoms:</strong> Training accuracy very high (99%) but Validation accuracy low (50%)</span>
+  </p>
+  <p>
+    <span class="fa"><strong>راه‌حل‌ها:</strong> Early Stopping، Dropout، داده بیشتر</span>
+    <span class="en"><strong>Solutions:</strong> Early Stopping, Dropout, more data</span>
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- PART 2 -->
+<!-- ============================================================ -->
+<div class="sep"></div>
+<h2 id="part2">
+  <span class="fa">بخش ۲: داده‌ها — با چه چیزی کار می‌کنیم؟</span>
+  <span class="en">Part 2: Data — What Are We Working With?</span>
+</h2>
+
+<h3><span class="fa">۲.۱ دیتاست ما</span><span class="en">2.1 Our Dataset</span></h3>
+<p>
+  <span class="fa">۲۳ نمونه بافتی مننژیوما از ۱۲ بیمار (هر بیمار ممکنه ۱ یا ۲ نمونه داده باشه: A و B).</span>
+  <span class="en">23 meningioma tissue samples from 12 patients (each patient may have 1 or 2 samples: A and B).</span>
+</p>
+
+<table>
+  <tr><th><span class="fa">ویژگی</span><span class="en">Feature</span></th><th><span class="fa">مقدار</span><span class="en">Value</span></th></tr>
+  <tr><td><span class="fa">تعداد نمونه‌ها (samples)</span><span class="en">Number of samples</span></td><td><span class="fa">۲۳</span><span class="en">23</span></td></tr>
+  <tr><td><span class="fa">تعداد کل منحنی‌های AFM</span><span class="en">Total AFM curves</span></td><td><span class="fa">۱۴۲,۳۴۷</span><span class="en">142,347</span></td></tr>
+  <tr><td><span class="fa">Grade 1 (خوش‌خیم)</span><span class="en">Grade 1 (Benign)</span></td><td><span class="fa">۱۴ نمونه (۶۱٪)</span><span class="en">14 samples (61%)</span></td></tr>
+  <tr><td><span class="fa">Grade 2 (آتیپیک)</span><span class="en">Grade 2 (Atypical)</span></td><td><span class="fa">۹ نمونه (۳۹٪)</span><span class="en">9 samples (39%)</span></td></tr>
+  <tr><td><span class="fa">نمونه‌هایی که هیستولوژی هم دارن</span><span class="en">Samples with histology</span></td><td><span class="fa">۳ نمونه (1347, 2543, 3464)</span><span class="en">3 samples (1347, 2543, 3464)</span></td></tr>
+  <tr><td><span class="fa">تعداد پچ هیستولوژی</span><span class="en">Histology patches</span></td><td><span class="fa">۱,۵۰۰ (هر slide = ۵۰۰ پچ)</span><span class="en">1,500 (500 patches per slide)</span></td></tr>
+</table>
+
+<div class="why-box">
+  <h4><span class="fa">چرا ۲۳ نمونه کمه؟</span><span class="en">Why Are 23 Samples Few?</span></h4>
+  <p>
+    <span class="fa">در یادگیری عمیق معمولاً هزاران یا میلیون‌ها نمونه لازمه. ما ۲۳ نمونه بیمار داریم ولی هر نمونه هزاران منحنی AFM داره. مشکل اینجاست که منحنی‌های یک بیمار خیلی شبیه هم هستن — پس «۱۴۲ هزار منحنی» در واقع فقط «۲۳ بیمار متفاوت» هست.</span>
+    <span class="en">Deep learning typically needs thousands or millions of samples. We have 23 patient samples, but each sample has thousands of AFM curves. The problem is that curves from one patient are very similar — so "142K curves" is really just "23 different patients."</span>
+  </p>
+</div>
+
+<h3><span class="fa">۲.۲ دو نوع داده ما</span><span class="en">2.2 Our Two Data Types</span></h3>
+
+<h4><span class="fa">نوع ۱: منحنی‌های AFM (داده ۱بعدی)</span><span class="en">Type 1: AFM Curves (1D data)</span></h4>
+<p>
+  <span class="fa">هر منحنی AFM یه آرایه ۵۱۲ عددی هست. مثل یه سیگنال صوتی ولی به جای صدا، نیروی مکانیکی هست.</span>
+  <span class="en">Each AFM curve is an array of 512 numbers. Like an audio signal but instead of sound, it's mechanical force.</span>
+</p>
+<pre>
+<span class="comment"># یه منحنی AFM بعد از پیش‌پردازش / An AFM curve after preprocessing</span>
+curve = [0.0, 0.0, 0.001, 0.003, 0.01, ..., 0.89, 0.95, 1.0]
+<span class="comment">#  ^start: tip far from surface     ^end: tip pressing</span>
+len(curve)  <span class="comment"># = 512 points</span>
+</pre>
+
+<h4><span class="fa">نوع ۲: پچ‌های هیستولوژی (داده ۲بعدی)</span><span class="en">Type 2: Histology Patches (2D data)</span></h4>
+<p>
+  <span class="fa">هر پچ یه تصویر رنگی ۲۲۴×۲۲۴ پیکسل هست. سه کانال رنگی RGB داره.</span>
+  <span class="en">Each patch is a 224x224 pixel color image with three RGB color channels.</span>
+</p>
+<pre>
+<span class="comment"># یه پچ هیستولوژی / A histology patch</span>
+patch.shape = (3, 224, 224)
+<span class="comment">#  3 = color channels (Red, Green, Blue)</span>
+<span class="comment">#  224x224 = image size</span>
+</pre>
+
+<!-- ============================================================ -->
+<!-- PART 3 -->
+<!-- ============================================================ -->
+<div class="sep"></div>
+<h2 id="part3">
+  <span class="fa">بخش ۳: پیش‌پردازش — داده خام رو آماده کن</span>
+  <span class="en">Part 3: Preprocessing — Preparing Raw Data</span>
+</h2>
+
+<h3><span class="fa">۳.۱ پیش‌پردازش AFM (مرحله به مرحله)</span><span class="en">3.1 AFM Preprocessing (Step by Step)</span></h3>
+<p><span class="fa">فایل:</span><span class="en">File:</span> <span class="file-ref">src/preprocessing/afm_preprocess.py</span></p>
+
+<p>
+  <span class="fa"><span class="step-num">1</span> <strong>خواندن فایل HDF5:</strong> هر فایل خام شامل ۲۲۵ منحنی نیرو هست</span>
+  <span class="en"><span class="step-num">1</span> <strong>Reading HDF5 File:</strong> Each raw file contains 225 force curves</span>
+</p>
+<pre>
+<span class="comment"># هر فایل .h5 یه "نقشه" (map) از ۲۲۵ نقطه اندازه‌گیری</span>
+<span class="comment"># Each .h5 file is a "map" of 225 measurement points</span>
+<span class="keyword">with</span> h5py.<span class="func">File</span>(file_path, <span class="string">"r"</span>) <span class="keyword">as</span> f:
+    <span class="keyword">for</span> key <span class="keyword">in</span> f.keys():
+        force  = f[key][<span class="string">"force"</span>][:]
+        height = f[key][<span class="string">"height (measured)"</span>][:]
+        segment = f[key][<span class="string">"segment"</span>][:]
+</pre>
+
+<p>
+  <span class="fa"><span class="step-num">2</span> <strong>استخراج بخش Approach:</strong> فقط قسمت نزدیک‌شدن سوزن به سطح رو نگه می‌داریم (segment == 0)</span>
+  <span class="en"><span class="step-num">2</span> <strong>Extract Approach:</strong> Keep only the approach segment (segment == 0)</span>
+</p>
+<div class="why-box">
+  <h4><span class="fa">چرا فقط Approach؟</span><span class="en">Why Only Approach?</span></h4>
+  <p>
+    <span class="fa">بخش approach «خالص‌تر» هست. وقتی سوزن داره به سطح نزدیک می‌شه، خواص الاستیک بافت رو اندازه می‌گیره. بخش retract (برگشت) شامل اثرات چسبندگی و هیسترزیس هست که تفسیرش پیچیده‌تره.</span>
+    <span class="en">The approach part is "cleaner." When the tip approaches, it measures elastic tissue properties. The retract part includes adhesion and hysteresis effects that are harder to interpret.</span>
+  </p>
+</div>
+
+<p>
+  <span class="fa"><span class="step-num">3</span> <strong>تصحیح ثابت فنر:</strong> بعضی نمونه‌ها با cantilever‌هایی اندازه‌گیری شدن که کالیبراسیون متفاوتی داشتن</span>
+  <span class="en"><span class="step-num">3</span> <strong>Spring Constant Correction:</strong> Some samples were measured with cantilevers that had different calibrations</span>
+</p>
+<pre>
+<span class="comment"># Correction: real force = recorded force × spring constant ratio</span>
+F_correct = F_recorded × (k_correct / k_recorded)
+
+<span class="comment"># e.g., for sample 3374A:</span>
+<span class="comment"># real spring constant = 1.586 N/m</span>
+</pre>
+
+<p>
+  <span class="fa"><span class="step-num">4</span> <strong>برش در Setpoint:</strong> منحنی‌ها رو تا ۳۰۰ نانونیوتن برش می‌زنیم</span>
+  <span class="en"><span class="step-num">4</span> <strong>Cut at Setpoint:</strong> Curves are truncated at 300 nanonewtons</span>
+</p>
+<div class="why-box">
+  <h4><span class="fa">چرا ۳۰۰ nN؟</span><span class="en">Why 300 nN?</span></h4>
+  <p>
+    <span class="fa">Setpoint مقدار حداکثر نیرویی هست که سوزن به بافت وارد می‌کنه. بالاتر از این مقدار، بافت ممکنه آسیب ببینه و داده‌ها غیرقابل اعتماد بشن. ۳۰۰ nN مقدار استانداردی هست که آزمایشگاه تنظیم کرده.</span>
+    <span class="en">Setpoint is the maximum force the tip applies to tissue. Above this, tissue may be damaged and data unreliable. 300 nN is the standard value set by the laboratory.</span>
+  </p>
+</div>
+
+<p>
+  <span class="fa"><span class="step-num">5</span> <strong>نرمال‌سازی به طول ثابت ۵۱۲:</strong></span>
+  <span class="en"><span class="step-num">5</span> <strong>Normalize to Fixed Length 512:</strong></span>
+</p>
+<pre>
+<span class="keyword">def</span> <span class="func">normalize_to_fixed_length</span>(force):
+    <span class="comment"># Step 1: baseline correction</span>
+    f = force - force.min()
+    <span class="comment"># Step 2: scale to [0, 1]</span>
+    f = f / f.max()
+    <span class="comment"># Step 3: resample to 512 points</span>
+    x_src = np.linspace(0, 1, len(f))
+    x_dst = np.linspace(0, 1, 512)
+    <span class="keyword">return</span> np.interp(x_dst, x_src, f)
+</pre>
+<div class="why-box">
+  <h4><span class="fa">چرا ۵۱۲ نقطه؟</span><span class="en">Why 512 Points?</span></h4>
+  <p>
+    <span class="fa">شبکه عصبی ورودی با اندازه ثابت لازم داره. منحنی‌های خام طول‌های متفاوتی دارن (مثلاً ۳۰۰ تا ۲۰۰۰ نقطه). با resample کردن به ۵۱۲، همه منحنی‌ها یه اندازه می‌شن. ۵۱۲ = ۲⁹ هست و برای عملیات‌های CNN و Transformer بهینه‌ست.</span>
+    <span class="en">Neural networks need fixed-size input. Raw curves have varying lengths (e.g., 300 to 2000 points). By resampling to 512, all curves become the same size. 512 = 2^9 and is optimal for CNN and Transformer operations.</span>
+  </p>
+</div>
+
+<h3><span class="fa">۳.۲ پیش‌پردازش هیستولوژی</span><span class="en">3.2 Histology Preprocessing</span></h3>
+<p><span class="fa">فایل:</span><span class="en">File:</span> <span class="file-ref">src/preprocessing/histology_preprocess.py</span></p>
+<ul>
+  <li><span class="fa"><span class="step-num">1</span> باز کردن فایل SVS با کتابخانه OpenSlide</span><span class="en"><span class="step-num">1</span> Open SVS file with OpenSlide library</span></li>
+  <li><span class="fa"><span class="step-num">2</span> انتخاب سطح ۲۰x بزرگنمایی (استاندارد پاتولوژی)</span><span class="en"><span class="step-num">2</span> Select 20x magnification level (pathology standard)</span></li>
+  <li><span class="fa"><span class="step-num">3</span> تشخیص نواحی بافت (بجای ناحیه سفید خالی)</span><span class="en"><span class="step-num">3</span> Detect tissue regions (vs. empty white areas)</span></li>
+  <li><span class="fa"><span class="step-num">4</span> برش به پچ‌های ۲۲۴×۲۲۴ بدون همپوشانی</span><span class="en"><span class="step-num">4</span> Cut into 224x224 non-overlapping patches</span></li>
+  <li><span class="fa"><span class="step-num">5</span> فیلتر: پچ‌هایی که کمتر از ۷۰٪ بافت دارن حذف می‌شن</span><span class="en"><span class="step-num">5</span> Filter: patches with less than 70% tissue are removed</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- PART 4 -->
+<!-- ============================================================ -->
+<div class="sep"></div>
+<h2 id="part4">
+  <span class="fa">بخش ۴: مدل‌ها — مغز سیستم ما</span>
+  <span class="en">Part 4: Models — The Brain of Our System</span>
+</h2>
+
+<h3><span class="fa">۴.۱ مدل TemporalCNN (برای منحنی AFM)</span><span class="en">4.1 TemporalCNN Model (for AFM Curves)</span></h3>
+<p><span class="fa">فایل:</span><span class="en">File:</span> <span class="file-ref">src/models/afm_encoders.py</span></p>
+
+<div class="analogy">
+  <h4><span class="fa">تشبیه ساده</span><span class="en">Simple Analogy</span></h4>
+  <p>
+    <span class="fa">فرض کنید سه نفر دارن یه آهنگ گوش می‌دن: یکی فقط به ضربات طبل توجه می‌کنه (جزئیات ریز)، یکی به ملودی (الگوی میانی)، و یکی به ریتم کلی (شکل عمومی). هر سه نظرشون رو ترکیب می‌کنن تا بگن آهنگ شاد هست یا غمگین.</span>
+    <span class="en">Imagine three people listening to a song: one focuses on drum beats (fine details), one on melody (medium patterns), one on overall rhythm (general shape). They combine their opinions to say whether the song is happy or sad.</span>
+  </p>
+</div>
+
+<p>
+  <span class="fa">TemporalCNN سه شاخه <strong>موازی</strong> داره که همزمان منحنی رو پردازش می‌کنن:</span>
+  <span class="en">TemporalCNN has three <strong>parallel</strong> branches that process the curve simultaneously:</span>
+</p>
+
+<pre>
+<span class="comment"># Branch 1: fine details (kernel = 3 points)</span>
+branch_small = Conv1d(kernel_size=<span class="number">3</span>)
+
+<span class="comment"># Branch 2: medium patterns (kernel = 7 points)</span>
+branch_medium = Conv1d(kernel_size=<span class="number">7</span>)
+
+<span class="comment"># Branch 3: overall shape (kernel = 15 points)</span>
+branch_large = Conv1d(kernel_size=<span class="number">15</span>)
+
+<span class="comment"># Outputs concatenated</span>
+combined = concat(branch_small, branch_medium, branch_large)
+<span class="comment"># → 256-dimensional embedding</span>
+embedding = Linear(combined) → <span class="number">256</span> dimensions
+</pre>
+
+<p><span class="fa"><strong>در کد واقعی:</strong></span><span class="en"><strong>In actual code:</strong></span></p>
+<pre>
+<span class="keyword">class</span> <span class="class">TemporalCNN</span>(nn.Module):
+    <span class="keyword">def</span> <span class="func">__init__</span>(self):
+        <span class="comment"># Three parallel branches with different kernels</span>
+        self.branch_small  = Conv1d(1, 32, kernel_size=<span class="number">3</span>)  → Conv1d(32, 64, kernel_size=<span class="number">3</span>)
+        self.branch_medium = Conv1d(1, 32, kernel_size=<span class="number">7</span>)  → Conv1d(32, 64, kernel_size=<span class="number">7</span>)
+        self.branch_large  = Conv1d(1, 32, kernel_size=<span class="number">15</span>) → Conv1d(32, 64, kernel_size=<span class="number">15</span>)
+        <span class="comment"># 3 branches × 64 channels × 32 points = 6144</span>
+        self.projection = Linear(<span class="number">6144</span>, <span class="number">256</span>)
+
+    <span class="keyword">def</span> <span class="func">forward</span>(self, x):   <span class="comment"># x = (batch, 512)</span>
+        b1 = self.branch_small(x)
+        b2 = self.branch_medium(x)
+        b3 = self.branch_large(x)
+        combined = cat([b1, b2, b3])
+        <span class="keyword">return</span> self.projection(combined)  <span class="comment"># → (batch, 256)</span>
+</pre>
+
+<h3><span class="fa">۴.۲ مدل Transformer (برای منحنی AFM)</span><span class="en">4.2 Transformer Model (for AFM Curves)</span></h3>
+<p><span class="fa">فایل:</span><span class="en">File:</span> <span class="file-ref">src/models/afm_encoders.py</span></p>
+
+<div class="analogy">
+  <h4><span class="fa">تشبیه ساده</span><span class="en">Simple Analogy</span></h4>
+  <p>
+    <span class="fa">فرض کنید ۳۲ نفر هر کدوم یه تکه از یه پازل رو دارن. در CNN هر نفر فقط با همسایه‌هاش حرف می‌زنه. ولی در Transformer هر نفر می‌تونه با <strong>همه ۳۱ نفر دیگه</strong> همزمان صحبت کنه و بفهمه تکه‌اش با کجاها ارتباط داره.</span>
+    <span class="en">Imagine 32 people each holding a puzzle piece. In CNN each person only talks to neighbors. But in Transformer each person can talk to <strong>all 31 others</strong> simultaneously to understand how their piece connects.</span>
+  </p>
+</div>
+
+<pre>
+<span class="comment"># Step 1: Split 512-point curve into 32 segments of 16 points</span>
+curve = [............512 points............]
+        ↓
+tokens = [tok1|tok2|tok3|...|tok32]  <span class="comment"># each token = 16 points</span>
+
+<span class="comment"># Step 2: Add CLS token (special summary token)</span>
+tokens = [CLS|tok1|tok2|...|tok32]   <span class="comment"># 33 tokens</span>
+
+<span class="comment"># Step 3: Add Positional Encoding</span>
+<span class="comment"># (so model knows position of each token in the curve)</span>
+
+<span class="comment"># Step 4: Self-Attention (3 layers, 4 heads each)</span>
+<span class="comment"># Each token "attends" to all other tokens</span>
+
+<span class="comment"># Step 5: CLS token output = summary of entire curve</span>
+embedding = CLS_output → Linear → <span class="number">256</span> dimensions
+</pre>
+
+<div class="concept-box">
+  <h4><span class="fa">CLS Token چیه؟</span><span class="en">What Is the CLS Token?</span></h4>
+  <p>
+    <span class="fa">یه توکن مصنوعی که اول دنباله اضافه می‌شه. کارش اینه که بعد از چند لایه attention، اطلاعات همه توکن‌ها رو در خودش جمع کنه. آخر سر فقط خروجی همین یه توکن رو به عنوان «خلاصه کل منحنی» به classifier می‌دیم. این تکنیک از مقاله BERT (گوگل، ۲۰۱۸) اومده.</span>
+    <span class="en">An artificial token added to the start of the sequence. Its job is to aggregate information from all other tokens through attention layers. At the end, only this single token's output serves as the "summary of the entire curve" for the classifier. This technique comes from the BERT paper (Google, 2018).</span>
+  </p>
+</div>
+
+<div class="concept-box">
+  <h4><span class="fa">Positional Encoding چیه؟</span><span class="en">What Is Positional Encoding?</span></h4>
+  <p>
+    <span class="fa">Transformer ذاتاً نمی‌دونه ترتیب توکن‌ها چیه (برخلاف CNN که فیلتر رو به ترتیب می‌کشه). Positional Encoding یه بردار منحصربه‌فرد به هر موقعیت اضافه می‌کنه تا مدل بفهمه مثلاً توکن ۵ قبل از توکن ۲۰ هست. از توابع sin و cos استفاده می‌کنه.</span>
+    <span class="en">Transformers inherently don't know token order (unlike CNN which slides the filter sequentially). Positional Encoding adds a unique vector to each position so the model knows token 5 comes before token 20. It uses sin and cos functions.</span>
+  </p>
+</div>
+
+<h3><span class="fa">۴.۳ مقایسه CNN و Transformer</span><span class="en">4.3 CNN vs. Transformer Comparison</span></h3>
+<table>
+  <tr><th><span class="fa">ویژگی</span><span class="en">Feature</span></th><th>TemporalCNN</th><th>Transformer</th></tr>
+  <tr><td><span class="fa">نوع نگاه</span><span class="en">View Type</span></td><td><span class="fa">محلی (همسایه‌ها)</span><span class="en">Local (neighbors)</span></td><td><span class="fa">کلی (همه به همه)</span><span class="en">Global (all-to-all)</span></td></tr>
+  <tr><td><span class="fa">مزیت</span><span class="en">Strength</span></td><td><span class="fa">با داده کم خوب کار می‌کنه</span><span class="en">Works well with limited data</span></td><td><span class="fa">روابط بلندبرد رو می‌بینه</span><span class="en">Sees long-range relationships</span></td></tr>
+  <tr><td><span class="fa">ضعف</span><span class="en">Weakness</span></td><td><span class="fa">روابط دور رو نمی‌بینه</span><span class="en">Can't see distant relationships</span></td><td><span class="fa">به داده زیاد نیاز داره</span><span class="en">Needs lots of data</span></td></tr>
+  <tr><td><span class="fa">نتیجه ما</span><span class="en">Our Result</span></td><td class="good">74.5%</td><td>65.6%</td></tr>
+  <tr><td><span class="fa">کجای منحنی نگاه می‌کنه</span><span class="en">Curve Focus Area</span></td><td><span class="fa">ابتدا (نقطه تماس)</span><span class="en">Start (contact point)</span></td><td><span class="fa">انتها (عمق فرورفتن)</span><span class="en">End (indentation depth)</span></td></tr>
+</table>
+
+<h3><span class="fa">۴.۴ استراتژی‌های ادغام (Fusion)</span><span class="en">4.4 Fusion Strategies</span></h3>
+<p><span class="fa">فایل:</span><span class="en">File:</span> <span class="file-ref">src/models/fusion_models.py</span></p>
+<p>
+  <span class="fa">وقتی هم AFM و هم تصویر هیستولوژی داریم، باید اطلاعات هر دو رو ترکیب کنیم. سه روش پیاده‌سازی شده:</span>
+  <span class="en">When we have both AFM and histology images, we must combine information from both. Three methods implemented:</span>
+</p>
+
+<h4><span class="fa">روش ۱: Late Fusion (ادغام دیرهنگام)</span><span class="en">Method 1: Late Fusion</span></h4>
+<div class="analogy">
+  <h4><span class="fa">تشبیه</span><span class="en">Analogy</span></h4>
+  <p>
+    <span class="fa">دو دکتر جداگانه یه بیمار رو معاینه می‌کنن. یکی فقط نتایج AFM رو می‌بینه و نظرش رو می‌ده، یکی فقط تصویر هیستولوژی رو. آخر سر میانگین نظرشون رو می‌گیریم.</span>
+    <span class="en">Two doctors independently examine a patient. One sees only AFM results, the other only histology images. At the end, we average their opinions.</span>
+  </p>
+</div>
+<pre>
+logits = (afm_branch_prediction + image_branch_prediction) / <span class="number">2</span>
+</pre>
+
+<h4><span class="fa">روش ۲: Early Fusion (ادغام زودهنگام)</span><span class="en">Method 2: Early Fusion</span></h4>
+<div class="analogy">
+  <h4><span class="fa">تشبیه</span><span class="en">Analogy</span></h4>
+  <p>
+    <span class="fa">دو دکتر اول همه اطلاعاتشون رو روی میز می‌ذارن و بعد <strong>با هم</strong> تصمیم می‌گیرن.</span>
+    <span class="en">Two doctors first put all their information on the table and then make a decision <strong>together</strong>.</span>
+  </p>
+</div>
+<pre>
+combined = concat(afm_embedding, image_embedding)  <span class="comment"># 256 + 256 = 512</span>
+logits = classifier(combined)
+</pre>
+
+<h4><span class="fa">روش ۳: Attention Fusion (ادغام با توجه)</span><span class="en">Method 3: Attention Fusion</span></h4>
+<div class="analogy">
+  <h4><span class="fa">تشبیه</span><span class="en">Analogy</span></h4>
+  <p>
+    <span class="fa">یه سیستم هوشمند یاد می‌گیره کِی بیشتر به AFM گوش بده و کِی بیشتر به تصویر. مثلاً اگه تصویر تار باشه، بیشتر به AFM اعتماد کنه.</span>
+    <span class="en">A smart system learns when to listen more to AFM and when to the image. For example, if the image is blurry, trust AFM more.</span>
+  </p>
+</div>
+<pre>
+<span class="comment"># A small network determines the weight of each modality</span>
+gate = softmax(Linear(concat(afm_emb, img_emb)))
+<span class="comment"># gate = [0.7, 0.3]  means 70% AFM and 30% image</span>
+logits = gate[0]*afm_emb + gate[1]*img_emb
+</pre>
+
+<h3><span class="fa">۴.۵ مدل اختصاصی AFMHistoNet</span><span class="en">4.5 Custom AFMHistoNet Model</span></h3>
+<p><span class="fa">فایل:</span><span class="en">File:</span> <span class="file-ref">src/models/hybrid_model.py</span></p>
+
+<div class="concept-box">
+  <h4><span class="fa">ایده اصلی: Cross-Modal Attention</span><span class="en">Core Idea: Cross-Modal Attention</span></h4>
+  <p>
+    <span class="fa">بجای اینکه دو مدل مستقل تصمیم بگیرن، اجازه بدیم هر modality به اطلاعات دیگری <strong>نگاه</strong> کنه. مثلاً ناحیه‌ای از منحنی AFM که سختی بالا نشون می‌ده، بتونه ببینه آیا در تصویر هیستولوژی هم اون ناحیه ساختار متفاوتی داره یا نه.</span>
+    <span class="en">Instead of two independent models deciding, let each modality <strong>look at</strong> the other's information. For example, an AFM curve region showing high stiffness can check whether the histology image also shows different structure in that area.</span>
+  </p>
+</div>
+
+<pre>
+<span class="comment"># 1. AFM → 32 tokens</span>
+afm_tokens = AFM_Encoder(curve)        <span class="comment"># (batch, 32, 128)</span>
+
+<span class="comment"># 2. Image → 49 tokens (7×7 ResNet50 feature map)</span>
+img_tokens = Image_Encoder(patch)      <span class="comment"># (batch, 49, 128)</span>
+
+<span class="comment"># 3. Cross-attention: AFM looks at the image</span>
+afm_attended = Attention(query=afm_tokens, key=img_tokens, value=img_tokens)
+
+<span class="comment"># 4. Cross-attention: Image looks at AFM</span>
+img_attended = Attention(query=img_tokens, key=afm_tokens, value=afm_tokens)
+
+<span class="comment"># 5. Gated Fusion: smart combination</span>
+fused = GatedFusion(afm_attended.mean(), img_attended.mean())
+
+<span class="comment"># 6. Final classification</span>
+logits = Classifier(fused)  <span class="comment"># → [0.3, 0.7] = Grade 2</span>
+</pre>
+
+<div class="concept-box">
+  <h4><span class="fa">Query, Key, Value در Attention چیه؟</span><span class="en">What Are Query, Key, Value in Attention?</span></h4>
+  <p><span class="fa">فکر کن داری توی کتابخانه دنبال یه موضوع می‌گردی:</span><span class="en">Think of searching for a topic in a library:</span></p>
+  <ul>
+    <li><span class="fa"><strong>Query (سوال):</strong> «من دنبال اطلاعات درباره سختی بافت می‌گردم» (از AFM میاد)</span><span class="en"><strong>Query:</strong> "I'm looking for tissue stiffness info" (comes from AFM)</span></li>
+    <li><span class="fa"><strong>Key (عنوان کتاب‌ها):</strong> عنوان‌های بخش‌های مختلف تصویر هیستولوژی</span><span class="en"><strong>Key:</strong> Titles of different histology image sections</span></li>
+    <li><span class="fa"><strong>Value (محتوای کتاب):</strong> اطلاعات واقعی هر بخش تصویر</span><span class="en"><strong>Value:</strong> Actual information from each image section</span></li>
+  </ul>
+  <p>
+    <span class="fa">Attention score مشخص می‌کنه Query با کدوم Key‌ها match داره و از Value‌های متناظر اطلاعات می‌گیره.</span>
+    <span class="en">Attention score determines which Keys match the Query and extracts information from corresponding Values.</span>
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- PART 5 -->
+<!-- ============================================================ -->
+<div class="sep"></div>
+<h2 id="part5">
+  <span class="fa">بخش ۵: آموزش — مدل چطور یاد می‌گیره؟</span>
+  <span class="en">Part 5: Training — How Does the Model Learn?</span>
+</h2>
+
+<h3><span class="fa">۵.۱ تنظیمات آموزش</span><span class="en">5.1 Training Configuration</span></h3>
+<table>
+  <tr><th><span class="fa">پارامتر</span><span class="en">Parameter</span></th><th><span class="fa">مقدار</span><span class="en">Value</span></th><th><span class="fa">توضیح ساده</span><span class="en">Simple Explanation</span></th></tr>
+  <tr><td>Batch Size</td><td>128</td><td><span class="fa">در هر قدم، ۱۲۸ منحنی رو پردازش می‌کنه</span><span class="en">Processes 128 curves per step</span></td></tr>
+  <tr><td>Max Epochs</td><td>20</td><td><span class="fa">حداکثر ۲۰ بار کل داده رو می‌بینه</span><span class="en">Sees all data at most 20 times</span></td></tr>
+  <tr><td>Learning Rate</td><td>0.0001</td><td><span class="fa">اندازه قدم‌های بهینه‌سازی (کوچک = دقیق ولی کند)</span><span class="en">Optimization step size (small = precise but slow)</span></td></tr>
+  <tr><td>Optimizer</td><td>Adam</td><td><span class="fa">الگوریتم بهینه‌سازی — هوشمندانه قدم‌ها رو تنظیم می‌کنه</span><span class="en">Optimization algorithm — smartly adjusts steps</span></td></tr>
+  <tr><td>Early Stopping</td><td>patience=5</td><td><span class="fa">اگه ۵ epoch بهتر نشد، متوقف شو</span><span class="en">Stop if no improvement for 5 epochs</span></td></tr>
+  <tr><td>Loss</td><td>Focal Loss (γ=2)</td><td><span class="fa">تابع خطا مخصوص کلاس‌های نامتوازن</span><span class="en">Loss function for imbalanced classes</span></td></tr>
+  <tr><td>Scheduler</td><td>Cosine Annealing</td><td><span class="fa">Learning rate رو تدریجاً کم می‌کنه</span><span class="en">Gradually reduces learning rate</span></td></tr>
+</table>
+
+<h3><span class="fa">۵.۲ Focal Loss — چرا Cross-Entropy معمولی کافی نیست؟</span><span class="en">5.2 Focal Loss — Why Isn't Standard Cross-Entropy Enough?</span></h3>
+<p><span class="fa">فایل:</span><span class="en">File:</span> <span class="file-ref">src/training/loss.py</span></p>
+
+<div class="analogy">
+  <h4><span class="fa">تشبیه ساده</span><span class="en">Simple Analogy</span></h4>
+  <p>
+    <span class="fa">فرض کنید در کلاس ۱۰۰ نفره، ۸۰ نفر پسر و ۲۰ نفر دختر هستن. اگه مدل همیشه بگه «پسر»، دقتش ۸۰٪ می‌شه! ولی هیچ دختری رو شناسایی نکرده. Cross-Entropy معمولی این مدل «تنبل» رو خیلی تنبیه نمی‌کنه.</span>
+    <span class="en">Imagine a class of 100: 80 boys and 20 girls. If the model always says "boy", it gets 80% accuracy! But it hasn't identified any girls. Standard Cross-Entropy doesn't punish this "lazy" model much.</span>
+  </p>
+  <p>
+    <span class="fa">Focal Loss می‌گه: «وقتی مدل با اطمینان ۹۵٪ درست پیش‌بینی می‌کنه (نمونه‌های آسان)، وزن اون نمونه رو خیلی کم کن. تمام تمرکز روی نمونه‌هایی بذار که مدل گیج می‌شه (نمونه‌های سخت).»</span>
+    <span class="en">Focal Loss says: "When the model predicts correctly with 95% confidence (easy samples), greatly reduce that sample's weight. Focus entirely on samples where the model is confused (hard samples)."</span>
+  </p>
+</div>
+
+<pre>
+<span class="comment"># Standard Cross-Entropy:</span>
+loss = -log(p)
+
+<span class="comment"># Focal Loss:</span>
+loss = -(1-p)^γ × log(p)
+<span class="comment">#       ^^^^^^^ this factor down-weights easy samples (high p)</span>
+<span class="comment"># γ = 2: if model is 95% sure → factor = (0.05)² = 0.0025 (nearly zero!)</span>
+<span class="comment"># γ = 2: if model is 50% sure → factor = (0.50)² = 0.25 (still significant)</span>
+</pre>
+
+<h3><span class="fa">۵.۳ Cosine Annealing Scheduler</span><span class="en">5.3 Cosine Annealing Scheduler</span></h3>
+<div class="analogy">
+  <h4><span class="fa">تشبیه ساده</span><span class="en">Simple Analogy</span></h4>
+  <p>
+    <span class="fa">مثل رانندگی: اول با سرعت بالا حرکت می‌کنی (learning rate بزرگ = قدم‌های بزرگ) تا سریع به نزدیکی مقصد برسی. بعد آهسته‌آهسته سرعت رو کم می‌کنی (learning rate کوچک = قدم‌های ریز) تا دقیقاً در مقصد پارک کنی.</span>
+    <span class="en">Like driving: start fast (large learning rate = big steps) to quickly get near the destination. Then gradually slow down (small learning rate = tiny steps) to park precisely at the destination.</span>
+  </p>
+</div>
+<pre>
+<span class="comment"># Learning rate starts at 0.0001 and decreases following a cosine curve</span>
+lr(t) = lr_min + 0.5 × (lr_max - lr_min) × (1 + cos(π × t / T))
+<span class="comment"># epoch 0:  lr = 0.0001  (maximum)</span>
+<span class="comment"># epoch 10: lr = 0.00005 (half)</span>
+<span class="comment"># epoch 20: lr ≈ 0       (minimum)</span>
+</pre>
+
+<h3><span class="fa">۵.۴ Early Stopping</span><span class="en">5.4 Early Stopping</span></h3>
+<div class="analogy">
+  <h4><span class="fa">تشبیه ساده</span><span class="en">Simple Analogy</span></h4>
+  <p>
+    <span class="fa">مثل پختن کیک: وقتی کیک رو توی فر می‌ذاری هر ۵ دقیقه چک می‌کنی. اگه ۵ بار پشت سر هم چک کنی و هیچ تغییری نبینی، کیک آمادست و ادامه دادن فقط می‌سوزوندش (overfitting).</span>
+    <span class="en">Like baking a cake: you check every 5 minutes. If you check 5 times in a row and see no change, the cake is done and continuing will only burn it (overfitting).</span>
+  </p>
+</div>
+<pre>
+<span class="comment"># patience = 5 → if validation loss doesn't improve for 5 epochs, STOP</span>
+<span class="keyword">if</span> val_loss < best_val_loss:
+    best_val_loss = val_loss
+    save_checkpoint()      <span class="comment"># save best model</span>
+    patience_counter = <span class="number">0</span>
+<span class="keyword">else</span>:
+    patience_counter += <span class="number">1</span>
+    <span class="keyword">if</span> patience_counter >= <span class="number">5</span>:
+        <span class="keyword">break</span>              <span class="comment"># stop!</span>
+</pre>
+
+<!-- ============================================================ -->
+<!-- PART 6 -->
+<!-- ============================================================ -->
+<div class="sep"></div>
+<h2 id="part6">
+  <span class="fa">بخش ۶: ارزیابی — از کجا بفهمیم مدل خوب کار می‌کنه؟</span>
+  <span class="en">Part 6: Evaluation — How Do We Know the Model Works?</span>
+</h2>
+
+<h3><span class="fa">۶.۱ LOSO Cross-Validation — مهم‌ترین مفهوم ارزیابی این پروژه</span><span class="en">6.1 LOSO Cross-Validation — The Most Important Evaluation Concept</span></h3>
+<p><span class="fa">فایل:</span><span class="en">File:</span> <span class="file-ref">experiments/run_kfold.py</span></p>
+
+<div class="concept-box">
+  <h4><span class="fa">LOSO = Leave-One-Sample-Out</span><span class="en">LOSO = Leave-One-Sample-Out</span></h4>
+  <p>
+    <span class="fa"><strong>ایده:</strong> هر بار یه بیمار رو کنار بذار (تست)، با بقیه آموزش بده، ببین اون بیمار جدید رو درست تشخیص می‌دی؟ این کار رو برای <strong>همه</strong> بیماران تکرار کن.</span>
+    <span class="en"><strong>Idea:</strong> Each time leave one patient out (test), train with the rest, see if you can correctly diagnose that new patient. Repeat for <strong>all</strong> patients.</span>
+  </p>
+</div>
+
+<pre>
+<span class="comment"># Assume: 23 samples</span>
+results = []
+<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">23</span>):
+    test_sample  = samples[i]           <span class="comment"># ← this patient is tested</span>
+    train_samples = samples[:i] + samples[i+1:]  <span class="comment"># ← rest for training</span>
+
+    model = train(train_samples)         <span class="comment"># train the model</span>
+    accuracy = test(model, test_sample)  <span class="comment"># test on unseen patient</span>
+    results.append(accuracy)
+
+mean_accuracy = average(results)  <span class="comment"># average of 23 folds</span>
+</pre>
+
+<div class="why-box">
+  <h4><span class="fa">چرا LOSO و نه train/test split ساده؟</span><span class="en">Why LOSO and Not Simple Train/Test Split?</span></h4>
+  <p>
+    <span class="fa"><strong>مشکل اصلی: Data Leakage (نشت داده)</strong></span>
+    <span class="en"><strong>Main Problem: Data Leakage</strong></span>
+  </p>
+  <p>
+    <span class="fa">هر بیمار ممکنه ۱۰,۰۰۰ منحنی AFM داشته باشه. اگه منحنی‌ها رو تصادفی بین train و test تقسیم کنیم، منحنی‌های یه بیمار هم در train و هم در test میفته. مدل بجای یادگیری «الگوی Grade 2»، الگوی خاص «بیمار X» رو حفظ می‌کنه و در تست همون بیمار دقت بالا می‌ده.</span>
+    <span class="en">Each patient may have 10,000 AFM curves. If we randomly split curves between train and test, one patient's curves end up in both. The model memorizes "Patient X's pattern" instead of learning "Grade 2 pattern" and gets high accuracy on the same patient's test curves.</span>
+  </p>
+  <p>
+    <span class="fa">LOSO <strong>تضمین</strong> می‌کنه هیچ منحنی‌ای از بیمار تست در training نباشه. این سخت‌ترین ولی صادقانه‌ترین ارزیابی هست.</span>
+    <span class="en">LOSO <strong>guarantees</strong> no curves from the test patient are in training. This is the toughest but most honest evaluation.</span>
+  </p>
+</div>
+
+<div class="why-box">
+  <h4><span class="fa">چرا k-Fold معمولی هم کار نمی‌کنه؟</span><span class="en">Why Doesn't Standard k-Fold Work Either?</span></h4>
+  <p>
+    <span class="fa">k-Fold داده رو تصادفی به k بخش تقسیم می‌کنه. ولی این تقسیم در سطح «منحنی» هست، نه «بیمار». پس باز هم data leakage داریم. LOSO تقسیم رو در سطح «بیمار» انجام می‌ده.</span>
+    <span class="en">k-Fold randomly splits data into k parts. But this split is at the "curve" level, not "patient" level. So data leakage still occurs. LOSO splits at the "patient" level.</span>
+  </p>
+</div>
+
+<h3><span class="fa">۶.۲ معیارهای ارزیابی</span><span class="en">6.2 Evaluation Metrics</span></h3>
+
+<h4><span class="fa">Accuracy (دقت)</span><span class="en">Accuracy</span></h4>
+<p>
+  <span class="fa">ساده‌ترین معیار: از همه پیش‌بینی‌ها چند درصد درست بود؟</span>
+  <span class="en">Simplest metric: what percentage of all predictions were correct?</span>
+</p>
+<pre>
+accuracy = correct predictions / total predictions
+</pre>
+<div class="warning">
+  <span class="fa"><strong>مشکل:</strong> اگه ۸۰٪ داده Grade 1 باشه و مدل همیشه بگه «Grade 1»، دقتش ۸۰٪ می‌شه ولی هیچ Grade 2 ای رو نمی‌شناسه!</span>
+  <span class="en"><strong>Problem:</strong> If 80% of data is Grade 1 and the model always says "Grade 1", accuracy is 80% but it identifies zero Grade 2 cases!</span>
+</div>
+
+<h4><span class="fa">Confusion Matrix (ماتریس درهم‌ریختگی)</span><span class="en">Confusion Matrix</span></h4>
+<pre>
+                      Predicted Grade1    Predicted Grade2
+Actual Grade1         TP (correct)        FP (wrong)
+Actual Grade2         FN (wrong)          TN (correct)
+</pre>
+<ul>
+  <li><span class="fa"><strong>Recall (حساسیت):</strong> از همه بیماران Grade 2 واقعی، چند تا رو پیدا کردیم؟ = TP/(TP+FN)</span><span class="en"><strong>Recall (Sensitivity):</strong> Of all actual Grade 2 patients, how many did we find? = TP/(TP+FN)</span></li>
+  <li><span class="fa"><strong>Precision (دقت مثبت):</strong> از همه‌هایی که مدل Grade 2 گفت، چند تا واقعاً بودن؟ = TP/(TP+FP)</span><span class="en"><strong>Precision:</strong> Of all the model called Grade 2, how many actually were? = TP/(TP+FP)</span></li>
+  <li><span class="fa"><strong>F1 Score:</strong> میانگین هارمونیک Recall و Precision. وقتی کلاس‌ها نامتوازن هستن، F1 بهتر از Accuracy هست.</span><span class="en"><strong>F1 Score:</strong> Harmonic mean of Recall and Precision. When classes are imbalanced, F1 is better than Accuracy.</span></li>
+</ul>
+
+<h3><span class="fa">۶.۳ GradCAM — مدل به کجای تصویر نگاه می‌کنه؟</span><span class="en">6.3 GradCAM — Where Does the Model Look in the Image?</span></h3>
+<p><span class="fa">فایل:</span><span class="en">File:</span> <span class="file-ref">src/evaluation/gradcam.py</span></p>
+
+<div class="concept-box">
+  <h4><span class="fa">GradCAM چیه؟</span><span class="en">What Is GradCAM?</span></h4>
+  <p>
+    <span class="fa">بعد از اینکه مدل یه پچ هیستولوژی رو طبقه‌بندی کرد، می‌خوایم بدونیم «چرا» اون تصمیم رو گرفت. GradCAM gradient خروجی رو نسبت به آخرین لایه کانولوشن محاسبه می‌کنه و یه <strong>نقشه حرارتی (heatmap)</strong> روی تصویر تولید می‌کنه.</span>
+    <span class="en">After the model classifies a histology patch, we want to know "why" it made that decision. GradCAM computes the gradient of the output with respect to the last convolution layer and produces a <strong>heatmap</strong> over the image.</span>
+  </p>
+  <p>
+    <span class="fa">ناحیه‌های قرمز = مدل بیشترین توجه رو اینجا داشته<br>ناحیه‌های آبی = مدل اینجا رو نادیده گرفته</span>
+    <span class="en">Red regions = model paid most attention here<br>Blue regions = model ignored this area</span>
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- PART 7 -->
+<!-- ============================================================ -->
+<div class="sep"></div>
+<h2 id="part7">
+  <span class="fa">بخش ۷: تحلیل پلات‌ها — نتایج رو بخون</span>
+  <span class="en">Part 7: Plot Analysis — Reading the Results</span>
+</h2>
+
+<!-- PLOT GROUP 1 -->
+<h3><span class="fa">۷.۱ مقایسه سه مرحله پروژه</span><span class="en">7.1 Three-Phase Project Comparison</span></h3>
+<div class="plot-container">
+  <img src="plots/comparison_three_phases_2026-03-21.png" alt="Three Phase Comparison">
+</div>
+<p>
+  <span class="fa"><strong>این نمودار چی نشون می‌ده:</strong> سه ستون = سه مرحله مختلف پروژه با دقت هر کدوم.</span>
+  <span class="en"><strong>What this chart shows:</strong> Three columns = three different project phases with their accuracies.</span>
+</p>
+<ul>
+  <li><span class="fa"><strong>ستون ۱ (پایان‌نامه قبلی):</strong> با روش‌های قدیمی (SVM/RF) و ارزیابی ساده → <span class="good">۶۹.۸٪</span></span><span class="en"><strong>Column 1 (Previous thesis):</strong> Classical methods (SVM/RF) with simple evaluation → <span class="good">69.8%</span></span></li>
+  <li><span class="fa"><strong>ستون ۲ (ما با ۹ نمونه):</strong> یادگیری عمیق + LOSO → <span class="bad">۳۳.۴٪</span> فاجعه! چون داده خیلی کم بود</span><span class="en"><strong>Column 2 (Ours with 9 samples):</strong> Deep learning + LOSO → <span class="bad">33.4%</span> Disaster! Too little data</span></li>
+  <li><span class="fa"><strong>ستون ۳ (ما با ۲۳ نمونه):</strong> همون روش ولی داده بیشتر → <span class="good">۷۴.۵٪</span> حتی از قبلی بهتر!</span><span class="en"><strong>Column 3 (Ours with 23 samples):</strong> Same method but more data → <span class="good">74.5%</span> Even better than previous!</span></li>
+</ul>
+<div class="important">
+  <span class="fa"><strong>پیام اصلی:</strong> یادگیری عمیق با داده کم فاجعه‌ست، ولی با داده کافی از روش‌های سنتی جلو می‌زنه. و این با ارزیابی سخت‌تر (LOSO) هست!</span>
+  <span class="en"><strong>Key message:</strong> Deep learning with limited data is a disaster, but with enough data it surpasses traditional methods. And this is with a tougher evaluation (LOSO)!</span>
+</div>
+
+<!-- DATA EFFICIENCY -->
+<h3><span class="fa">۷.۲ تأثیر حجم داده</span><span class="en">7.2 Data Efficiency Impact</span></h3>
+<div class="plot-container">
+  <img src="plots/data_efficiency_9vs23_2026-03-21.png" alt="Data Efficiency">
+</div>
+<p>
+  <span class="fa"><strong>این نمودار چی نشون می‌ده:</strong> مقایسه مستقیم ۹ نمونه و ۲۳ نمونه برای هر مدل.</span>
+  <span class="en"><strong>What this shows:</strong> Direct comparison of 9 vs. 23 samples for each model.</span>
+</p>
+<ul>
+  <li><span class="fa">TemporalCNN: <span class="good">+۴۱ درصد بهبود!</span> (۳۳٪ → ۷۴٪)</span><span class="en">TemporalCNN: <span class="good">+41% improvement!</span> (33% → 74%)</span></li>
+  <li><span class="fa">Transformer: <span class="good">+۲۱ درصد بهبود</span> (۴۵٪ → ۶۶٪)</span><span class="en">Transformer: <span class="good">+21% improvement</span> (45% → 66%)</span></li>
+</ul>
+<div class="why-box">
+  <h4><span class="fa">چرا CNN بیشتر سود برد؟</span><span class="en">Why Did CNN Benefit More?</span></h4>
+  <p>
+    <span class="fa">CNN از هر نمونه جدید بیشتر یاد می‌گیره چون inductive bias محلی داره (فرض می‌کنه الگوهای مهم محلی هستن — که برای منحنی AFM درسته). Transformer فرض خاصی نمی‌کنه و باید همه چیز رو از داده یاد بگیره، پس به داده خیلی بیشتری نیاز داره.</span>
+    <span class="en">CNN learns more from each new sample because it has local inductive bias (assumes important patterns are local — which is correct for AFM curves). Transformer makes no assumptions and must learn everything from data, so it needs much more data.</span>
+  </p>
+</div>
+
+<!-- LOSO ACCURACY -->
+<h3><span class="fa">۷.۳ مقایسه مدل‌ها (۲۳ نمونه)</span><span class="en">7.3 Model Comparison (23 Samples)</span></h3>
+<div class="plot-container">
+  <img src="plots/loso_accuracy_comparison_2026-03-21.png" alt="LOSO Accuracy Comparison">
+</div>
+<p>
+  <span class="fa">دو ستون با خط‌های خطا (error bar). Error bar بزرگ = نتایج بین fold‌ها خیلی متفاوته.</span>
+  <span class="en">Two columns with error bars. Large error bars = results vary a lot between folds.</span>
+</p>
+<div class="why-box">
+  <h4><span class="fa">چرا error bar‌ها اینقدر بزرگه؟</span><span class="en">Why Are the Error Bars So Large?</span></h4>
+  <p>
+    <span class="fa">چون هر fold یه بیمار کامل رو تست می‌کنه و بعضی بیماران ذاتاً سخت‌تر هستن (بافتشون غیرعادی‌تره). این واریانس بالا در دیتاست‌های پزشکی کوچک <strong>طبیعی</strong> هست.</span>
+    <span class="en">Because each fold tests a complete patient and some patients are inherently harder (more unusual tissue). This high variance is <strong>normal</strong> in small medical datasets.</span>
+  </p>
+</div>
+
+<!-- PER FOLD -->
+<h3><span class="fa">۷.۴ دقت هر بیمار (هر Fold)</span><span class="en">7.4 Per-Patient Accuracy (Per Fold)</span></h3>
+<div class="plot-container">
+  <img src="plots/loso_per_fold_task2_2026-03-21.png" alt="Per Fold Task2 23">
+</div>
+<p>
+  <span class="fa"><strong>هر ستون = یه بیمار</strong> که تست شده. خط افقی = میانگین.</span>
+  <span class="en"><strong>Each column = one patient</strong> tested. Horizontal line = mean.</span>
+</p>
+<p><span class="fa"><strong>بهترین‌ها</strong> (چرا خوب هستن؟):</span><span class="en"><strong>Best performers</strong> (why?):</span></p>
+<ul>
+  <li><span class="fa">1525A (<span class="good">۹۹.۸٪</span>) — بافت خیلی یکدست و ویژگی‌های مکانیکی واضح</span><span class="en">1525A (<span class="good">99.8%</span>) — Very uniform tissue with clear mechanical features</span></li>
+  <li><span class="fa">2926 (<span class="good">۹۸.۳٪</span>) — منحنی‌های AFM الگوی خیلی متمایز Grade 2 رو دارن</span><span class="en">2926 (<span class="good">98.3%</span>) — AFM curves show very distinct Grade 2 pattern</span></li>
+</ul>
+<p><span class="fa"><strong>بدترین‌ها</strong> (چرا بد هستن؟):</span><span class="en"><strong>Worst performers</strong> (why?):</span></p>
+<ul>
+  <li><span class="fa">3374B (<span class="bad">۱۹٪</span>) — فقط <strong>۸۴ منحنی</strong> داره! خیلی کمه برای ارزیابی قابل اعتماد</span><span class="en">3374B (<span class="bad">19%</span>) — Only <strong>84 curves</strong>! Too few for reliable evaluation</span></li>
+  <li><span class="fa">3464A (<span class="bad">۱۸٪</span>) — ممکنه نمونه‌گیری بد یا artifact داشته باشه</span><span class="en">3464A (<span class="bad">18%</span>) — Possibly bad sampling or artifacts</span></li>
+  <li><span class="fa">753B (<span class="bad">۳۳٪</span>) — بافت احتمالاً خیلی heterogeneous (ناهمگن) هست</span><span class="en">753B (<span class="bad">33%</span>) — Tissue is probably very heterogeneous</span></li>
+</ul>
+
+<!-- HEATMAP -->
+<h3><span class="fa">۷.۵ نقشه حرارتی عملکرد</span><span class="en">7.5 Performance Heatmap</span></h3>
+<div class="plot-container">
+  <img src="plots/sample_performance_heatmap_23samples_2026-03-21.png" alt="Heatmap 23">
+</div>
+<p>
+  <span class="fa"><strong>خوندنش ساده‌ست:</strong> سبز = خوب، قرمز = بد. ردیف بالا = CNN، ردیف پایین = Transformer.</span>
+  <span class="en"><strong>Easy to read:</strong> Green = good, Red = bad. Top row = CNN, Bottom row = Transformer.</span>
+</p>
+<ul>
+  <li><span class="fa">ردیف CNN سبزتره — CNN بهتر و پایدارتر عمل می‌کنه</span><span class="en">CNN row is greener — CNN performs better and more consistently</span></li>
+  <li><span class="fa">ستون‌هایی که در <strong>هر دو</strong> ردیف قرمز هستن = نمونه‌های ذاتاً سخت</span><span class="en">Columns red in <strong>both</strong> rows = inherently difficult samples</span></li>
+</ul>
+
+<!-- DATASET DISTRIBUTION -->
+<h3><span class="fa">۷.۶ توزیع دیتاست</span><span class="en">7.6 Dataset Distribution</span></h3>
+<div class="plot-container">
+  <img src="plots/dataset_distribution_2026-03-21.png" alt="Dataset Distribution 23">
+</div>
+<p>
+  <span class="fa"><strong>نمودار دایره‌ای:</strong> Grade 1 = ۶۱٪، Grade 2 = ۳۹٪ — تقریباً متوازن (بهتر از ۷۸:۲۲ قبلی)</span>
+  <span class="en"><strong>Pie chart:</strong> Grade 1 = 61%, Grade 2 = 39% — nearly balanced (better than previous 78:22)</span>
+</p>
+<p>
+  <span class="fa"><strong>نمودار میله‌ای:</strong> تعداد منحنی هر نمونه. نمونه 224 = ۱۰هزار منحنی ولی 3374B = فقط ۸۴!</span>
+  <span class="en"><strong>Bar chart:</strong> Curves per sample. Sample 224 = 10K curves but 3374B = only 84!</span>
+</p>
+
+<!-- CONFUSION MATRICES -->
+<h3><span class="fa">۷.۷ ماتریس‌های درهم‌ریختگی</span><span class="en">7.7 Confusion Matrices</span></h3>
+
+<h4><span class="fa">TemporalCNN (۲۳ نمونه)</span><span class="en">TemporalCNN (23 samples)</span></h4>
+<div class="plot-container">
+  <img src="plots/aggregated_cm_task2_temporal_cnn_2026-03-21.png" alt="CM CNN 23">
+</div>
+<p><span class="fa"><strong>چطور بخونیم:</strong></span><span class="en"><strong>How to read:</strong></span></p>
+<ul>
+  <li><span class="fa">سطر بالا-چپ (سبز): Grade 1 که درست Grade 1 شناسایی شده ← <span class="good">۴۴,۲۳۴ درست</span></span><span class="en">Top-left (green): Grade 1 correctly identified as Grade 1 ← <span class="good">44,234 correct</span></span></li>
+  <li><span class="fa">سطر بالا-راست (قرمز): Grade 1 که اشتباهی Grade 2 گفته شده ← ۱۳,۰۴۲ اشتباه</span><span class="en">Top-right (red): Grade 1 incorrectly called Grade 2 ← 13,042 wrong</span></li>
+  <li><span class="fa">سطر پایین-چپ: Grade 2 که اشتباهی Grade 1 گفته شده ← ۲۱,۳۷۹ اشتباه</span><span class="en">Bottom-left: Grade 2 incorrectly called Grade 1 ← 21,379 wrong</span></li>
+  <li><span class="fa">سطر پایین-راست (سبز): Grade 2 که درست Grade 2 شناسایی شده ← <span class="good">۶۳,۶۹۲ درست</span></span><span class="en">Bottom-right (green): Grade 2 correctly identified as Grade 2 ← <span class="good">63,692 correct</span></span></li>
+</ul>
+<p>
+  <span class="fa"><strong>Recall Grade 1 = ۷۷٪ | Recall Grade 2 = ۷۵٪</strong> — تقریباً متقارن! Focal Loss خوب کار کرده.</span>
+  <span class="en"><strong>Recall Grade 1 = 77% | Recall Grade 2 = 75%</strong> — Nearly symmetric! Focal Loss worked well.</span>
+</p>
+
+<h4><span class="fa">Transformer (۲۳ نمونه)</span><span class="en">Transformer (23 samples)</span></h4>
+<div class="plot-container">
+  <img src="plots/aggregated_cm_task2_transformer_2026-03-21.png" alt="CM Transformer 23">
+</div>
+<p>
+  <span class="fa">Recall پایین‌تر (۶۶٪ و ۶۳٪) و خطاهای بیشتر. Transformer الگوهای قوی یاد نگرفته.</span>
+  <span class="en">Lower Recall (66% and 63%) and more errors. Transformer hasn't learned strong patterns.</span>
+</p>
+
+<!-- BASELINE 9 SAMPLES -->
+<h3><span class="fa">۷.۸ نتایج ۹ نمونه (برای مقایسه — چقدر بد بود)</span><span class="en">7.8 Results with 9 Samples (For Comparison — How Bad It Was)</span></h3>
+
+<div class="plot-pair">
+  <div class="plot-container">
+    <img src="plots/loso_accuracy_comparison_2026-03-19.png" alt="LOSO 9">
+    <p><span class="fa"><strong>مقایسه ۹ نمونه</strong> — Task 2 زیر chance!</span><span class="en"><strong>9-sample comparison</strong> — Task 2 below chance!</span></p>
+  </div>
+  <div class="plot-container">
+    <img src="plots/dataset_distribution_2026-03-19.png" alt="Distribution 9">
+    <p><span class="fa"><strong>توزیع ۹ نمونه</strong> — عدم تعادل شدید</span><span class="en"><strong>9-sample distribution</strong> — severe imbalance</span></p>
+  </div>
+</div>
+
+<div class="plot-container">
+  <img src="plots/loso_per_fold_task2_2026-03-19.png" alt="Per Fold Task2 9">
+</div>
+<div class="warning">
+  <span class="fa"><strong>چرا اینقدر بد بود؟</strong></span>
+  <span class="en"><strong>Why was it so bad?</strong></span>
+  <ul>
+    <li><span class="fa">فقط ۲ نمونه Grade 2 ← مدل این کلاس رو اصلاً یاد نمی‌گیره</span><span class="en">Only 2 Grade 2 samples ← model never learns this class</span></li>
+    <li><span class="fa">لیبل اشتباه ← نمونه ۲۲۴ (واقعاً G2) لیبل G1 داشت و برعکس برای 3107A</span><span class="en">Wrong labels ← Sample 224 (actually G2) was labeled G1 and vice versa for 3107A</span></li>
+    <li><span class="fa">Transformer: رفتار ۰٪ یا ۱۰۰٪ = فقط یه کلاس رو می‌گه!</span><span class="en">Transformer: 0% or 100% behavior = only predicts one class!</span></li>
+  </ul>
+</div>
+
+<div class="plot-pair">
+  <div class="plot-container">
+    <img src="plots/aggregated_cm_task2_temporal_cnn_2026-03-19.png" alt="CM CNN 9">
+    <p><span class="fa"><strong>CNN ۹ نمونه</strong> — Grade 2 Recall = ۹٪ فقط!</span><span class="en"><strong>CNN 9 samples</strong> — Grade 2 Recall = 9% only!</span></p>
+  </div>
+  <div class="plot-container">
+    <img src="plots/aggregated_cm_task2_transformer_2026-03-19.png" alt="CM Trans 9">
+    <p><span class="fa"><strong>Transformer ۹ نمونه</strong> — همه چیز رو G2 می‌گه!</span><span class="en"><strong>Transformer 9 samples</strong> — predicts everything as G2!</span></p>
+  </div>
+</div>
+
+<div class="plot-container">
+  <img src="plots/sample_heatmap_2026-03-19.png" alt="Heatmap 9">
+</div>
+<p>
+  <span class="fa">سمت راست (Task 2) تقریباً کاملاً قرمزه = هیچ مدلی هیچ‌چیز یاد نگرفته بود.</span>
+  <span class="en">Right side (Task 2) is almost entirely red = no model learned anything.</span>
+</p>
+
+<h3><span class="fa">۷.۸.۱ نتایج Task 1 (نوع مننژیوما) — ۹ نمونه</span><span class="en">7.8.1 Task 1 Results (Meningioma Subtype) — 9 Samples</span></h3>
+<div class="plot-container">
+  <img src="plots/loso_per_fold_task1_2026-03-19.png" alt="Per Fold Task1 9">
+</div>
+<p>
+  <span class="fa">نمونه 1125 (تنها Psammomatous): <span class="bad">۰٪</span> در هر دو مدل. چون وقتی تست می‌شه، هیچ نمونه Psammomatous در training نیست.</span>
+  <span class="en">Sample 1125 (only Psammomatous): <span class="bad">0%</span> in both models. Because when tested, there's no Psammomatous sample in training.</span>
+</p>
+
+<div class="plot-pair">
+  <div class="plot-container">
+    <img src="plots/aggregated_cm_task1_temporal_cnn_2026-03-19.png" alt="CM Task1 CNN">
+    <p><span class="fa"><strong>CNN Task1</strong></span><span class="en"><strong>CNN Task1</strong></span></p>
+  </div>
+  <div class="plot-container">
+    <img src="plots/aggregated_cm_task1_transformer_2026-03-19.png" alt="CM Task1 Trans">
+    <p><span class="fa"><strong>Transformer Task1</strong></span><span class="en"><strong>Transformer Task1</strong></span></p>
+  </div>
+</div>
+<p>
+  <span class="fa">هر دو مدل: Psammomatous Recall = <span class="bad">۰٪</span>. با ۱ نمونه غیرممکنه.</span>
+  <span class="en">Both models: Psammomatous Recall = <span class="bad">0%</span>. Impossible with 1 sample.</span>
+</p>
+
+<!-- LEARNING CURVES -->
+<h3><span class="fa">۷.۹ منحنی‌های یادگیری</span><span class="en">7.9 Learning Curves</span></h3>
+<div class="concept-box">
+  <h4><span class="fa">منحنی یادگیری چیه؟</span><span class="en">What Is a Learning Curve?</span></h4>
+  <p>
+    <span class="fa">نمودار Loss یا Accuracy در طول epoch‌ها. خط آبی = Training (مدل روی داده آموزشی)، خط قرمز = Validation (مدل روی داده ندیده). اگه فاصله زیاد باشه = overfitting.</span>
+    <span class="en">A plot of Loss or Accuracy over epochs. Blue line = Training (on training data), Red line = Validation (on unseen data). Large gap = overfitting.</span>
+  </p>
+</div>
+
+<div class="plot-container">
+  <img src="plots/learning_curves_task2_temporal_cnn_2026-03-21.png" alt="LC CNN 23">
+</div>
+<p>
+  <span class="fa"><strong>TemporalCNN (۲۳ نمونه):</strong> فاصله train-val کم = <span class="good">overfitting کنترل شده</span>. سریع همگرا می‌شه (epoch ۵-۷).</span>
+  <span class="en"><strong>TemporalCNN (23 samples):</strong> Small train-val gap = <span class="good">controlled overfitting</span>. Converges quickly (epoch 5-7).</span>
+</p>
+
+<div class="plot-container">
+  <img src="plots/learning_curves_task2_transformer_2026-03-21.png" alt="LC Trans 23">
+</div>
+<p>
+  <span class="fa"><strong>Transformer (۲۳ نمونه):</strong> فاصله بیشتر = <span class="bad">overfitting بیشتر</span>. کندتر همگرا می‌شه.</span>
+  <span class="en"><strong>Transformer (23 samples):</strong> Larger gap = <span class="bad">more overfitting</span>. Converges slower.</span>
+</p>
+
+<h4><span class="fa">مقایسه با ۹ نمونه:</span><span class="en">Comparison with 9 samples:</span></h4>
+<div class="plot-pair">
+  <div class="plot-container">
+    <img src="plots/learning_curves_task2_temporal_cnn_2026-03-19.png" alt="LC CNN 9">
+    <p><span class="fa"><strong>CNN ۹ نمونه</strong></span><span class="en"><strong>CNN 9 samples</strong></span></p>
+  </div>
+  <div class="plot-container">
+    <img src="plots/learning_curves_task2_transformer_2026-03-19.png" alt="LC Trans 9">
+    <p><span class="fa"><strong>Transformer ۹ نمونه</strong></span><span class="en"><strong>Transformer 9 samples</strong></span></p>
+  </div>
+</div>
+<p>
+  <span class="fa">با ۹ نمونه: validation هیچ‌وقت بهتر نمی‌شه = مدل چیز معناداری یاد نمی‌گیره.</span>
+  <span class="en">With 9 samples: validation never improves = model doesn't learn anything meaningful.</span>
+</p>
+
+<!-- EXPLAINABILITY -->
+<h3><span class="fa">۷.۱۰ پلات‌های تفسیرپذیری — مدل به کجای منحنی نگاه می‌کنه؟</span><span class="en">7.10 Explainability Plots — Where Does the Model Look in the Curve?</span></h3>
+
+<div class="concept-box">
+  <h4><span class="fa">Saliency و Attention Visualization چیه؟</span><span class="en">What Are Saliency and Attention Visualization?</span></h4>
+  <p>
+    <span class="fa">بعد از آموزش مدل، می‌خوایم بفهمیم کدوم بخش‌های منحنی AFM برای تصمیم‌گیری مهم بودن. دو روش داریم:</span>
+    <span class="en">After training, we want to know which parts of the AFM curve were important for the decision. Two methods:</span>
+  </p>
+  <ul>
+    <li><span class="fa"><strong>Gradient Saliency (برای CNN):</strong> gradient خروجی رو نسبت به ورودی محاسبه می‌کنیم. هر جا gradient بزرگ‌تره = تغییر کوچک ورودی تأثیر بزرگی روی خروجی داره = اونجا مهمه</span><span class="en"><strong>Gradient Saliency (for CNN):</strong> We compute gradient of output with respect to input. Where gradient is larger = small input change has big output effect = that area is important</span></li>
+    <li><span class="fa"><strong>Attention Weights (برای Transformer):</strong> وزن‌های attention لایه آخر رو نگاه می‌کنیم. CLS token به کدوم توکن‌ها بیشتر توجه کرده؟</span><span class="en"><strong>Attention Weights (for Transformer):</strong> We look at the last layer's attention weights. Which tokens did the CLS token attend to most?</span></li>
+  </ul>
+</div>
+
+<h4><span class="fa">مقایسه CNN و Transformer</span><span class="en">CNN vs. Transformer Comparison</span></h4>
+<div class="plot-container">
+  <img src="plots/cross_model_attention_heatmap_2026-03-22.png" alt="Cross Model Attention">
+</div>
+<p>
+  <span class="fa"><strong>بالا (CNN):</strong> بیشترین توجه در <strong>ابتدای منحنی</strong> (نقطه تماس — contact point). این منطقیه: وقتی سوزن اولین بار به سطح بافت می‌رسه، سختی سطح رو اندازه می‌گیره.</span>
+  <span class="en"><strong>Top (CNN):</strong> Most attention at the <strong>start of the curve</strong> (contact point). This makes sense: when the tip first touches the tissue surface, it measures surface stiffness.</span>
+</p>
+<p>
+  <span class="fa"><strong>پایین (Transformer):</strong> بیشترین توجه در <strong>انتهای منحنی</strong> (عمق فرورفتن). این هم منطقیه: وقتی سوزن عمیق فرو می‌ره، خواص لایه‌های زیرین بافت رو اندازه می‌گیره.</span>
+  <span class="en"><strong>Bottom (Transformer):</strong> Most attention at the <strong>end of the curve</strong> (indentation depth). This also makes sense: when the tip goes deep, it measures deeper tissue layer properties.</span>
+</p>
+<div class="important">
+  <span class="fa"><strong>کشف مهم:</strong> دو مدل بخش‌های <strong>مکمل</strong> منحنی رو نگاه می‌کنن! CNN = سطح، Transformer = عمق. ترکیب‌شون (ensemble) می‌تونه عملکرد رو بهبود بده.</span>
+  <span class="en"><strong>Key Discovery:</strong> The two models look at <strong>complementary</strong> parts of the curve! CNN = surface, Transformer = depth. Combining them (ensemble) could improve performance.</span>
+</div>
+
+<h4><span class="fa">تفاوت Grade 1 و Grade 2</span><span class="en">Grade 1 vs. Grade 2 Differences</span></h4>
+<div class="plot-container">
+  <img src="plots/attention_by_class_2026-03-22.png" alt="Attention by Class">
+</div>
+<p>
+  <span class="fa">مدل‌ها الگوهای متفاوتی برای Grade 1 و Grade 2 یاد گرفتن — اثبات می‌کنه که تفاوت واقعی فیزیکی بین دو درجه وجود داره (نه فقط تصادفی).</span>
+  <span class="en">Models learned different patterns for Grade 1 and Grade 2 — proving that real physical differences exist between the two grades (not just random).</span>
+</p>
+
+<h4><span class="fa">لایه‌های Transformer</span><span class="en">Transformer Layers</span></h4>
+<div class="plot-container">
+  <img src="plots/transformer_segment_attention_2026-03-22.png" alt="Transformer Layers">
+</div>
+<p>
+  <span class="fa"><strong>چپ:</strong> لایه ۱ (آبی) attention یکنواخت = هنوز ویژگی عمومی. لایه ۳ (سبز) خیلی متمرکز = لایه آخر دقیقاً می‌دونه کجا مهمه.</span>
+  <span class="en"><strong>Left:</strong> Layer 1 (blue) has uniform attention = still general features. Layer 3 (green) is very focused = last layer knows exactly where to look.</span>
+</p>
+<p>
+  <span class="fa"><strong>راست:</strong> Grade 1 و Grade 2 الگوی attention متفاوت دارن = مدل واقعاً تفاوت بیولوژیکی پیدا کرده.</span>
+  <span class="en"><strong>Right:</strong> Grade 1 and Grade 2 have different attention patterns = model found real biological differences.</span>
+</p>
+
+<h4><span class="fa">سه شاخه CNN</span><span class="en">Three CNN Branches</span></h4>
+<div class="plot-container">
+  <img src="plots/cnn_branch_saliency_2026-03-22.png" alt="CNN Branch Saliency">
+</div>
+<ul>
+  <li><span class="fa"><strong>آبی (Kernel 3 — ریز):</strong> نقطه تماس و نوسانات سریع — مثل صدای «تق» وقتی سوزن به سطح می‌رسه</span><span class="en"><strong>Blue (Kernel 3 — fine):</strong> Contact point and rapid oscillations — like the "click" when the tip reaches the surface</span></li>
+  <li><span class="fa"><strong>نارنجی (Kernel 7 — متوسط):</strong> ناحیه تغییر شکل — چطور بافت خم می‌شه</span><span class="en"><strong>Orange (Kernel 7 — medium):</strong> Deformation region — how the tissue bends</span></li>
+  <li><span class="fa"><strong>سبز (Kernel 15 — کلی):</strong> شیب کلی منحنی = Young's Modulus ≈ سختی کل بافت</span><span class="en"><strong>Green (Kernel 15 — coarse):</strong> Overall curve slope = Young's Modulus ≈ overall tissue stiffness</span></li>
+</ul>
+<div class="important">
+  <span class="fa"><strong>تأیید طراحی:</strong> سه شاخه واقعاً ویژگی‌های متفاوت و مکمل استخراج می‌کنن! طراحی multi-scale اعتبارسنجی شد.</span>
+  <span class="en"><strong>Design Validation:</strong> The three branches truly extract different, complementary features! The multi-scale design is validated.</span>
+</div>
+
+<!-- ============================================================ -->
+<!-- PART 8 -->
+<!-- ============================================================ -->
+<div class="sep"></div>
+<h2 id="part8">
+  <span class="fa">بخش ۸: سوالات احتمالی استاد + جواب</span>
+  <span class="en">Part 8: Potential Examiner Questions + Answers</span>
+</h2>
+
+<h3><span class="fa">س۱: «چرا از یادگیری عمیق استفاده کردید و نه روش‌های کلاسیک؟»</span><span class="en">Q1: "Why did you use deep learning instead of classical methods?"</span></h3>
+<p>
+  <span class="fa"><strong>جواب:</strong> پایان‌نامه قبلی با SVM/RF و ویژگی‌های دستی (مثل Young's Modulus) به ۶۹.۸٪ رسید. مشکل روش‌های کلاسیک اینه که ما باید <strong>خودمون</strong> بگیم کدوم ویژگی‌ها مهمن. ممکنه ویژگی‌های مهمی رو از دست بدیم. یادگیری عمیق <strong>خودش</strong> ویژگی‌ها رو از داده خام استخراج می‌کنه (end-to-end learning). و وقتی داده کافی داشتیم (۲۳ نمونه)، به ۷۴.۵٪ رسیدیم — بهتر از قبلی، حتی با ارزیابی سخت‌تر (LOSO).</span>
+  <span class="en"><strong>Answer:</strong> The previous thesis achieved 69.8% with SVM/RF and hand-crafted features (like Young's Modulus). The problem with classical methods is that we must <strong>manually</strong> decide which features matter. We might miss important ones. Deep learning <strong>automatically</strong> extracts features from raw data (end-to-end learning). When we had enough data (23 samples), we reached 74.5% — better than before, even with tougher evaluation (LOSO).</span>
+</p>
+
+<h3><span class="fa">س۲: «چرا Multimodal؟ فقط AFM کافی نیست؟»</span><span class="en">Q2: "Why multimodal? Isn't AFM alone enough?"</span></h3>
+<p>
+  <span class="fa"><strong>جواب:</strong> AFM خواص <strong>مکانیکی</strong> (سختی، چسبندگی) رو اندازه می‌گیره. هیستولوژی ساختار <strong>بصری</strong> (شکل سلول‌ها، الگوی بافت) رو نشون می‌ده. اینها اطلاعات <strong>مکمل</strong> هستن — مثل اینکه یه دکتر هم MRI بگیره هم خون‌آزمایش. ترکیب هر دو باید تشخیص رو بهتر کنه.</span>
+  <span class="en"><strong>Answer:</strong> AFM measures <strong>mechanical</strong> properties (stiffness, adhesion). Histology shows <strong>visual</strong> structure (cell shapes, tissue patterns). These are <strong>complementary</strong> — like a doctor doing both MRI and blood tests. Combining both should improve diagnosis.</span>
+</p>
+
+<h3><span class="fa">س۳: «نتایج شما از پایان‌نامه قبلی بهتره؟»</span><span class="en">Q3: "Are your results better than the previous thesis?"</span></h3>
+<p>
+  <span class="fa"><strong>جواب:</strong> مقایسه مستقیم <strong>دقیقاً منصفانه نیست</strong> چون: ۱) ما LOSO استفاده کردیم (سخت‌تر) ولی قبلی train/test split ساده (آسان‌تر)، ۲) حجم داده متفاوته، ۳) روش‌ها متفاوتن. ولی با وجود ارزیابی سخت‌تر، CNN ما (۷۴.۵٪) از قبلی (۶۹.۸٪) بهتره. و هنوز multimodal اجرا نشده — انتظار داریم بهبود بیشتری ببینیم.</span>
+  <span class="en"><strong>Answer:</strong> Direct comparison is <strong>not exactly fair</strong> because: 1) We used LOSO (harder) vs. simple train/test split (easier), 2) Different data sizes, 3) Different methods. But despite tougher evaluation, our CNN (74.5%) outperforms the previous (69.8%). And multimodal hasn't been run yet — we expect further improvement.</span>
+</p>
+
+<h3><span class="fa">س۴: «چرا ۲۳ نمونه خیلی بهتر از ۹ نمونه شد؟»</span><span class="en">Q4: "Why did 23 samples perform much better than 9?"</span></h3>
+<p>
+  <span class="fa"><strong>جواب:</strong> چهار دلیل: ۱) <strong>داده بیشتر</strong> = تنوع بافتی بیشتر برای یادگیری، ۲) <strong>تعادل بهتر</strong> کلاس‌ها (از ۷:۲ به ۱۴:۹)، ۳) <strong>تصحیح ۲ لیبل اشتباه</strong> که مدل رو فعالانه گمراه می‌کرد، ۴) <strong>فیلتر نوع</strong> — فقط Meningothelial نگه داشتیم تا مدل تفاوت نوع رو با تفاوت درجه قاطی نکنه.</span>
+  <span class="en"><strong>Answer:</strong> Four reasons: 1) <strong>More data</strong> = more tissue diversity for learning, 2) <strong>Better class balance</strong> (from 7:2 to 14:9), 3) <strong>Correcting 2 wrong labels</strong> that were actively misleading the model, 4) <strong>Subtype filtering</strong> — keeping only Meningothelial so the model doesn't confuse subtype differences with grade differences.</span>
+</p>
+
+<h3><span class="fa">س۵: «Data Leakage رو چطور مدیریت کردید؟»</span><span class="en">Q5: "How did you handle Data Leakage?"</span></h3>
+<p>
+  <span class="fa"><strong>جواب:</strong> تقسیم داده در سطح <strong>بیمار</strong> (نه منحنی) انجام شد. در LOSO، وقتی بیمار X تست می‌شه، <strong>هیچ</strong> منحنی‌ای از اون بیمار در training نیست. حتی validation هم از بیماران دیگه ساخته می‌شه.</span>
+  <span class="en"><strong>Answer:</strong> Data splitting was done at the <strong>patient</strong> level (not curve level). In LOSO, when patient X is tested, <strong>no</strong> curves from that patient are in training. Even validation is built from other patients.</span>
+</p>
+
+<h3><span class="fa">س۶: «محدودیت‌های کار چیه؟»</span><span class="en">Q6: "What are the limitations?"</span></h3>
+<p>
+  <span class="fa"><strong>جواب:</strong> صادقانه: ۱) <strong>دیتاست کوچک</strong> (۲۳ بیمار)، ۲) <strong>واریانس بالا</strong> (±۲۵٪)، ۳) <strong>Multimodal هنوز اجرا نشده</strong> (فقط ۳ نمونه هیستولوژی دارن)، ۴) <strong>Task 1 غیرممکن</strong> (۲۲:۱ عدم تعادل)، ۵) AUC-ROC در LOSO قابل اعتماد نیست چون هر fold فقط یه کلاس تست داره.</span>
+  <span class="en"><strong>Answer:</strong> Honestly: 1) <strong>Small dataset</strong> (23 patients), 2) <strong>High variance</strong> (+/-25%), 3) <strong>Multimodal not yet run</strong> (only 3 samples have histology), 4) <strong>Task 1 impossible</strong> (22:1 imbalance), 5) AUC-ROC unreliable in LOSO since each fold only tests one class.</span>
+</p>
+
+<h3><span class="fa">س۷: «اگه وقت بیشتر داشتید چه کار می‌کردید؟»</span><span class="en">Q7: "What would you do with more time?"</span></h3>
+<p>
+  <span class="fa"><strong>جواب:</strong> ۱) اجرای آزمایش‌های multimodal، ۲) جمع‌آوری نمونه بیشتر، ۳) Data Augmentation روی منحنی‌ها (نویز، shift)، ۴) Ensemble CNN+Transformer (چون بخش‌های مکمل منحنی رو می‌بینن)، ۵) t-SNE/UMAP برای visualization embedding‌ها، ۶) آنالیز آماری (McNemar test).</span>
+  <span class="en"><strong>Answer:</strong> 1) Run multimodal experiments, 2) Collect more samples, 3) Data Augmentation on curves (noise, shift), 4) Ensemble CNN+Transformer (since they see complementary parts), 5) t-SNE/UMAP for embedding visualization, 6) Statistical analysis (McNemar test).</span>
+</p>
+
+<h3><span class="fa">س۸: «Spring constant correction چرا لازم بود؟»</span><span class="en">Q8: "Why was spring constant correction needed?"</span></h3>
+<p>
+  <span class="fa"><strong>جواب:</strong> AFM نیرو رو از روی خم شدن cantilever حساب می‌کنه: F = k × d (نیرو = ثابت فنر × خم‌شدگی). اگه k اشتباه باشه، همه مقادیر نیرو اشتباه محاسبه می‌شن. مثلاً cantilever نمونه‌های 3374A/B ثابت فنر 1.586 N/m داشت ولی نرم‌افزار مقدار پیش‌فرض رو استفاده کرده بود. بدون تصحیح، منحنی‌های این نمونه‌ها با بقیه قابل مقایسه نیستن.</span>
+  <span class="en"><strong>Answer:</strong> AFM calculates force from cantilever deflection: F = k x d (force = spring constant x deflection). If k is wrong, all force values are miscalculated. For example, samples 3374A/B had a cantilever with k = 1.586 N/m but the software used a default value. Without correction, these samples' curves aren't comparable to the rest.</span>
+</p>
+
+<h3><span class="fa">س۹: «Dropout چیه و چرا استفاده شد؟»</span><span class="en">Q9: "What is Dropout and why was it used?"</span></h3>
+<p>
+  <span class="fa"><strong>جواب:</strong> Dropout در هر iteration آموزش، تصادفی ۳۰-۴۰٪ نورون‌ها رو غیرفعال می‌کنه. مثل اینکه بعضی دانش‌آموزای یه گروه مطالعاتی تصادفی غایب باشن — بقیه مجبور می‌شن خودشون هم یاد بگیرن و به یه نفر خاص تکیه نکنن. این از overfitting جلوگیری می‌کنه.</span>
+  <span class="en"><strong>Answer:</strong> Dropout randomly deactivates 30-40% of neurons during each training iteration. Like randomly absent students in a study group — the rest must learn independently and not rely on one person. This prevents overfitting.</span>
+</p>
+
+<h3><span class="fa">س۱۰: «BatchNorm چیکار می‌کنه؟»</span><span class="en">Q10: "What does BatchNorm do?"</span></h3>
+<p>
+  <span class="fa"><strong>جواب:</strong> Batch Normalization مقادیر خروجی هر لایه رو نرمال‌سازی می‌کنه (میانگین ≈ ۰، واریانس ≈ ۱). بدون این، مقادیر ممکنه خیلی بزرگ یا خیلی کوچک بشن و آموزش ناپایدار بشه. مثل اینکه قبل از هر مرحله پخت، مواد رو وزن کنید تا نسبت‌ها درست بمونه.</span>
+  <span class="en"><strong>Answer:</strong> Batch Normalization normalizes each layer's output values (mean ≈ 0, variance ≈ 1). Without this, values might become very large or small and training becomes unstable. Like weighing ingredients before each baking step to keep proportions correct.</span>
+</p>
+
+<!-- SUMMARY TABLE -->
+<div class="sep"></div>
+<h2>
+  <span class="fa">جمع‌بندی نهایی</span>
+  <span class="en">Final Summary</span>
+</h2>
+
+<table>
+  <tr><th><span class="fa">یافته</span><span class="en">Finding</span></th><th><span class="fa">اثبات‌شده توسط</span><span class="en">Proven By</span></th></tr>
+  <tr><td><span class="fa">منحنی AFM واقعاً اطلاعات درجه تومور رو داره</span><span class="en">AFM curves truly contain tumor grade information</span></td><td><span class="fa">۷۴.۵٪ دقت، بالاتر از chance (۵۰٪)</span><span class="en">74.5% accuracy, above chance (50%)</span></td></tr>
+  <tr><td><span class="fa">داده بیشتر = نتیجه خیلی بهتر</span><span class="en">More data = much better results</span></td><td><span class="fa">پرش از ۳۳٪ به ۷۴٪ با ۱۴ نمونه اضافی</span><span class="en">Jump from 33% to 74% with 14 additional samples</span></td></tr>
+  <tr><td><span class="fa">CNN بهتر از Transformer (با این حجم داده)</span><span class="en">CNN better than Transformer (at this data size)</span></td><td>74.5% vs 65.6%</td></tr>
+  <tr><td><span class="fa">CNN و Transformer ویژگی‌های مکمل استخراج می‌کنن</span><span class="en">CNN and Transformer extract complementary features</span></td><td><span class="fa">CNN=سطح، Transformer=عمق (پلات attention)</span><span class="en">CNN=surface, Transformer=depth (attention plots)</span></td></tr>
+  <tr><td><span class="fa">طراحی multi-scale CNN درسته</span><span class="en">Multi-scale CNN design is correct</span></td><td><span class="fa">سه شاخه واقعاً ویژگی‌های متفاوت می‌بینن (saliency)</span><span class="en">Three branches truly see different features (saliency)</span></td></tr>
+  <tr><td><span class="fa">Focal Loss عدم تعادل کلاس رو حل کرده</span><span class="en">Focal Loss solved class imbalance</span></td><td><span class="fa">Recall تقریباً متقارن بین دو کلاس</span><span class="en">Nearly symmetric Recall between classes</span></td></tr>
+  <tr><td><span class="fa">LOSO ارزیابی صادقانه‌تر می‌ده</span><span class="en">LOSO gives more honest evaluation</span></td><td><span class="fa">نتایج قابل تعمیم به بیمار جدید</span><span class="en">Results generalizable to new patients</span></td></tr>
+  <tr><td><span class="fa">کیفیت لیبل حیاتیه</span><span class="en">Label quality is critical</span></td><td><span class="fa">تصحیح ۲ لیبل، بهبود چشمگیر نتایج</span><span class="en">Correcting 2 labels dramatically improved results</span></td></tr>
+</table>
+
+</body>
+</html>
