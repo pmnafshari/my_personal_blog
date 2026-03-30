@@ -1912,15 +1912,42 @@ Actual Grade2         FN (wrong)          TN (correct)
 </h2>
 
 <table>
-  <tr><th><span class="fa">یافته</span><span class="en">Finding</span><span class="it">Dimostrato Da</span></th></tr>
-  <tr><td><span class="fa">منحنی AFM واقعاً اطلاعات درجه تومور رو داره</span><span class="en">AFM curves truly contain tumor grade information</span><span class="it">Accuratezza del 74,5%, superiore al caso (50%)</span></td></tr>
-  <tr><td><span class="fa">داده بیشتر = نتیجه خیلی بهتر</span><span class="en">More data = much better results</span><span class="it">Salto dal 33% al 74% con 14 campioni aggiuntivi</span></td></tr>
-  <tr><td><span class="fa">CNN بهتر از Transformer (با این حجم داده)</span><span class="en">CNN better than Transformer (at this data size)</span><span class="it">CNN migliore del Transformer (con questa dimensione dei dati)</span></td><td>74.5% vs 65.6%</td></tr>
-  <tr><td><span class="fa">CNN و Transformer ویژگی‌های مکمل استخراج می‌کنن</span><span class="en">CNN and Transformer extract complementary features</span><span class="it">CNN=superficie, Transformer=profondità (grafici di attenzione)</span></td></tr>
-  <tr><td><span class="fa">طراحی multi-scale CNN درسته</span><span class="en">Multi-scale CNN design is correct</span><span class="it">I tre rami vedono davvero caratteristiche diverse (saliency)</span></td></tr>
-  <tr><td><span class="fa">Focal Loss عدم تعادل کلاس رو حل کرده</span><span class="en">Focal Loss solved class imbalance</span><span class="it">Recall quasi simmetrico tra le classi</span></td></tr>
-  <tr><td><span class="fa">LOSO ارزیابی صادقانه‌تر می‌ده</span><span class="en">LOSO gives more honest evaluation</span><span class="it">Risultati generalizzabili a nuovi pazienti</span></td></tr>
-  <tr><td><span class="fa">کیفیت لیبل حیاتیه</span><span class="en">Label quality is critical</span><span class="it">La correzione di 2 etichette ha migliorato drasticamente i risultati</span></td></tr>
+  <tr>
+    <th><span class="fa">یافته</span><span class="en">Finding</span><span class="it">Scoperta</span></th>
+    <th><span class="fa">شواهد</span><span class="en">Evidence</span><span class="it">Dimostrato da</span></th>
+  </tr>
+  <tr>
+    <td><span class="fa">منحنی AFM واقعاً اطلاعات درجه تومور رو داره</span><span class="en">AFM curves truly contain tumor grade information</span><span class="it">Le curve AFM contengono davvero informazioni sul grado tumorale</span></td>
+    <td><span class="fa">دقت ۷۴.۵٪، بالاتر از شانس (۵۰٪)</span><span class="en">74.5% accuracy, above chance (50%)</span><span class="it">Accuratezza del 74,5%, superiore al caso (50%)</span></td>
+  </tr>
+  <tr>
+    <td><span class="fa">داده بیشتر = نتیجه خیلی بهتر</span><span class="en">More data = much better results</span><span class="it">Più dati = risultati molto migliori</span></td>
+    <td><span class="fa">پرش از ۳۳٪ به ۷۴٪ با ۱۴ نمونه اضافه</span><span class="en">Jump from 33% to 74% with 14 additional samples</span><span class="it">Salto dal 33% al 74% con 14 campioni aggiuntivi</span></td>
+  </tr>
+  <tr>
+    <td><span class="fa">CNN بهتر از Transformer (با این حجم داده)</span><span class="en">CNN better than Transformer (at this data size)</span><span class="it">CNN migliore del Transformer (con questa dimensione dei dati)</span></td>
+    <td>74.5% vs 65.6%</td>
+  </tr>
+  <tr>
+    <td><span class="fa">CNN و Transformer ویژگی‌های مکمل استخراج می‌کنن</span><span class="en">CNN and Transformer extract complementary features</span><span class="it">CNN e Transformer estraggono caratteristiche complementari</span></td>
+    <td><span class="fa">CNN=سطح منحنی، Transformer=عمق (پلات‌های توجه)</span><span class="en">CNN=surface, Transformer=depth (attention plots)</span><span class="it">CNN=superficie, Transformer=profondità (grafici di attenzione)</span></td>
+  </tr>
+  <tr>
+    <td><span class="fa">طراحی multi-scale CNN درسته</span><span class="en">Multi-scale CNN design is correct</span><span class="it">Il design CNN multi-scala è corretto</span></td>
+    <td><span class="fa">سه شاخه واقعاً ویژگی‌های متفاوتی می‌بینن (saliency)</span><span class="en">Three branches genuinely see different features (saliency maps)</span><span class="it">I tre rami vedono davvero caratteristiche diverse (saliency)</span></td>
+  </tr>
+  <tr>
+    <td><span class="fa">Focal Loss عدم تعادل کلاس رو حل کرده</span><span class="en">Focal Loss solved class imbalance</span><span class="it">Focal Loss ha risolto lo sbilanciamento delle classi</span></td>
+    <td><span class="fa">Recall تقریباً متقارن بین دو کلاس</span><span class="en">Nearly symmetric recall between classes</span><span class="it">Recall quasi simmetrico tra le classi</span></td>
+  </tr>
+  <tr>
+    <td><span class="fa">LOSO ارزیابی صادقانه‌تر می‌ده</span><span class="en">LOSO gives more honest evaluation</span><span class="it">LOSO fornisce una valutazione più onesta</span></td>
+    <td><span class="fa">نتایج قابل تعمیم به بیماران جدید</span><span class="en">Results generalizable to new patients</span><span class="it">Risultati generalizzabili a nuovi pazienti</span></td>
+  </tr>
+  <tr>
+    <td><span class="fa">کیفیت لیبل حیاتیه</span><span class="en">Label quality is critical</span><span class="it">La qualità delle etichette è fondamentale</span></td>
+    <td><span class="fa">تصحیح ۲ لیبل نتایج رو به شدت بهبود داد</span><span class="en">Correcting 2 labels drastically improved results</span><span class="it">La correzione di 2 etichette ha migliorato drasticamente i risultati</span></td>
+  </tr>
 </table>
 
 </body>
