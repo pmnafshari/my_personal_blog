@@ -1210,11 +1210,31 @@ embedding = CLS_output → Linear → <span class="number">256</span> dimensions
 <h3><span class="fa">۴.۳ مقایسه CNN و Transformer</span><span class="en">4.3 CNN vs. Transformer Comparison</span><span class="it">4.3 Confronto CNN vs. Transformer</span></h3>
 <table>
   <tr><th><span class="fa">ویژگی</span><span class="en">Feature</span><span class="it">Caratteristica</span></th><th>TemporalCNN</th><th>Transformer</th></tr>
-  <tr><td><span class="fa">نوع نگاه</span><span class="en">View Type</span><span class="it">Globale (tutti-a-tutti)</span></td></tr>
-  <tr><td><span class="fa">مزیت</span><span class="en">Strength</span><span class="it">Vede relazioni a lungo raggio</span></td></tr>
-  <tr><td><span class="fa">ضعف</span><span class="en">Weakness</span><span class="it">Richiede molti dati</span></td></tr>
-  <tr><td><span class="fa">نتیجه ما</span><span class="en">Our Result</span><span class="it">Nostro Risultato</span></td><td class="good">74.5%</td><td>65.6%</td></tr>
-  <tr><td><span class="fa">کجای منحنی نگاه می‌کنه</span><span class="en">Curve Focus Area</span><span class="it">Fine (profondità di indentazione)</span></td></tr>
+  <tr>
+    <td><span class="fa">نوع نگاه</span><span class="en">View Type</span><span class="it">Tipo di Vista</span></td>
+    <td><span class="fa">محلی (local patterns)</span><span class="en">Local (local patterns)</span><span class="it">Locale (pattern locali)</span></td>
+    <td><span class="fa">جهانی (همه با همه)</span><span class="en">Global (all-to-all)</span><span class="it">Globale (tutti con tutti)</span></td>
+  </tr>
+  <tr>
+    <td><span class="fa">مزیت</span><span class="en">Strength</span><span class="it">Punto di Forza</span></td>
+    <td><span class="fa">سریع، با داده کم هم کار می‌کنه</span><span class="en">Fast, works with less data</span><span class="it">Veloce, funziona con meno dati</span></td>
+    <td><span class="fa">روابط بلندمدت در منحنی رو می‌بینه</span><span class="en">Sees long-range relationships in the curve</span><span class="it">Vede relazioni a lungo raggio nella curva</span></td>
+  </tr>
+  <tr>
+    <td><span class="fa">ضعف</span><span class="en">Weakness</span><span class="it">Punto Debole</span></td>
+    <td><span class="fa">دید محدود به پنجره فیلتر</span><span class="en">Limited receptive field</span><span class="it">Campo recettivo limitato</span></td>
+    <td><span class="fa">به داده زیاد نیاز داره</span><span class="en">Needs lots of data</span><span class="it">Richiede molti dati</span></td>
+  </tr>
+  <tr>
+    <td><span class="fa">نتیجه ما</span><span class="en">Our Result</span><span class="it">Nostro Risultato</span></td>
+    <td class="good">74.5%</td>
+    <td>65.6%</td>
+  </tr>
+  <tr>
+    <td><span class="fa">کجای منحنی نگاه می‌کنه</span><span class="en">Curve Focus Area</span><span class="it">Zona di Interesse nella Curva</span></td>
+    <td><span class="fa">ابتدا و وسط (نقطه تماس)</span><span class="en">Beginning &amp; middle (contact point region)</span><span class="it">Inizio e metà (zona del punto di contatto)</span></td>
+    <td><span class="fa">انتها (عمق نفوذ بالا)</span><span class="en">End (deep indentation region)</span><span class="it">Fine (zona di indentazione profonda)</span></td>
+  </tr>
 </table>
 
 <h3><span class="fa">۴.۴ استراتژی‌های ادغام (Fusion)</span><span class="en">4.4 Fusion Strategies</span><span class="it">4.4 Strategie di Fusione</span></h3>
@@ -1569,14 +1589,14 @@ Actual Grade2         FN (wrong)          TN (correct)
 </p>
 <p><span class="fa"><strong>بهترین‌ها</strong> (چرا خوب هستن؟):</span><span class="en"><strong>Best performers</strong> (why?):</span><span class="it"><strong>Migliori prestazioni</strong> (perché?):</span></p>
 <ul>
-  <li><span class="fa">1525A (<span class="good">۹۹.۸٪</span>) — بافت خیلی یکدست و ویژگی‌های مکانیکی واضح</span><span class="en">1525A (<span class="good">99.8%</span><span class="it">1525A (<span class="good">99,8%</span>) — Tessuto molto uniforme con caratteristiche meccaniche chiare</span></li>
-  <li><span class="fa">2926 (<span class="good">۹۸.۳٪</span>) — منحنی‌های AFM الگوی خیلی متمایز Grade 2 رو دارن</span><span class="en">2926 (<span class="good">98.3%</span><span class="it">2926 (<span class="good">98,3%</span>) — Le curve AFM mostrano un pattern di Grado 2 molto distinto</span></li>
+  <li><span class="fa">1525A (<span class="good">۹۹.۸٪</span>) — بافت خیلی یکدست و ویژگی‌های مکانیکی واضح</span><span class="en">1525A (<span class="good">99.8%</span>) — Very uniform tissue with clear mechanical characteristics</span><span class="it">1525A (<span class="good">99,8%</span>) — Tessuto molto uniforme con caratteristiche meccaniche chiare</span></li>
+  <li><span class="fa">2926 (<span class="good">۹۸.۳٪</span>) — منحنی‌های AFM الگوی خیلی متمایز Grade 2 رو دارن</span><span class="en">2926 (<span class="good">98.3%</span>) — AFM curves show a very distinct Grade 2 pattern</span><span class="it">2926 (<span class="good">98,3%</span>) — Le curve AFM mostrano un pattern di Grado 2 molto distinto</span></li>
 </ul>
 <p><span class="fa"><strong>بدترین‌ها</strong> (چرا بد هستن؟):</span><span class="en"><strong>Worst performers</strong> (why?):</span><span class="it"><strong>Prestazioni peggiori</strong> (perché?):</span></p>
 <ul>
-  <li><span class="fa">3374B (<span class="bad">۱۹٪</span>) — فقط <strong>۸۴ منحنی</strong> داره! خیلی کمه برای ارزیابی قابل اعتماد</span><span class="en">3374B (<span class="bad">19%</span><span class="it">3374B (<span class="bad">19%</span>) — Solo <strong>84 curve</strong>! Troppo poche per una valutazione affidabile</span></li>
-  <li><span class="fa">3464A (<span class="bad">۱۸٪</span>) — ممکنه نمونه‌گیری بد یا artifact داشته باشه</span><span class="en">3464A (<span class="bad">18%</span><span class="it">3464A (<span class="bad">18%</span>) — Possibilmente campionamento errato o artefatti</span></li>
-  <li><span class="fa">753B (<span class="bad">۳۳٪</span>) — بافت احتمالاً خیلی heterogeneous (ناهمگن) هست</span><span class="en">753B (<span class="bad">33%</span><span class="it">753B (<span class="bad">33%</span>) — Il tessuto è probabilmente molto eterogeneo</span></li>
+  <li><span class="fa">3374B (<span class="bad">۱۹٪</span>) — فقط <strong>۸۴ منحنی</strong> داره! خیلی کمه برای ارزیابی قابل اعتماد</span><span class="en">3374B (<span class="bad">19%</span>) — Only <strong>84 curves</strong>! Too few for reliable evaluation</span><span class="it">3374B (<span class="bad">19%</span>) — Solo <strong>84 curve</strong>! Troppo poche per una valutazione affidabile</span></li>
+  <li><span class="fa">3464A (<span class="bad">۱۸٪</span>) — ممکنه نمونه‌گیری بد یا artifact داشته باشه</span><span class="en">3464A (<span class="bad">18%</span>) — Possibly poor sampling or artifacts</span><span class="it">3464A (<span class="bad">18%</span>) — Possibilmente campionamento errato o artefatti</span></li>
+  <li><span class="fa">753B (<span class="bad">۳۳٪</span>) — بافت احتمالاً خیلی heterogeneous (ناهمگن) هست</span><span class="en">753B (<span class="bad">33%</span>) — Tissue is likely very heterogeneous</span><span class="it">753B (<span class="bad">33%</span>) — Il tessuto è probabilmente molto eterogeneo</span></li>
 </ul>
 
 <!-- HEATMAP -->
