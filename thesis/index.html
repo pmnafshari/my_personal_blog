@@ -275,6 +275,7 @@ function toggleLanguage() {
   <li><a href="#abmil46"><span class="fa">بخش ۴.۶: مدل Two-Stage ABMIL (یادگیری نمونه‌ای با توجه)</span><span class="en">Section 4.6: Two-Stage ABMIL Model (Attention-Based MIL)</span><span class="it">Sezione 4.6: Modello Two-Stage ABMIL (MIL con Attenzione)</span></a></li>
   <li><a href="#part711"><span class="fa">بخش ۷.۱۱: نتایج مقایسه سه مدل (CNN، Transformer، ABMIL)</span><span class="en">Section 7.11: Three-Model Comparison (CNN, Transformer, ABMIL)</span><span class="it">Sezione 7.11: Confronto tra Tre Modelli (CNN, Transformer, ABMIL)</span></a></li>
   <li><a href="#part712"><span class="fa">بخش ۷.۱۲: تحلیل نمونه‌های مرزی (G1/2 و G2/1)</span><span class="en">Section 7.12: Borderline Sample Analysis (G1/2 and G2/1)</span><span class="it">Sezione 7.12: Analisi dei Campioni Borderline (G1/2 e G2/1)</span></a></li>
+  <li><a href="#part713"><span class="fa">بخش ۷.۱۳: هتروژنیتی بافت و نقش هیستولوژی</span><span class="en">Section 7.13: Tissue Heterogeneity and the Role of Histology</span><span class="it">Sezione 7.13: Eterogeneità del Tessuto e il Ruolo dell'Istologia</span></a></li>
 </ol>
 </div>
 
@@ -2123,6 +2124,110 @@ margin = |0.4601 − 0.4398| = 0.0203</pre>
     <span class="fa">از ۶ بیمار اشتباه تشخیص‌داده‌شده، ۴ نفر (۶۷٪) دارای خصوصیات بیومکانیکی منحنی متفاوت از label پاتولوژیکشان هستند. این موضوع چند تفسیر دارد: ۱) خواص مکانیکی بافت همیشه با درجه پاتولوژیکی کاملاً همبسته نیستند. ۲) بعضی بیماران Grade2 ممکن است در مراحل اولیه تومور باشند و خواص بیومکانیکی‌شان هنوز به Grade1 نزدیک است. ۳) دقت label‌ها یکی از عوامل محدودکننده کار است.</span>
     <span class="en">Of 6 misclassified patients, 4 (67%) have biomechanical curve properties that differ from their pathological label. This has several interpretations: 1) tissue mechanical properties are not always perfectly correlated with pathological grade. 2) Some Grade2 patients may be in early tumour stages and their biomechanical properties are still close to Grade1. 3) Label accuracy is one of the limiting factors of this work.</span><span class="it">Dei 6 pazienti classificati erroneamente, 4 (67%) hanno proprietà biomeccaniche delle curve diverse dalla loro etichetta patologica. Questo ha diverse interpretazioni: 1) le proprietà meccaniche del tessuto non sono sempre perfettamente correlate con il grado patologico. 2) Alcuni pazienti Grade2 potrebbero essere in stadi precoci del tumore e le loro proprietà biomeccaniche sono ancora vicine a Grade1. 3) L'accuratezza delle etichette è uno dei fattori limitanti di questo lavoro.</span>
   </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- PART 7.13: HETEROGENEITY + MULTIMODAL SYNTHESIS -->
+<!-- ============================================================ -->
+<h3 id="part713">
+  <span class="fa">۷.۱۳ جمع‌بندی: هتروژنیتی بافت و نقش هیستولوژی</span>
+  <span class="en">7.13 Synthesis: Tissue Heterogeneity and the Role of Histology</span>
+  <span class="it">7.13 Sintesi: Eterogeneità del Tessuto e il Ruolo dell'Istologia</span>
+</h3>
+
+<div class="concept-box">
+  <h4>
+    <span class="fa">چرا 3464A و 3464B یک بیمار هستند ولی رفتار متفاوت دارند؟</span>
+    <span class="en">Why Do 3464A and 3464B Come from the Same Patient but Behave Differently?</span>
+    <span class="it">Perché 3464A e 3464B Provengono dallo Stesso Paziente ma si Comportano Diversamente?</span>
+  </h4>
+  <p>
+    <span class="fa">هر دو نمونه از بیمار ۳۴۶۴ هستند، label پاتولوژیک هر دو Grade2 است، ولی رفتار بیومکانیکی‌شان کاملاً مخالف هم است:</span>
+    <span class="en">Both samples come from patient 3464, both have pathological label Grade2, yet their biomechanical behaviour is completely opposite:</span>
+    <span class="it">Entrambi i campioni provengono dal paziente 3464, entrambi hanno etichetta patologica Grade2, eppure il loro comportamento biomeccanico è completamente opposto:</span>
+  </p>
+  <table>
+    <tr>
+      <th><span class="fa">نمونه</span><span class="en">Sample</span><span class="it">Campione</span></th>
+      <th><span class="fa">label</span><span class="en">Label</span><span class="it">Etichetta</span></th>
+      <th><span class="fa">بیومکانیک</span><span class="en">Biomechanics</span><span class="it">Biomeccanica</span></th>
+      <th><span class="fa">نتیجه</span><span class="en">Result</span><span class="it">Risultato</span></th>
+    </tr>
+    <tr>
+      <td>3464A</td>
+      <td>Grade2</td>
+      <td><span class="fa">شبیه Grade1 (cos_G1=0.848)</span><span class="en">Resembles Grade1 (cos_G1=0.848)</span><span class="it">Somiglia a Grade1 (cos_G1=0.848)</span></td>
+      <td><span class="fa">Borderline G2/1</span><span class="en">Borderline G2/1</span><span class="it">Borderline G2/1</span></td>
+    </tr>
+    <tr>
+      <td>3464B</td>
+      <td>Grade2</td>
+      <td><span class="fa">شبیه Grade2 (cos_G2 بزرگتر)</span><span class="en">Resembles Grade2 (cos_G2 larger)</span><span class="it">Somiglia a Grade2 (cos_G2 maggiore)</span></td>
+      <td><span class="fa">خطای مدل (excluded)</span><span class="en">Model error (excluded)</span><span class="it">Errore modello (escluso)</span></td>
+    </tr>
+  </table>
+  <p>
+    <span class="fa"><strong>دلیل: Intratumoral Mechanical Heterogeneity (هتروژنیتی مکانیکی داخل تومور).</strong> یک مننژیوم Grade2 به معنای این نیست که کل بافت یکدست آتیپیک است. تومورهای Grade2 بر اساس معیارهای WHO باید در جایی از بافت ویژگی‌های آتیپیک (تراکم سلولی بالا، میتوز، نکروز) داشته باشند — ولی این ویژگی‌ها توزیع یکنواخت ندارند. AFM هر بار فقط یک ناحیه‌ی میکرومتری از بافت را اندازه می‌گیرد:</span>
+    <span class="en"><strong>Reason: Intratumoral Mechanical Heterogeneity.</strong> A Grade2 meningioma does not mean the entire tissue is uniformly atypical. Grade2 tumours by WHO criteria must have atypical features (high cell density, mitosis, necrosis) somewhere in the tissue — but these features are not uniformly distributed. AFM each time measures only a micrometre-scale region of the tissue:</span>
+    <span class="it"><strong>Motivo: Eterogeneità Meccanica Intratumorale.</strong> Un meningioma Grade2 non significa che l'intero tessuto sia uniformemente atipico. I tumori Grade2 secondo i criteri WHO devono avere caratteristiche atipiche (alta densità cellulare, mitosi, necrosi) da qualche parte nel tessuto — ma queste caratteristiche non sono distribuite uniformemente. L'AFM ogni volta misura solo una regione a scala micrometrica del tessuto:</span>
+  </p>
+  <pre>
+<span class="fa">بافت بیمار ۳۴۶۴:</span><span class="en">Patient 3464 tissue:</span><span class="it">Tessuto paziente 3464:</span>
+
+  [<span class="fa">منطقه A</span><span class="en">Region A</span><span class="it">Regione A</span>]         [<span class="fa">منطقه B</span><span class="en">Region B</span><span class="it">Regione B</span>]
+  ──────────────────────    ──────────────────────
+  <span class="fa">سلول‌های نرمال‌تر            سلول‌های آتیپیک</span><span class="en">Normal-appearing cells      Atypical cells</span><span class="it">Cellule normali             Cellule atipiche</span>
+  <span class="fa">ماتریکس کمتر آسیب‌دیده       تراکم بالا، میتوز</span><span class="en">Less disrupted matrix       High density, mitosis</span><span class="it">Matrice meno alterata       Alta densità, mitosi</span>
+  AFM → Grade1-like          AFM → Grade2-like
+       ↓                          ↓
+  Sample 3464A               Sample 3464B</pre>
+  <p>
+    <span class="fa">پاتولوژیست کل اسلاید را می‌بیند و چون جایی در آن آتیپی وجود دارد، label را Grade2 می‌زند. ولی AFM چشم ندارد — نمی‌داند دقیقاً روی کدام منطقه از بافت نشسته. این spatial blindness محدودیت اصلی AFM به‌تنهایی است.</span>
+    <span class="en">The pathologist sees the entire slide and, because atypical features exist somewhere in it, assigns label Grade2. But AFM is "blind" — it does not know which exact region of the tissue it is measuring. This spatial blindness is the main limitation of AFM alone.</span>
+    <span class="it">Il patologo vede l'intero vetrino e, poiché esistono caratteristiche atipiche da qualche parte, assegna l'etichetta Grade2. Ma l'AFM è "cieco" — non sa in quale esatta regione del tessuto sta misurando. Questa cecità spaziale è la principale limitazione dell'AFM da solo.</span>
+  </p>
+</div>
+
+<div class="why-box">
+  <h4>
+    <span class="fa">آیا ترکیب هیستولوژی با AFM پیش‌بینی را بهتر می‌کند؟</span>
+    <span class="en">Would Combining Histology with AFM Improve Prediction?</span>
+    <span class="it">Combinare l'Istologia con l'AFM Migliorerebbe la Previsione?</span>
+  </h4>
+  <p>
+    <span class="fa">دو مدالیته اطلاعات <strong>مکمل</strong> دارند، نه تکراری:</span>
+    <span class="en">The two modalities carry <strong>complementary</strong> information, not redundant:</span>
+    <span class="it">Le due modalità portano informazioni <strong>complementari</strong>, non ridondanti:</span>
+  </p>
+  <table>
+    <tr>
+      <th>AFM</th>
+      <th><span class="fa">هیستولوژی</span><span class="en">Histology</span><span class="it">Istologia</span></th>
+    </tr>
+    <tr>
+      <td><span class="fa">سختی و چسبندگی مکانیکی</span><span class="en">Mechanical stiffness &amp; adhesion</span><span class="it">Rigidità &amp; adesione meccanica</span></td>
+      <td><span class="fa">شکل هسته، تراکم سلولی، الگوی بافتی</span><span class="en">Nuclear shape, cell density, tissue architecture</span><span class="it">Forma nucleare, densità cellulare, architettura tissutale</span></td>
+    </tr>
+    <tr>
+      <td><span class="fa">دقت بالا در یک نقطه</span><span class="en">High precision at one point</span><span class="it">Alta precisione in un punto</span></td>
+      <td><span class="fa">نمای کلی از کل بافت</span><span class="en">Global view of the entire tissue</span><span class="it">Vista globale dell'intero tessuto</span></td>
+    </tr>
+    <tr>
+      <td><span class="fa">نمی‌داند کجای بافت اندازه گرفته</span><span class="en">Does not know where in tissue it measured</span><span class="it">Non sa dove nel tessuto ha misurato</span></td>
+      <td><span class="fa">می‌بیند کدام ناحیه آتیپیک است</span><span class="en">Sees which region is atypical</span><span class="it">Vede quale regione è atipica</span></td>
+    </tr>
+  </table>
+  <p>
+    <span class="fa"><strong>تأثیر بر کیس‌های این تحلیل:</strong> برای 3107A که margin فقط ۰.۰۲ بود و مدل عملاً سکه انداخت، هیستولوژی می‌توانست بگوید آیا در این بافت mitotic figures یا nuclear pleomorphism وجود دارد — اطلاعاتی که AFM به‌تنهایی نمی‌تواند تشخیص دهد. برای 3464A، اگر هیستولوژی نشان می‌داد که منطقه‌ی اندازه‌گیری AFM در بخش سالم بافت بوده، مدل می‌توانست وزن بیشتری به label پاتولوژیکی بدهد.</span>
+    <span class="en"><strong>Impact on cases in this analysis:</strong> For 3107A (margin=0.02, model essentially flipped a coin), histology could have revealed whether mitotic figures or nuclear pleomorphism are present — information AFM alone cannot detect. For 3464A, if histology showed that the AFM measurement region was in the healthy part of the tissue, the model could have given more weight to the pathological label.</span>
+    <span class="it"><strong>Impatto sui casi di questa analisi:</strong> Per 3107A (margin=0.02, il modello ha essenzialmente tirato una moneta), l'istologia avrebbe potuto rivelare se sono presenti figure mitotiche o pleomorfismo nucleare — informazioni che l'AFM da solo non può rilevare. Per 3464A, se l'istologia avesse mostrato che la regione di misurazione AFM era nella parte sana del tessuto, il modello avrebbe potuto dare più peso all'etichetta patologica.</span>
+  </p>
+</div>
+
+<div class="important">
+  <span class="fa"><strong>جمع‌بندی نهایی:</strong> از نظر علمی، ترکیب AFM + هیستولوژی باید دقت را به‌ویژه برای کیس‌های مرزی بهبود دهد. برآورد: از ~۷۴٪ به ~۸۰-۸۵٪ — عمدتاً به‌خاطر حل‌شدن کیس‌هایی مثل 3107A که مدل AFM‌تنها نمی‌توانست با اطمینان تصمیم بگیرد. محدودیت اصلی: ۲۳ نمونه برای آموزش یک مدل multimodal کم است و خطر overfitting وجود دارد.</span>
+  <span class="en"><strong>Final summary:</strong> Scientifically, combining AFM + histology should improve accuracy especially for borderline cases. Estimate: from ~74% to ~80–85% — mainly because cases like 3107A where the AFM-only model could not decide with confidence would be resolved. Main limitation: 23 samples is too few to train a robust multimodal model and overfitting risk is real.</span>
+  <span class="it"><strong>Sintesi finale:</strong> Scientificamente, combinare AFM + istologia dovrebbe migliorare l'accuratezza specialmente per i casi borderline. Stima: da ~74% a ~80–85% — principalmente perché casi come 3107A in cui il modello solo-AFM non poteva decidere con sicurezza verrebbero risolti. Limitazione principale: 23 campioni sono troppo pochi per addestrare un modello multimodale robusto e il rischio di overfitting è reale.</span>
 </div>
 
 <!-- ============================================================ -->
