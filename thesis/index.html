@@ -272,9 +272,9 @@ function toggleLanguage() {
   <li><a href="#part6"><span class="fa">بخش ۶: ارزیابی — از کجا بفهمیم مدل خوب کار می‌کنه؟</span><span class="en">Part 6: Evaluation — How Do We Know the Model Works?</span><span class="it">Parte 6: Valutazione — Come Sappiamo che il Modello Funziona?</span></a></li>
   <li><a href="#part7"><span class="fa">بخش ۷: تحلیل پلات‌ها — نتایج رو بخون</span><span class="en">Part 7: Plot Analysis — Reading the Results</span><span class="it">Parte 7: Analisi dei Grafici — Leggere i Risultati</span></a></li>
   <li><a href="#part8"><span class="fa">بخش ۸: سوالات احتمالی استاد + جواب</span><span class="en">Part 8: Potential Examiner Questions + Answers</span><span class="it">Parte 8: Possibili Domande del Commissario + Risposte</span></a></li>
-  <li><a href="#abmil46"><span class="fa">بخش ۴.۶: مدل Two-Stage ABMIL (یادگیری نمونه‌ای با توجه)</span><span class="en"></span><span class="it"></span></a></li>
-  <li><a href="#part711"><span class="fa">بخش ۷.۱۱: نتایج مقایسه سه مدل (CNN، Transformer، ABMIL)</span><span class="en"></span><span class="it"></span></a></li>
-  <li><a href="#part712"><span class="fa">بخش ۷.۱۲: تحلیل نمونه‌های مرزی (G1/2 و G2/1)</span><span class="en"></span><span class="it"></span></a></li>
+  <li><a href="#abmil46"><span class="fa">بخش ۴.۶: مدل Two-Stage ABMIL (یادگیری نمونه‌ای با توجه)</span><span class="en">Section 4.6: Two-Stage ABMIL Model (Attention-Based MIL)</span><span class="it"></span></a></li>
+  <li><a href="#part711"><span class="fa">بخش ۷.۱۱: نتایج مقایسه سه مدل (CNN، Transformer، ABMIL)</span><span class="en">Section 7.11: Three-Model Comparison (CNN, Transformer, ABMIL)</span><span class="it"></span></a></li>
+  <li><a href="#part712"><span class="fa">بخش ۷.۱۲: تحلیل نمونه‌های مرزی (G1/2 و G2/1)</span><span class="en">Section 7.12: Borderline Sample Analysis (G1/2 and G2/1)</span><span class="it"></span></a></li>
 </ol>
 </div>
 
@@ -1240,28 +1240,28 @@ embedding = CLS_output → Linear → <span class="number">256</span> dimensions
   </tr>
 </table>
 
-<h3 id="abmil46"><span class="fa">۴.۶ مدل Two-Stage ABMIL (یادگیری نمونه‌ای با توجه)</span><span class="en"></span><span class="it"></span></h3>
+<h3 id="abmil46"><span class="fa">۴.۶ مدل Two-Stage ABMIL (یادگیری نمونه‌ای با توجه)</span><span class="en">4.6 Two-Stage ABMIL Model (Attention-Based Multiple Instance Learning)</span><span class="it"></span></h3>
 <p><span class="fa">فایل:</span><span class="en">File:</span><span class="it">File:</span> <span class="file-ref">src/models/abmil.py</span> | <span class="file-ref">experiments/run_abmil_loso.py</span></p>
 
 <div class="concept-box">
-  <h4><span class="fa">مشکل اساسی چرا این مدل لازم شد</span><span class="en"></span><span class="it"></span></h4>
+  <h4><span class="fa">مشکل اساسی چرا این مدل لازم شد</span><span class="en">Why This Model Was Needed</span><span class="it"></span></h4>
   <p>
     <span class="fa">در CNN و Transformer، مدل هر منحنی رو جداگانه دسته‌بندی می‌کنه. بعد با رأی‌گیری اکثریت (majority vote) تصمیم نهایی برای بیمار گرفته می‌شه. این رویکرد یه ضعف اساسی داره: مدل برای <strong>دقت بیمار</strong> آموزش نمی‌بینه، بلکه برای دقت منحنی آموزش می‌بینه. ABMIL این مشکل رو از ریشه حل می‌کنه — آموزش مستقیم روی label بیمار.</span>
-    <span class="en"></span><span class="it"></span>
+    <span class="en">In CNN and Transformer, the model classifies each curve independently. A final patient-level decision is then made by majority vote. This has a fundamental weakness: the model is <strong>not trained for patient accuracy</strong>, only curve accuracy. ABMIL solves this at the root — training directly on patient labels.</span><span class="it"></span>
   </p>
 </div>
 
 <div class="analogy">
-  <h4><span class="fa">تشبیه ساده</span><span class="en"></span><span class="it"></span></h4>
+  <h4><span class="fa">تشبیه ساده</span><span class="en">Simple Analogy</span><span class="it"></span></h4>
   <p>
     <span class="fa">یه پزشک متخصص ۶۰۰۰ آزمایش مختلف از یه بیمار داره. نه همه آزمایش‌ها به یک اندازه مهمن. پزشک یاد می‌گیره کدوم آزمایش‌ها بیشتر می‌تونن درجه بیماری رو نشون بدن — و بقیه رو کمتر وزن می‌ده. این دقیقاً کاری هست که Attention شبکه انجام می‌ده.</span>
-    <span class="en"></span><span class="it"></span>
+    <span class="en">A specialist doctor has 6,000 different test results from one patient. Not all tests are equally informative. The doctor learns which tests best reveal the disease grade — and weights the others less. This is exactly what the attention network does.</span><span class="it"></span>
   </p>
 </div>
 
 <p>
   <span class="fa">معماری دو مرحله‌ای:</span>
-  <span class="en"></span><span class="it"></span>
+  <span class="en">Two-stage architecture:</span><span class="it"></span>
 </p>
 
 <pre>
@@ -1284,16 +1284,16 @@ embedding = CLS_output → Linear → <span class="number">256</span> dimensions
 </pre>
 
 <div class="why-box">
-  <h4><span class="fa">چرا دو مرحله؟</span><span class="en"></span><span class="it"></span></h4>
+  <h4><span class="fa">چرا دو مرحله؟</span><span class="en">Why Two Stages?</span><span class="it"></span></h4>
   <p>
     <span class="fa">اگه CNN رو از صفر داخل ABMIL آموزش بدیم، با ۲۲ بیمار training داریم. این خیلی کمه برای آموزش یه feature extractor قوی و نتیجه class collapse می‌ده (مدل همه چیز رو یه کلاس می‌گه). Stage 1 این مشکل رو حل می‌کنه: CNN با ۱۳۰هزار منحنی label‌دار آموزش می‌بینه و discriminative features یاد می‌گیره. بعد Stage 2 فقط یاد می‌گیره <strong>کدوم curves</strong> برای تشخیص بیمار مهم‌تر هستن.</span>
-    <span class="en"></span><span class="it"></span>
+    <span class="en">If we train the CNN from scratch inside ABMIL, we only have 22 training bags. This is too few for a strong feature extractor and causes class collapse (model predicts only one class). Stage 1 solves this: the CNN is trained on 130,000 labeled curves and learns discriminative features. Then Stage 2 only learns <strong>which curves</strong> are most important for patient-level diagnosis.</span><span class="it"></span>
   </p>
 </div>
 
 <div class="important">
   <span class="fa"><strong>نتیجه:</strong> ۱۷ از ۲۳ بیمار درست تشخیص داده شد = <strong>۷۳.۹۱٪</strong> دقت بیمار‌محور — قابل مقایسه با CNN baseline (۷۴.۴۵٪) ولی با رویکرد کاملاً متفاوت.</span>
-  <span class="en"></span><span class="it"></span>
+  <span class="en"><strong>Result:</strong> 17 out of 23 patients correctly classified = <strong>73.91%</strong> patient-level accuracy — comparable to CNN baseline (74.45%) but with a completely different approach.</span><span class="it"></span>
 </div>
 
 <h3><span class="fa">۴.۴ استراتژی‌های ادغام (Fusion)</span><span class="en">4.4 Fusion Strategies</span><span class="it">4.4 Strategie di Fusione</span></h3>
@@ -1897,7 +1897,7 @@ Actual Grade2         FN (wrong)          TN (correct)
 <!-- ============================================================ -->
 <!-- PART 7.11: ABMIL RESULTS -->
 <!-- ============================================================ -->
-<h3 id="part711"><span class="fa">۷.۱۱ مقایسه نهایی سه مدل — CNN، Transformer، ABMIL</span><span class="en"></span><span class="it"></span></h3>
+<h3 id="part711"><span class="fa">۷.۱۱ مقایسه نهایی سه مدل — CNN، Transformer، ABMIL</span><span class="en">7.11 Final Three-Model Comparison — CNN, Transformer, ABMIL</span><span class="it"></span></h3>
 
 <table>
   <tr>
@@ -1927,103 +1927,103 @@ Actual Grade2         FN (wrong)          TN (correct)
 </table>
 
 <div class="why-box">
-  <h4><span class="fa">چرا ABMIL از CNN کمی ضعیف‌تره؟</span><span class="en"></span><span class="it"></span></h4>
+  <h4><span class="fa">چرا ABMIL از CNN کمی ضعیف‌تره؟</span><span class="en">Why Is ABMIL Slightly Weaker Than CNN?</span><span class="it"></span></h4>
   <p>
     <span class="fa">ABMIL با ۲۲ بیمار (bag) در هر fold آموزش می‌بینه. Stage 2 attention network فقط ۲۲ نمونه positive/negative دیده — خیلی کمه برای یادگیری الگوی پایدار. CNN با ۱۳۰هزار منحنی مستقیماً آموزش می‌بینه و هر منحنی یه نمونه‌ی مستقل هست. با داده بیشتر (مثلاً ۵۰+ بیمار)، ABMIL احتمالاً از CNN پیشی می‌گرفت.</span>
-    <span class="en"></span><span class="it"></span>
+    <span class="en">ABMIL trains on 22 patients (bags) per fold. The Stage 2 attention network has only seen 22 positive/negative examples — too few for stable pattern learning. CNN trains directly on 130,000 curves, each an independent sample. With more data (e.g., 50+ patients), ABMIL would likely surpass CNN.</span><span class="it"></span>
   </p>
 </div>
 
 <div class="important">
   <span class="fa"><strong>ارزش اصلی ABMIL:</strong> این مدل اولین رویکردی هست که مستقیماً برای <strong>تشخیص بیمار</strong> (نه منحنی) آموزش می‌بینه. Attention weights نشون می‌دن کدوم curves بیشترین نقش رو در تشخیص داشتن — که برای تفسیر نتایج پزشکی ارزشمنده.</span>
-  <span class="en"></span><span class="it"></span>
+  <span class="en"><strong>Core value of ABMIL:</strong> This is the first approach that trains directly for <strong>patient diagnosis</strong> (not curve-level). Attention weights reveal which curves contributed most to the decision — valuable for medical result interpretation.</span><span class="it"></span>
 </div>
 
 <!-- ============================================================ -->
 <!-- PART 7.12: MISCLASSIFIED ANALYSIS -->
 <!-- ============================================================ -->
-<h3 id="part712"><span class="fa">۷.۱۲ تحلیل نمونه‌های مرزی — G1/2 و G2/1</span><span class="en"></span><span class="it"></span></h3>
+<h3 id="part712"><span class="fa">۷.۱۲ تحلیل نمونه‌های مرزی — G1/2 و G2/1</span><span class="en">7.12 Borderline Sample Analysis — G1/2 and G2/1</span><span class="it"></span></h3>
 
 <div class="concept-box">
-  <h4><span class="fa">این تحلیل چیه و چرا مهمه؟</span><span class="en"></span><span class="it"></span></h4>
+  <h4><span class="fa">این تحلیل چیه و چرا مهمه؟</span><span class="en">What Is This Analysis and Why Does It Matter?</span><span class="it"></span></h4>
   <p>
     <span class="fa">وقتی مدل یه بیمار رو اشتباه دسته‌بندی می‌کنه، دو احتمال وجود داره: ۱) <strong>مدل خطا کرده</strong> — منحنی‌ها واقعاً شبیه label درست هستن. ۲) <strong>نمونه مرزی</strong> — منحنی‌های این بیمار از نظر بیومکانیکی واقعاً شبیه گروه مقابل هستن، حتی اگه label پاتولوژیکش متفاوت باشه.</span>
-    <span class="en"></span><span class="it"></span>
+    <span class="en">When the model misclassifies a patient, two possibilities exist: 1) <strong>True model error</strong> — curves are genuinely similar to the correct label. 2) <strong>Borderline sample</strong> — the patient's curves are biomechanically similar to the opposite group, even if the pathological label differs.</span><span class="it"></span>
   </p>
   <p>
     <span class="fa">برای تشخیص این دو حالت، cosine similarity بین embedding این بیمار و centroid هر کلاس محاسبه شد. اگه embedding به centroid گروه <strong>مقابل</strong> نزدیک‌تر باشه → نمونه مرزی واقعی. اگه به centroid گروه <strong>خودش</strong> نزدیک‌تر باشه → خطای مدل.</span>
-    <span class="en"></span><span class="it"></span>
+    <span class="en">To distinguish these two cases, cosine similarity was computed between the patient's embedding and each class centroid. If the embedding is closer to the <strong>opposite</strong> class centroid → genuine borderline sample. If closer to its <strong>own</strong> class centroid → true model error.</span><span class="it"></span>
   </p>
 </div>
 
 <p>
   <span class="fa">از ۶ بیمار اشتباه دسته‌بندی‌شده: <strong>۴ نمونه مرزی واقعی</strong> پیدا شدن و <strong>۲ خطای مدل</strong> از تحلیل حذف شدن.</span>
-  <span class="en"></span><span class="it"></span>
+  <span class="en">Out of 6 misclassified patients: <strong>4 genuine borderline samples</strong> identified and <strong>2 true model errors</strong> excluded from the report.</span><span class="it"></span>
 </p>
 
 <!-- Example 1: 3107A G1/2 -->
-<h4><span class="fa">نمونه ۱: 3107A — دسته G1/2 (label=Grade1، رفتار Grade2)</span><span class="en"></span><span class="it"></span></h4>
+<h4><span class="fa">نمونه ۱: 3107A — دسته G1/2 (label=Grade1، رفتار Grade2)</span><span class="en">Sample 1: 3107A — Category G1/2 (label=Grade1, behaviour=Grade2)</span><span class="it"></span></h4>
 <div class="plot-container">
   <img src="plots/3107A_G1_2_comparison.png" alt="3107A G1/2 comparison">
 </div>
 <ul>
-  <li><span class="fa"><strong>شباهت به Grade2:</strong> cos=0.4601 | <strong>شباهت به Grade1:</strong> cos=0.4398 | margin=0.0203</span><span class="en"></span><span class="it"></span></li>
-  <li><span class="fa"><strong>نمودار چپ:</strong> منحنی میانگین 3107A (نارنجی) تقریباً <strong>روی</strong> میانگین Grade2 (آبی) افتاده — شکل منحنی بسیار مشابه</span><span class="en"></span><span class="it"></span></li>
-  <li><span class="fa"><strong>نمودار راست:</strong> در مقابل، Grade1 mean (سبز) فاصله واضح‌تری با 3107A داره</span><span class="en"></span><span class="it"></span></li>
-  <li><span class="fa"><strong>نکته:</strong> این نمونه label اصلاحی داره — ابتدا Grade2 بود و بعد به Grade1 اصلاح شد. رفتار منحنی با label اصلاح‌شده همخوانی کامل ندارد.</span><span class="en"></span><span class="it"></span></li>
+  <li><span class="fa"><strong>شباهت به Grade2:</strong> cos=0.4601 | <strong>شباهت به Grade1:</strong> cos=0.4398 | margin=0.0203</span><span class="en"><strong>Similarity to Grade2:</strong> cos=0.4601 | <strong>Similarity to Grade1:</strong> cos=0.4398 | margin=0.0203</span><span class="it"></span></li>
+  <li><span class="fa"><strong>نمودار چپ:</strong> منحنی میانگین 3107A (نارنجی) تقریباً <strong>روی</strong> میانگین Grade2 (آبی) افتاده — شکل منحنی بسیار مشابه</span><span class="en"><strong>Left plot:</strong> Mean curve of 3107A (orange) lies almost <strong>on top of</strong> the Grade2 mean (blue) — very similar shape</span><span class="it"></span></li>
+  <li><span class="fa"><strong>نمودار راست:</strong> در مقابل، Grade1 mean (سبز) فاصله واضح‌تری با 3107A داره</span><span class="en"><strong>Right plot:</strong> Grade1 mean (green) has a clearer gap from 3107A</span><span class="it"></span></li>
+  <li><span class="fa"><strong>نکته:</strong> این نمونه label اصلاحی داره — ابتدا Grade2 بود و بعد به Grade1 اصلاح شد. رفتار منحنی با label اصلاح‌شده همخوانی کامل ندارد.</span><span class="en"><strong>Note:</strong> This sample has a corrected label — originally Grade2, later changed to Grade1. Curve behaviour does not fully align with the corrected label.</span><span class="it"></span></li>
 </ul>
 <div class="warning">
   <span class="fa">margin فقط ۰.۰۲ هست — ضعیف‌ترین نمونه مرزی. این بیمار واقعاً در مرز بین دو Grade هست.</span>
-  <span class="en"></span><span class="it"></span>
+  <span class="en">Margin is only 0.02 — weakest borderline case. This patient is genuinely on the boundary between grades.</span><span class="it"></span>
 </div>
 
 <!-- Example 2: 3374B G1/2 -->
-<h4><span class="fa">نمونه ۲: 3374B — دسته G1/2 (label=Grade1، رفتار Grade2)</span><span class="en"></span><span class="it"></span></h4>
+<h4><span class="fa">نمونه ۲: 3374B — دسته G1/2 (label=Grade1، رفتار Grade2)</span><span class="en">Sample 2: 3374B — Category G1/2 (label=Grade1, behaviour=Grade2)</span><span class="it"></span></h4>
 <div class="plot-container">
   <img src="plots/3374B_G1_2_comparison.png" alt="3374B G1/2 comparison">
 </div>
 <ul>
-  <li><span class="fa"><strong>شباهت به Grade2:</strong> cos=0.6763 | <strong>شباهت به Grade1:</strong> cos=0.3127 | margin=0.3636</span><span class="en"></span><span class="it"></span></li>
-  <li><span class="fa"><strong>نمودار چپ:</strong> منحنی 3374B (نارنجی) کاملاً با Grade2 mean (آبی) همپوشانی دارد — شکل یکسان</span><span class="en"></span><span class="it"></span></li>
-  <li><span class="fa"><strong>نمودار راست:</strong> Grade1 mean (سبز) شیب متفاوت‌تری داره — شباهت کمتر</span><span class="en"></span><span class="it"></span></li>
-  <li><span class="fa"><strong>نکته مهم:</strong> این نمونه فقط <strong>۸۴ منحنی</strong> دارد (کمترین در کل dataset). با این حجم کم، همه منحنی‌هایش رفتار Grade2 نشان می‌دهند.</span><span class="en"></span><span class="it"></span></li>
+  <li><span class="fa"><strong>شباهت به Grade2:</strong> cos=0.6763 | <strong>شباهت به Grade1:</strong> cos=0.3127 | margin=0.3636</span><span class="en"><strong>Similarity to Grade2:</strong> cos=0.6763 | <strong>Similarity to Grade1:</strong> cos=0.3127 | margin=0.3636</span><span class="it"></span></li>
+  <li><span class="fa"><strong>نمودار چپ:</strong> منحنی 3374B (نارنجی) کاملاً با Grade2 mean (آبی) همپوشانی دارد — شکل یکسان</span><span class="en"><strong>Left plot:</strong> 3374B curve (orange) overlaps completely with Grade2 mean (blue) — identical shape</span><span class="it"></span></li>
+  <li><span class="fa"><strong>نمودار راست:</strong> Grade1 mean (سبز) شیب متفاوت‌تری داره — شباهت کمتر</span><span class="en"><strong>Right plot:</strong> Grade1 mean (green) has a different slope — less similar</span><span class="it"></span></li>
+  <li><span class="fa"><strong>نکته مهم:</strong> این نمونه فقط <strong>۸۴ منحنی</strong> دارد (کمترین در کل dataset). با این حجم کم، همه منحنی‌هایش رفتار Grade2 نشان می‌دهند.</span><span class="en"><strong>Important note:</strong> This sample has only <strong>84 curves</strong> (fewest in the entire dataset). With this small volume, all curves consistently show Grade2 behaviour.</span><span class="it"></span></li>
 </ul>
 <div class="important">
   <span class="fa">margin قوی ۰.۳۶ — شواهد محکمی که این بیمار از نظر بیومکانیکی به Grade2 نزدیک‌تر است.</span>
-  <span class="en"></span><span class="it"></span>
+  <span class="en">Strong margin of 0.36 — solid evidence that this patient is biomechanically closer to Grade2.</span><span class="it"></span>
 </div>
 
 <!-- Example 3: 3464A G2/1 -->
-<h4><span class="fa">نمونه ۳: 3464A — دسته G2/1 (label=Grade2، رفتار Grade1)</span><span class="en"></span><span class="it"></span></h4>
+<h4><span class="fa">نمونه ۳: 3464A — دسته G2/1 (label=Grade2، رفتار Grade1)</span><span class="en">Sample 3: 3464A — Category G2/1 (label=Grade2, behaviour=Grade1)</span><span class="it"></span></h4>
 <div class="plot-container">
   <img src="plots/3464A_G2_1_comparison.png" alt="3464A G2/1 comparison">
 </div>
 <ul>
-  <li><span class="fa"><strong>شباهت به Grade1:</strong> cos=0.8477 | <strong>شباهت به Grade2:</strong> cos=−0.2222 | margin=1.0699</span><span class="en"></span><span class="it"></span></li>
-  <li><span class="fa"><strong>نمودار چپ:</strong> منحنی 3464A (نارنجی) تقریباً <strong>دقیقاً روی</strong> Grade1 mean (آبی) — یکسان</span><span class="en"></span><span class="it"></span></li>
-  <li><span class="fa"><strong>نمودار راست:</strong> Grade2 mean (سبز) شیب خیلی تندتری داره — cosine منفی یعنی جهت مخالف!</span><span class="en"></span><span class="it"></span></li>
-  <li><span class="fa"><strong>قوی‌ترین نمونه مرزی</strong> در این تحلیل — margin=1.07 نشان می‌دهد جداسازی کاملاً قطعی است.</span><span class="en"></span><span class="it"></span></li>
+  <li><span class="fa"><strong>شباهت به Grade1:</strong> cos=0.8477 | <strong>شباهت به Grade2:</strong> cos=−0.2222 | margin=1.0699</span><span class="en"><strong>Similarity to Grade1:</strong> cos=0.8477 | <strong>Similarity to Grade2:</strong> cos=−0.2222 | margin=1.0699</span><span class="it"></span></li>
+  <li><span class="fa"><strong>نمودار چپ:</strong> منحنی 3464A (نارنجی) تقریباً <strong>دقیقاً روی</strong> Grade1 mean (آبی) — یکسان</span><span class="en"><strong>Left plot:</strong> 3464A curve (orange) lies almost <strong>exactly on</strong> Grade1 mean (blue) — identical</span><span class="it"></span></li>
+  <li><span class="fa"><strong>نمودار راست:</strong> Grade2 mean (سبز) شیب خیلی تندتری داره — cosine منفی یعنی جهت مخالف!</span><span class="en"><strong>Right plot:</strong> Grade2 mean (green) has a much steeper slope — negative cosine means opposite direction!</span><span class="it"></span></li>
+  <li><span class="fa"><strong>قوی‌ترین نمونه مرزی</strong> در این تحلیل — margin=1.07 نشان می‌دهد جداسازی کاملاً قطعی است.</span><span class="en"><strong>Strongest borderline case</strong> in this analysis — margin=1.07 shows completely decisive separation.</span><span class="it"></span></li>
 </ul>
 <div class="important">
   <span class="fa"><strong>تفسیر بیولوژیکی:</strong> 3464A با label Grade2 دارد، اما خواص بیومکانیکی منحنی‌هایش کاملاً با Grade1 مطابقت دارد. این می‌تواند نشان‌دهنده‌ی تنوع درون‌گروهی در بیماران Grade2 باشد.</span>
-  <span class="en"></span><span class="it"></span>
+  <span class="en"><strong>Biological interpretation:</strong> 3464A has label Grade2, but the biomechanical properties of its curves fully match Grade1. This may indicate within-group variability in Grade2 patients.</span><span class="it"></span>
 </div>
 
 <!-- Example 4: 753A G1/2 -->
-<h4><span class="fa">نمونه ۴: 753A — دسته G1/2 (label=Grade1، رفتار Grade2)</span><span class="en"></span><span class="it"></span></h4>
+<h4><span class="fa">نمونه ۴: 753A — دسته G1/2 (label=Grade1، رفتار Grade2)</span><span class="en">Sample 4: 753A — Category G1/2 (label=Grade1, behaviour=Grade2)</span><span class="it"></span></h4>
 <div class="plot-container">
   <img src="plots/753A_G1_2_comparison.png" alt="753A G1/2 comparison">
 </div>
 <ul>
-  <li><span class="fa"><strong>شباهت به Grade2:</strong> cos=0.6108 | <strong>شباهت به Grade1:</strong> cos=0.1752 | margin=0.4356</span><span class="en"></span><span class="it"></span></li>
-  <li><span class="fa"><strong>نمودار چپ:</strong> منحنی 753A (نارنجی) با Grade2 mean (آبی) به خوبی مطابقت دارد</span><span class="en"></span><span class="it"></span></li>
-  <li><span class="fa"><strong>نمودار راست:</strong> Grade1 mean (سبز) فاصله واضحی دارد</span><span class="en"></span><span class="it"></span></li>
-  <li><span class="fa">این نمونه ۷۴۴۱ منحنی دارد — pattern مشاهده‌شده از داده کافی استخراج شده و قابل اعتماد است.</span><span class="en"></span><span class="it"></span></li>
+  <li><span class="fa"><strong>شباهت به Grade2:</strong> cos=0.6108 | <strong>شباهت به Grade1:</strong> cos=0.1752 | margin=0.4356</span><span class="en"><strong>Similarity to Grade2:</strong> cos=0.6108 | <strong>Similarity to Grade1:</strong> cos=0.1752 | margin=0.4356</span><span class="it"></span></li>
+  <li><span class="fa"><strong>نمودار چپ:</strong> منحنی 753A (نارنجی) با Grade2 mean (آبی) به خوبی مطابقت دارد</span><span class="en"><strong>Left plot:</strong> 753A curve (orange) closely matches Grade2 mean (blue)</span><span class="it"></span></li>
+  <li><span class="fa"><strong>نمودار راست:</strong> Grade1 mean (سبز) فاصله واضحی دارد</span><span class="en"><strong>Right plot:</strong> Grade1 mean (green) shows a clear separation</span><span class="it"></span></li>
+  <li><span class="fa">این نمونه ۷۴۴۱ منحنی دارد — pattern مشاهده‌شده از داده کافی استخراج شده و قابل اعتماد است.</span><span class="en">This sample has 7,441 curves — the observed pattern is extracted from sufficient data and is reliable.</span><span class="it"></span></li>
 </ul>
 
 <!-- Summary of borderline analysis -->
 <div class="concept-box">
-  <h4><span class="fa">جدول خلاصه نمونه‌های مرزی</span><span class="en"></span><span class="it"></span></h4>
+  <h4><span class="fa">جدول خلاصه نمونه‌های مرزی</span><span class="en">Borderline Samples Summary Table</span><span class="it"></span></h4>
   <table>
     <tr>
       <th><span class="fa">نمونه</span><span class="en">Sample</span><span class="it">Campione</span></th>
@@ -2040,15 +2040,15 @@ Actual Grade2         FN (wrong)          TN (correct)
   </table>
   <p>
     <span class="fa"><strong>حذف شده (خطای مدل):</strong> 3464B و 3465B — embedding این دو نمونه به centroid Grade2 (label درست) نزدیک‌تر بود، پس مدل واقعاً اشتباه کرده بود و در این تحلیل نمی‌آیند.</span>
-    <span class="en"></span><span class="it"></span>
+    <span class="en"><strong>Excluded (model error):</strong> 3464B and 3465B — the embeddings of these two samples were closer to the Grade2 centroid (correct label), so the model made a genuine error and they are excluded from this analysis.</span><span class="it"></span>
   </p>
 </div>
 
 <div class="why-box">
-  <h4><span class="fa">این نتایج چه می‌گوید؟</span><span class="en"></span><span class="it"></span></h4>
+  <h4><span class="fa">این نتایج چه می‌گوید؟</span><span class="en">What do these results tell us?</span><span class="it"></span></h4>
   <p>
     <span class="fa">از ۶ بیمار اشتباه تشخیص‌داده‌شده، ۴ نفر (۶۷٪) دارای خصوصیات بیومکانیکی منحنی متفاوت از label پاتولوژیکشان هستند. این موضوع چند تفسیر دارد: ۱) خواص مکانیکی بافت همیشه با درجه پاتولوژیکی کاملاً همبسته نیستند. ۲) بعضی بیماران Grade2 ممکن است در مراحل اولیه تومور باشند و خواص بیومکانیکی‌شان هنوز به Grade1 نزدیک است. ۳) دقت label‌ها یکی از عوامل محدودکننده کار است.</span>
-    <span class="en"></span><span class="it"></span>
+    <span class="en">Of 6 misclassified patients, 4 (67%) have biomechanical curve properties that differ from their pathological label. This has several interpretations: 1) tissue mechanical properties are not always perfectly correlated with pathological grade. 2) Some Grade2 patients may be in early tumour stages and their biomechanical properties are still close to Grade1. 3) Label accuracy is one of the limiting factors of this work.</span><span class="it"></span>
   </p>
 </div>
 
