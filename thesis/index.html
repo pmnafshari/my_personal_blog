@@ -1961,6 +1961,43 @@ Actual Grade2         FN (wrong)          TN (correct)
   <span class="en">Out of 6 misclassified patients: <strong>4 genuine borderline samples</strong> identified and <strong>2 true model errors</strong> excluded from the report.</span><span class="it">Dei 6 pazienti classificati erroneamente: <strong>4 campioni borderline genuini</strong> identificati e <strong>2 errori reali del modello</strong> esclusi dall'analisi.</span>
 </p>
 
+<div class="concept-box">
+  <h4>
+    <span class="fa">مفاهیم کلیدی این تحلیل — embedding، centroid، cosine similarity، margin</span>
+    <span class="en">Key Concepts in This Analysis — Embedding, Centroid, Cosine Similarity, Margin</span>
+    <span class="it">Concetti Chiave di Questa Analisi — Embedding, Centroide, Cosine Similarity, Margin</span>
+  </h4>
+  <p>
+    <span class="fa"><strong>Embedding (بردار نمایش بیمار):</strong> CNN آموزش‌دیده‌ی Stage 1 هر منحنی نیرو رو به یه بردار ۲۵۶‌بعدی تبدیل می‌کنه. برای یه بیمار با N منحنی، میانگین این N بردار رو می‌گیریم → یه بردار ۲۵۶‌بعدی که کل بیمار رو نشون می‌ده. این بردار "امضای بیومکانیکی" اون بیماره — شکل، سختی، و الگوی کلی منحنی‌هاش.</span>
+    <span class="en"><strong>Embedding (patient representation vector):</strong> The trained Stage 1 CNN converts each force curve into a 256-dimensional vector. For a patient with N curves, we take the mean of those N vectors → one 256-dimensional vector representing the entire patient. This vector is the patient's "biomechanical signature" — the shape, stiffness, and overall pattern of their curves.</span>
+    <span class="it"><strong>Embedding (vettore di rappresentazione del paziente):</strong> La CNN addestrata dello Stadio 1 converte ogni curva di forza in un vettore a 256 dimensioni. Per un paziente con N curve, si calcola la media di questi N vettori → un unico vettore a 256 dimensioni che rappresenta l'intero paziente. Questo vettore è la "firma biomeccanica" del paziente — forma, rigidità e pattern generale delle sue curve.</span>
+  </p>
+  <p>
+    <span class="fa"><strong>Centroid (مرکز کلاس):</strong> برای هر کلاس (Grade1 و Grade2)، میانگین embedding همه‌ی بیماران آموزشی اون کلاس رو محاسبه می‌کنیم. نتیجه یه بردار ۲۵۶‌بعدی هست که "بیمار نمونه‌ی Grade1" یا "Grade2" رو نشون می‌ده. مثل یه نقطه‌ی مرکزی در فضای ۲۵۶‌بعدی که نماینده‌ی کل گروه هست.</span>
+    <span class="en"><strong>Centroid (class centre):</strong> For each class (Grade1 and Grade2), we compute the mean of the embeddings of all training patients in that class. The result is a 256-dimensional vector representing the "typical Grade1 patient" or "typical Grade2 patient". Like a central point in 256-dimensional space that represents the whole group.</span>
+    <span class="it"><strong>Centroide (centro della classe):</strong> Per ogni classe (Grade1 e Grade2), si calcola la media degli embedding di tutti i pazienti di addestramento in quella classe. Il risultato è un vettore a 256 dimensioni che rappresenta il "paziente Grade1 tipico" o "Grade2 tipico". Come un punto centrale nello spazio a 256 dimensioni che rappresenta l'intero gruppo.</span>
+  </p>
+  <p>
+    <span class="fa"><strong>Cosine Similarity (شباهت جهتی):</strong> با دو بردار A (embedding بیمار) و B (centroid کلاس)، cosine similarity زاویه‌ی بین آنها را اندازه می‌گیرد:</span>
+    <span class="en"><strong>Cosine Similarity (directional similarity):</strong> Given two vectors A (patient embedding) and B (class centroid), cosine similarity measures the angle between them:</span>
+    <span class="it"><strong>Cosine Similarity (similarità direzionale):</strong> Dati due vettori A (embedding del paziente) e B (centroide della classe), la cosine similarity misura l'angolo tra loro:</span>
+  </p>
+  <pre>cos(θ) = (A · B) / (|A| × |B|)    <span class="fa">→ از −۱ تا +۱</span><span class="en">→ ranges from −1 to +1</span><span class="it">→ da −1 a +1</span>
+  +1 : <span class="fa">جهت کاملاً یکسان (بیمار رفتاری مثل centroid کلاس داره)</span><span class="en">exactly same direction (patient behaves like the class centroid)</span><span class="it">stessa direzione (il paziente si comporta come il centroide della classe)</span>
+   0 : <span class="fa">عمود (هیچ ارتباطی ندارند)</span><span class="en">perpendicular (no relation)</span><span class="it">perpendicolare (nessuna relazione)</span>
+  −1 : <span class="fa">جهت کاملاً مخالف</span><span class="en">opposite direction</span><span class="it">direzione opposta</span></pre>
+  <p>
+    <span class="fa"><strong>چرا cosine؟</strong> چون به طول بردار (تعداد منحنی‌ها) حساس نیست — فقط <em>جهت</em> مهمه. بیماری با ۸۴ منحنی و بیماری با ۱۱,۰۰۰ منحنی به‌طور منصفانه مقایسه می‌شوند.</span>
+    <span class="en"><strong>Why cosine?</strong> Because it is insensitive to vector length (number of curves) — only <em>direction</em> matters. A patient with 84 curves and one with 11,000 curves are compared fairly.</span>
+    <span class="it"><strong>Perché cosine?</strong> Perché non è sensibile alla lunghezza del vettore (numero di curve) — conta solo la <em>direzione</em>. Un paziente con 84 curve e uno con 11.000 vengono confrontati equamente.</span>
+  </p>
+  <p>
+    <span class="fa"><strong>Margin (حاشیه‌ی اطمینان):</strong> margin = |cos_G1 − cos_G2|. نشون می‌ده مدل چقدر مطمئن بوده. margin بزرگ → جداسازی قطعی. margin کوچک → بیمار در مرز دو کلاس نشسته.</span>
+    <span class="en"><strong>Margin (confidence gap):</strong> margin = |cos_G1 − cos_G2|. Shows how decisive the classification was. Large margin → decisive separation. Small margin → patient is sitting at the class boundary.</span>
+    <span class="it"><strong>Margin (margine di confidenza):</strong> margin = |cos_G1 − cos_G2|. Indica quanto è stata decisiva la classificazione. Margin grande → separazione decisiva. Margin piccolo → il paziente è al confine tra le classi.</span>
+  </p>
+</div>
+
 <!-- Example 1: 3107A G1/2 -->
 <h4><span class="fa">نمونه ۱: 3107A — دسته G1/2 (label=Grade1، رفتار Grade2)</span><span class="en">Sample 1: 3107A — Category G1/2 (label=Grade1, behaviour=Grade2)</span><span class="it">Campione 1: 3107A — Categoria G1/2 (etichetta=Grade1, comportamento=Grade2)</span></h4>
 <div class="plot-container">
@@ -1975,6 +2012,42 @@ Actual Grade2         FN (wrong)          TN (correct)
 <div class="warning">
   <span class="fa">margin فقط ۰.۰۲ هست — ضعیف‌ترین نمونه مرزی. این بیمار واقعاً در مرز بین دو Grade هست.</span>
   <span class="en">Margin is only 0.02 — weakest borderline case. This patient is genuinely on the boundary between grades.</span><span class="it">Il margin è solo 0.02 — il caso borderline più debole. Questo paziente è genuinamente al confine tra i due gradi.</span>
+</div>
+
+<div class="why-box">
+  <h4>
+    <span class="fa">چرا مدل 3107A را Grade2 تشخیص داد؟ — تحلیل قدم‌به‌قدم</span>
+    <span class="en">Why Did the Model Predict Grade2 for 3107A? — Step-by-Step</span>
+    <span class="it">Perché il Modello Ha Predetto Grade2 per 3107A? — Passo dopo Passo</span>
+  </h4>
+  <p>
+    <span class="fa"><strong>مرحله ۱ — استخراج embedding:</strong> CNN فریز‌شده همه‌ی ۲,۴۷۵ منحنی 3107A را پردازش کرد. هر منحنی → بردار ۲۵۶‌بعدی. میانگین همه → یه بردار واحد که "امضای بیومکانیکی" 3107A رو نشون می‌ده.</span>
+    <span class="en"><strong>Step 1 — Extract embedding:</strong> The frozen CNN processed all 2,475 curves of 3107A. Each curve → 256-dim vector. Mean of all → a single vector representing 3107A's "biomechanical signature".</span>
+    <span class="it"><strong>Passo 1 — Estrazione embedding:</strong> La CNN congelata ha elaborato tutte le 2.475 curve di 3107A. Ogni curva → vettore a 256 dimensioni. Media di tutte → un singolo vettore che rappresenta la "firma biomeccanica" di 3107A.</span>
+  </p>
+  <p>
+    <span class="fa"><strong>مرحله ۲ — محاسبه centroid‌ها:</strong> از بیماران training این fold، میانگین embedding همه‌ی Grade1‌ها → centroid_G1 و میانگین همه‌ی Grade2‌ها → centroid_G2.</span>
+    <span class="en"><strong>Step 2 — Compute centroids:</strong> From the training patients in this fold, mean embedding of all Grade1s → centroid_G1, and mean of all Grade2s → centroid_G2.</span>
+    <span class="it"><strong>Passo 2 — Calcolo centroidi:</strong> Dai pazienti di addestramento di questo fold, media degli embedding di tutti i Grade1 → centroid_G1, e media di tutti i Grade2 → centroid_G2.</span>
+  </p>
+  <p>
+    <span class="fa"><strong>مرحله ۳ — محاسبه cosine similarity:</strong></span>
+    <span class="en"><strong>Step 3 — Compute cosine similarity:</strong></span>
+    <span class="it"><strong>Passo 3 — Calcolo cosine similarity:</strong></span>
+  </p>
+  <pre>cos(3107A, centroid_G2) = 0.4601   <span class="fa">← زاویه‌ی کوچک‌تر با Grade2</span><span class="en">← smaller angle with Grade2</span><span class="it">← angolo minore con Grade2</span>
+cos(3107A, centroid_G1) = 0.4398   <span class="fa">← زاویه‌ی کمی بزرگ‌تر با Grade1</span><span class="en">← slightly larger angle with Grade1</span><span class="it">← angolo leggermente maggiore con Grade1</span>
+margin = |0.4601 − 0.4398| = 0.0203</pre>
+  <p>
+    <span class="fa"><strong>مرحله ۴ — تصمیم‌گیری:</strong> مدل از ساده‌ترین قانون ممکن استفاده می‌کنه: <em>کدام centroid نزدیک‌تر است؟</em> چون cos_G2 &gt; cos_G1، پاسخ Grade2 هست. ولی تفاوت فقط ۰.۰۲ هست — در فضای ۲۵۶‌بعدی این یعنی 3107A تقریباً روی خط مرز بین دو کلاس قرار داره.</span>
+    <span class="en"><strong>Step 4 — Decision:</strong> The model uses the simplest possible rule: <em>which centroid is closer?</em> Since cos_G2 &gt; cos_G1, the answer is Grade2. But the gap is only 0.02 — in 256-dimensional space this means 3107A sits almost exactly on the boundary line between the two classes.</span>
+    <span class="it"><strong>Passo 4 — Decisione:</strong> Il modello usa la regola più semplice possibile: <em>quale centroide è più vicino?</em> Poiché cos_G2 &gt; cos_G1, la risposta è Grade2. Ma la differenza è solo 0.02 — nello spazio a 256 dimensioni questo significa che 3107A si trova quasi esattamente sulla linea di confine tra le due classi.</span>
+  </p>
+  <p>
+    <span class="fa"><strong>نتیجه‌گیری:</strong> مدل "اشتباه" نکرد به معنای کلاسیک — embedding 3107A واقعاً به centroid Grade2 نزدیک‌تر هست. اما margin=0.02 یعنی این نزدیکی از نظر آماری بی‌معنی‌ه. فاکت که label این نمونه از Grade2 به Grade1 اصلاح شد نشون می‌ده حتی پاتولوژیست‌ها هم در این مورد تردید داشتند.</span>
+    <span class="en"><strong>Conclusion:</strong> The model did not make a "mistake" in the classical sense — 3107A's embedding genuinely is closer to the Grade2 centroid. But margin=0.02 means this proximity is statistically insignificant. The fact that this sample's label was corrected from Grade2 to Grade1 shows even the pathologists had uncertainty about this case.</span>
+    <span class="it"><strong>Conclusione:</strong> Il modello non ha commesso un "errore" nel senso classico — l'embedding di 3107A è genuinamente più vicino al centroide di Grade2. Ma margin=0.02 significa che questa vicinanza è statisticamente irrilevante. Il fatto che l'etichetta di questo campione sia stata corretta da Grade2 a Grade1 mostra che anche i patologi avevano incertezza su questo caso.</span>
+  </p>
 </div>
 
 <!-- Example 2: 3374B G1/2 -->
