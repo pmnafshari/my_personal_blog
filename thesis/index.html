@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>راهنمای کامل پروژه پایان‌نامه — از صفر تا صد</title>
+<title>Complete Thesis Project Guide — End-to-End</title>
 <style>
   body {
     font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif;
@@ -206,15 +206,20 @@
 <body>
 
 <!-- LANGUAGE TOGGLE BUTTON -->
-<button id="lang-toggle" onclick="toggleLanguage()">English &#127468;&#127463;</button>
+<button id="lang-toggle" onclick="toggleLanguage()">English</button>
 
 <script>
 var langCycle = ['fa', 'en', 'it'];
 var langIndex = 0;
 var langLabels = {
-  'fa': 'English &#127468;&#127463;',
-  'en': 'Italiano &#127470;&#127481;',
-  'it': '&#1601;&#1575;&#1585;&#1587;&#1740; &#127470;&#127479;'
+  'fa': 'English',
+  'en': 'Italiano',
+  'it': '&#1601;&#1575;&#1585;&#1587;&#1740;'
+};
+var langTitles = {
+  'fa': '\u0631\u0627\u0647\u0646\u0645\u0627\u06CC \u06A9\u0627\u0645\u0644 \u067E\u0631\u0648\u0698\u0647 \u067E\u0627\u06CC\u0627\u0646\u200C\u0646\u0627\u0645\u0647 \u2014 \u0627\u0632 \u0635\u0641\u0631 \u062A\u0627 \u0635\u062F',
+  'en': 'Complete Thesis Project Guide \u2014 End-to-End',
+  'it': 'Guida Completa al Progetto di Tesi \u2014 End-to-End'
 };
 function toggleLanguage() {
   var body = document.body;
@@ -238,13 +243,14 @@ function toggleLanguage() {
     document.documentElement.setAttribute('dir', 'rtl');
   }
   btn.innerHTML = langLabels[newLang];
+  document.title = langTitles[newLang];
 }
 </script>
 
 <!-- ============================================================ -->
 <h1>
   <span class="fa">راهنمای کامل پروژه پایان‌نامه — از صفر تا صد</span>
-  <span class="en">Complete Thesis Project Guide — From Zero to Hero</span>
+  <span class="en">Complete Thesis Project Guide — End-to-End</span>
   <span class="it">Guida Completa al Progetto di Tesi — Dall'Inizio alla Fine</span>
 </h1>
 <p>
@@ -271,7 +277,7 @@ function toggleLanguage() {
   <li><a href="#part5"><span class="fa">بخش ۵: آموزش — مدل چطور یاد می‌گیره؟</span><span class="en">Part 5: Training — How Does the Model Learn?</span><span class="it">Parte 5: Addestramento — Come Apprende il Modello?</span></a></li>
   <li><a href="#part6"><span class="fa">بخش ۶: ارزیابی — از کجا بفهمیم مدل خوب کار می‌کنه؟</span><span class="en">Part 6: Evaluation — How Do We Know the Model Works?</span><span class="it">Parte 6: Valutazione — Come Sappiamo che il Modello Funziona?</span></a></li>
   <li><a href="#part7"><span class="fa">بخش ۷: تحلیل پلات‌ها — نتایج رو بخون</span><span class="en">Part 7: Plot Analysis — Reading the Results</span><span class="it">Parte 7: Analisi dei Grafici — Leggere i Risultati</span></a></li>
-  <li><a href="#part8"><span class="fa">بخش ۸: سوالات احتمالی استاد + جواب</span><span class="en">Part 8: Potential Examiner Questions + Answers</span><span class="it">Parte 8: Possibili Domande del Commissario + Risposte</span></a></li>
+  <li><a href="#part8"><span class="fa">بخش ۸: سوالات احتمالی استاد + جواب</span><span class="en">Questions</span><span class="it">Domande</span></a></li>
   <li><a href="#abmil46"><span class="fa">بخش ۴.۶: مدل Two-Stage ABMIL (یادگیری نمونه‌ای با توجه)</span><span class="en">Section 4.6: Two-Stage ABMIL Model (Attention-Based MIL)</span><span class="it">Sezione 4.6: Modello Two-Stage ABMIL (MIL con Attenzione)</span></a></li>
   <li><a href="#part711"><span class="fa">بخش ۷.۱۱: نتایج مقایسه سه مدل (CNN، Transformer، ABMIL)</span><span class="en">Section 7.11: Three-Model Comparison (CNN, Transformer, ABMIL)</span><span class="it">Sezione 7.11: Confronto tra Tre Modelli (CNN, Transformer, ABMIL)</span></a></li>
   <li><a href="#part712"><span class="fa">بخش ۷.۱۲: تحلیل نمونه‌های مرزی (G1/2 و G2/1)</span><span class="en">Section 7.12: Borderline Sample Analysis (G1/2 and G2/1)</span><span class="it">Sezione 7.12: Analisi dei Campioni Borderline (G1/2 e G2/1)</span></a></li>
@@ -2236,7 +2242,7 @@ margin = |0.4601 − 0.4398| = 0.0203</pre>
 <div class="sep"></div>
 <h2 id="part8">
   <span class="fa">بخش ۸: سوالات احتمالی استاد + جواب</span>
-  <span class="en">Part 8: Potential Examiner Questions + Answers</span><span class="it">Parte 8: Possibili Domande dell'Esaminatore + Risposte</span>
+  <span class="en">Questions</span><span class="it">Domande</span>
 </h2>
 
 <h3><span class="fa">س۱: «چرا از یادگیری عمیق استفاده کردید و نه روش‌های کلاسیک؟»</span><span class="en">Q1: "Why did you use deep learning instead of classical methods?"</span><span class="it">D1: "Perché avete usato il deep learning invece dei metodi classici?"</span></h3>
