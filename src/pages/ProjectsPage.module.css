@@ -79,19 +79,19 @@
 
 .filter:hover {
   color: var(--text);
-  border-color: #3a3a41;
+  border-color: var(--accent-soft);
 }
 
 .filterActive {
   background: var(--accent);
   border-color: var(--accent);
-  color: #fff;
+  color: var(--bg-primary);
 }
 
 .filterActive:hover {
   background: var(--accent-hover);
   border-color: var(--accent-hover);
-  color: #fff;
+  color: var(--bg-primary);
 }
 
 .count {
@@ -118,7 +118,7 @@
 }
 
 .entry:hover {
-  border-color: #35353c;
+  border-color: var(--accent-soft);
 }
 
 .media {

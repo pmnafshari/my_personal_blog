@@ -32,14 +32,14 @@
 
 .primary {
   background: var(--accent);
-  color: #fff;
+  color: var(--bg-primary);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .primary:hover {
   background: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 6px 20px rgba(180, 154, 122, 0.3);
 }
 
 .secondary {
@@ -49,8 +49,8 @@
 }
 
 .secondary:hover {
-  background: #232328;
-  border-color: #3a3a41;
+  background: var(--surface);
+  border-color: var(--accent-soft);
   transform: translateY(-1px);
 }
 

@@ -51,13 +51,13 @@ export function NeuralGraph() {
       >
         <defs>
           <linearGradient id="ng-edge" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stopColor="#6366F1" stopOpacity="0.08" />
-            <stop offset="0.5" stopColor="#8B5CF6" stopOpacity="0.55" />
-            <stop offset="1" stopColor="#6366F1" stopOpacity="0.08" />
+            <stop offset="0" stopColor="#B49A7A" stopOpacity="0.08" />
+            <stop offset="0.5" stopColor="#B49A7A" stopOpacity="0.25" />
+            <stop offset="1" stopColor="#B49A7A" stopOpacity="0.08" />
           </linearGradient>
           <radialGradient id="ng-node">
-            <stop offset="0" stopColor="#A5B4FC" />
-            <stop offset="1" stopColor="#6366F1" />
+            <stop offset="0" stopColor="#D8C9B8" />
+            <stop offset="1" stopColor="#8A7765" />
           </radialGradient>
         </defs>
 
@@ -74,7 +74,7 @@ export function NeuralGraph() {
               cx={n.x}
               cy={n.y}
               r={n.r * 3.4}
-              fill="#6366F1"
+              fill="#B49A7A"
               opacity="0.09"
             />
             <circle

@@ -10,7 +10,7 @@
 .glow {
   position: absolute;
   inset: 12% 8%;
-  background: radial-gradient(closest-side, rgba(99, 102, 241, 0.16), transparent 70%);
+  background: radial-gradient(closest-side, rgba(180, 154, 122, 0.16), transparent 70%);
   filter: blur(18px);
   pointer-events: none;
 }

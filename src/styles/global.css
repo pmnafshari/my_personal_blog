@@ -2,27 +2,43 @@
    Design tokens
    ============================================================ */
 :root {
-  /* Surfaces */
-  --bg: #0a0a0b;
-  --bg-secondary: #111113;
-  --surface: #151518;
-  --surface-elevated: #1b1b1f;
+  /* Warm-neutral palette */
+  --bg-primary: #11100f;
+  --bg-secondary: #1b1917;
+  --bg-card: #292725;
+  --bg-elevated: #363330;
+
+  --text-primary: #f1ece3;
+  --text-secondary: #b8b1a7;
+  --text-muted: #8f877d;
+
+  --border-subtle: #302d29;
+  --border-default: #514c46;
+
+  --accent-primary: #b49a7a;
+  --accent-hover: #c7b096;
+  --accent-soft: #8a7765;
+  --accent-light: #d8c9b8;
+
+  --white: #ffffff;
+  --black: #000000;
+
+  /* Legacy aliases used across component styles */
+  --bg: var(--bg-primary);
+  --surface: var(--bg-card);
+  --surface-elevated: var(--bg-elevated);
 
   /* Text */
-  --text: #f5f5f5;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
+  --text: var(--text-primary);
 
   /* Borders */
-  --border: #27272a;
-  --border-subtle: #1f1f22;
+  --border: var(--border-default);
 
   /* Accent */
-  --accent: #6366f1;
-  --accent-2: #8b5cf6;
-  --accent-hover: #818cf8;
-  --accent-gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
-  --accent-soft: rgba(99, 102, 241, 0.12);
+  --accent: var(--accent-primary);
+  --accent-2: var(--accent-light);
+  --accent-gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
+  --accent-soft-bg: rgba(180, 154, 122, 0.12);
 
   /* Typography */
   --font: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
@@ -142,8 +158,8 @@ ol {
 }
 
 ::selection {
-  background: rgba(99, 102, 241, 0.35);
-  color: #fff;
+  background: rgba(180, 154, 122, 0.34);
+  color: var(--text-primary);
 }
 
 /* ============================================================
@@ -154,8 +170,9 @@ ol {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent-hover);
+  outline: 2px solid var(--accent-primary);
   outline-offset: 3px;
+  box-shadow: 0 0 0 1px rgba(216, 201, 184, 0.45);
   border-radius: 4px;
 }
 
