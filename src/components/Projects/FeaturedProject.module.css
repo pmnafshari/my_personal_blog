@@ -9,7 +9,7 @@
 }
 
 .card:hover {
-  border-color: #35353c;
+  border-color: var(--accent-soft);
 }
 
 .media {
@@ -38,8 +38,8 @@
 .badge {
   padding: 4px 10px;
   border-radius: var(--r-pill);
-  background: var(--accent-soft);
-  border: 1px solid rgba(99, 102, 241, 0.35);
+  background: var(--accent-soft-bg);
+  border: 1px solid rgba(138, 119, 101, 0.45);
   color: var(--accent-hover);
   font-weight: 600;
   letter-spacing: 0.06em;

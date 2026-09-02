@@ -31,7 +31,7 @@
 }
 
 .highlight:hover {
-  border-color: rgba(99, 102, 241, 0.4);
+  border-color: rgba(138, 119, 101, 0.6);
   color: var(--text);
 }
 

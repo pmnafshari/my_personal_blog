@@ -48,13 +48,13 @@
   height: 9px;
   border-radius: 50%;
   background: var(--surface-elevated);
-  border: 1px solid #3f3f46;
+  border: 1px solid var(--border-default);
 }
 
 .markerCurrent {
   background: var(--accent);
   border-color: var(--accent);
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.14);
+  box-shadow: 0 0 0 4px rgba(180, 154, 122, 0.18);
 }
 
 .entryHead {

@@ -15,7 +15,7 @@
 }
 
 .card:hover {
-  border-color: #35353c;
+  border-color: var(--accent-soft);
   background: var(--surface-elevated);
 }
 
