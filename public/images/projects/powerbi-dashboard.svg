@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" font-family="Inter, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6366F1" stop-opacity=".35"/><stop offset="1" stop-color="#6366F1" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1F1F22" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="#101014"/>
+  <rect width="1600" height="900" fill="url(#grid)" opacity=".55"/>
+  <g fill="none" stroke="#27272A" stroke-width="1.5">
+    <rect x="90" y="90" width="1420" height="720" rx="14"/>
+  </g>
+  <!-- KPI tiles -->
+  <g>
+    <rect x="130" y="130" width="300" height="120" rx="10" fill="#18181C" stroke="#27272A"/>
+    <text x="155" y="175" fill="#71717A" font-size="20">MODELS BENCHMARKED</text>
+    <text x="155" y="222" fill="#F5F5F5" font-size="42" font-weight="700">28</text>
+    <rect x="450" y="130" width="300" height="120" rx="10" fill="#18181C" stroke="#27272A"/>
+    <text x="475" y="175" fill="#71717A" font-size="20">STUDIES</text>
+    <text x="475" y="222" fill="#F5F5F5" font-size="42" font-weight="700">4</text>
+    <rect x="770" y="130" width="300" height="120" rx="10" fill="#18181C" stroke="#27272A"/>
+    <text x="795" y="175" fill="#71717A" font-size="20">DIM TABLES</text>
+    <text x="795" y="222" fill="#F5F5F5" font-size="42" font-weight="700">7</text>
+    <rect x="1090" y="130" width="380" height="120" rx="10" fill="#1B1420" stroke="#8B5CF6" stroke-opacity=".45"/>
+    <text x="1115" y="175" fill="#A78BFA" font-size="20">VALIDATION COMPROMISED</text>
+    <text x="1115" y="222" fill="#F5F5F5" font-size="42" font-weight="700">3</text>
+  </g>
+  <!-- bar chart -->
+  <rect x="130" y="290" width="820" height="480" rx="10" fill="#18181C" stroke="#27272A"/>
+  <text x="158" y="335" fill="#A1A1AA" font-size="22" font-weight="600">Accuracy by model</text>
+  <g stroke="#1F1F22" stroke-width="1">
+    <line x1="158" y1="700" x2="920" y2="700"/><line x1="158" y1="620" x2="920" y2="620"/>
+    <line x1="158" y1="540" x2="920" y2="540"/><line x1="158" y1="460" x2="920" y2="460"/>
+  </g>
+  <g>
+    <rect x="190" y="470" width="70" height="230" rx="4" fill="url(#acc)"/>
+    <rect x="290" y="420" width="70" height="280" rx="4" fill="#8B5CF6" opacity=".55"/>
+    <rect x="390" y="510" width="70" height="190" rx="4" fill="url(#acc)"/>
+    <rect x="490" y="392" width="70" height="308" rx="4" fill="#3F3F46"/>
+    <rect x="490" y="392" width="70" height="308" rx="4" fill="none" stroke="#8B5CF6" stroke-dasharray="6 5"/>
+    <rect x="590" y="545" width="70" height="155" rx="4" fill="url(#acc)"/>
+    <rect x="690" y="440" width="70" height="260" rx="4" fill="#8B5CF6" opacity=".55"/>
+    <rect x="790" y="497" width="70" height="203" rx="4" fill="url(#acc)"/>
+  </g>
+  <text x="497" y="378" fill="#A78BFA" font-size="17">leaked split</text>
+  <!-- side panel -->
+  <rect x="980" y="290" width="490" height="480" rx="10" fill="#18181C" stroke="#27272A"/>
+  <text x="1008" y="335" fill="#A1A1AA" font-size="22" font-weight="600">Validation integrity</text>
+  <g font-size="19">
+    <rect x="1008" y="365" width="434" height="58" rx="8" fill="#141418"/>
+    <circle cx="1036" cy="394" r="7" fill="#6366F1"/><text x="1058" y="401" fill="#A1A1AA">LOSO cross-validation</text><text x="1400" y="401" fill="#F5F5F5" text-anchor="end">12</text>
+    <rect x="1008" y="435" width="434" height="58" rx="8" fill="#141418"/>
+    <circle cx="1036" cy="464" r="7" fill="#8B5CF6"/><text x="1058" y="471" fill="#A1A1AA">Hold-out test</text><text x="1400" y="471" fill="#F5F5F5" text-anchor="end">9</text>
+    <rect x="1008" y="505" width="434" height="58" rx="8" fill="#141418"/>
+    <circle cx="1036" cy="534" r="7" fill="#52525B"/><text x="1058" y="541" fill="#A1A1AA">Random split</text><text x="1400" y="541" fill="#F5F5F5" text-anchor="end">4</text>
+    <rect x="1008" y="575" width="434" height="58" rx="8" fill="#1B1420" stroke="#8B5CF6" stroke-opacity=".35"/>
+    <circle cx="1036" cy="604" r="7" fill="#A78BFA"/><text x="1058" y="611" fill="#A78BFA">Compromised design</text><text x="1400" y="611" fill="#F5F5F5" text-anchor="end">3</text>
+    <rect x="1008" y="645" width="434" height="58" rx="8" fill="#141418"/>
+    <circle cx="1036" cy="674" r="7" fill="#3F3F46"/><text x="1058" y="681" fill="#71717A">Unreported</text><text x="1400" y="681" fill="#71717A" text-anchor="end">—</text>
+  </g>
+</svg>

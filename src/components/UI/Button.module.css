@@ -1,0 +1,89 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  border-radius: var(--r-btn);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition:
+    background var(--t-base),
+    border-color var(--t-base),
+    color var(--t-base),
+    transform var(--t-fast),
+    box-shadow var(--t-base);
+}
+
+/* 44px minimum touch target */
+.md {
+  min-height: 46px;
+  padding: 0 var(--sp-5);
+}
+
+.sm {
+  min-height: 38px;
+  padding: 0 var(--sp-4);
+  font-size: var(--fs-xs);
+}
+
+.primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.25);
+}
+
+.secondary {
+  background: var(--surface-elevated);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.secondary:hover {
+  background: #232328;
+  border-color: #3a3a41;
+  transform: translateY(-1px);
+}
+
+.ghost {
+  color: var(--text-secondary);
+  padding-inline: var(--sp-3);
+}
+
+.ghost:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.icon,
+.iconRight {
+  flex: none;
+  transition: transform var(--t-base);
+}
+
+.btn:hover .iconRight {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover {
+    transform: none;
+  }
+
+  .btn:hover .iconRight {
+    transform: none;
+  }
+}

@@ -1,0 +1,236 @@
+/* ============================================================
+   Design tokens
+   ============================================================ */
+:root {
+  /* Surfaces */
+  --bg: #0a0a0b;
+  --bg-secondary: #111113;
+  --surface: #151518;
+  --surface-elevated: #1b1b1f;
+
+  /* Text */
+  --text: #f5f5f5;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+
+  /* Borders */
+  --border: #27272a;
+  --border-subtle: #1f1f22;
+
+  /* Accent */
+  --accent: #6366f1;
+  --accent-2: #8b5cf6;
+  --accent-hover: #818cf8;
+  --accent-gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
+  --accent-soft: rgba(99, 102, 241, 0.12);
+
+  /* Typography */
+  --font: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+
+  --fs-hero: clamp(2.125rem, 1.55rem + 2.6vw, 3.5rem);
+  --fs-h2: clamp(2rem, 1.6rem + 2vw, 2.75rem);
+  --fs-h3: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --fs-lead: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+  --fs-body: 1rem;
+  --fs-sm: 0.875rem;
+  --fs-xs: 0.8125rem;
+
+  /* Spacing */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+
+  --section-y: clamp(72px, 8vw, 116px);
+  --page-x: clamp(20px, 4vw, 32px);
+  --maxw: 1200px;
+
+  /* Radii */
+  --r-card: 16px;
+  --r-btn: 10px;
+  --r-pill: 999px;
+
+  --nav-h: 68px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --t-fast: 0.16s var(--ease);
+  --t-base: 0.28s var(--ease);
+}
+
+/* ============================================================
+   Reset
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 16px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  font-synthesis-weight: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.35);
+  color: #fff;
+}
+
+/* ============================================================
+   Focus — visible, consistent, never removed
+   ============================================================ */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   Utilities
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--page-x);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--sp-4);
+  z-index: 200;
+  padding: var(--sp-3) var(--sp-5);
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-btn);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  transition: top var(--t-base);
+}
+
+.skip-link:focus-visible {
+  top: var(--sp-4);
+}
+
+/* ============================================================
+   Scroll reveal — opt-in, disabled under reduced motion
+   ============================================================ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.6s var(--ease),
+    transform 0.6s var(--ease);
+}
+
+[data-reveal='shown'] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

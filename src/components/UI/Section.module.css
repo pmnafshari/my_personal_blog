@@ -1,0 +1,57 @@
+.section {
+  padding-block: var(--section-y);
+  position: relative;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--sp-5);
+  margin-bottom: var(--sp-8);
+}
+
+.headingCol {
+  min-width: 0;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+  color: var(--accent-hover);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.eyebrowMark {
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+  flex: none;
+}
+
+.title {
+  font-size: var(--fs-h2);
+  max-width: 20ch;
+}
+
+.lead {
+  color: var(--text-secondary);
+  font-size: var(--fs-lead);
+  max-width: 62ch;
+}
+
+@media (min-width: 900px) {
+  .header {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--sp-8);
+    align-items: end;
+  }
+
+  .lead {
+    padding-bottom: var(--sp-2);
+  }
+}

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" font-family="Inter, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1F1F22" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="#101014"/>
+  <rect width="1600" height="900" fill="url(#grid)" opacity=".55"/>
+  <g font-size="20" fill="#71717A"><text x="120" y="120" letter-spacing="3">SOURCES</text></g>
+  <g fill="#18181C" stroke="#27272A" stroke-width="1.5">
+    <rect x="120" y="160" width="250" height="86" rx="10"/><rect x="120" y="270" width="250" height="86" rx="10"/>
+    <rect x="120" y="380" width="250" height="86" rx="10"/><rect x="120" y="490" width="250" height="86" rx="10"/>
+  </g>
+  <g font-size="23" fill="#F5F5F5" font-weight="500">
+    <text x="150" y="212">Google Scholar</text><text x="150" y="322">arXiv</text>
+    <text x="150" y="432">Semantic Scholar</text><text x="150" y="542">IEEE Xplore</text>
+  </g>
+  <g stroke="#3F3F46" stroke-width="1.5" fill="none">
+    <path d="M370 203C440 203 460 330 530 368"/><path d="M370 313C440 313 470 350 530 368"/>
+    <path d="M370 423C440 423 470 390 530 368"/><path d="M370 533C440 533 460 410 530 368"/>
+  </g>
+  <rect x="530" y="300" width="270" height="140" rx="12" fill="#18181C" stroke="#6366F1" stroke-opacity=".45" stroke-width="1.5"/>
+  <text x="560" y="352" fill="#F5F5F5" font-size="25" font-weight="600">Chunk + embed</text>
+  <text x="560" y="392" fill="#71717A" font-size="19">vector index</text>
+  <path d="M800 370h60" stroke="#3F3F46" stroke-width="2"/><path d="M866 370l-16-8v16z" fill="#3F3F46"/>
+  <rect x="866" y="300" width="270" height="140" rx="12" fill="#18181C" stroke="#8B5CF6" stroke-opacity=".45" stroke-width="1.5"/>
+  <text x="896" y="352" fill="#F5F5F5" font-size="25" font-weight="600">LLM summarise</text>
+  <text x="896" y="392" fill="#71717A" font-size="19">key points + insights</text>
+  <path d="M1136 370h60" stroke="#3F3F46" stroke-width="2"/><path d="M1202 370l-16-8v16z" fill="#3F3F46"/>
+  <g fill="#18181C" stroke="#27272A" stroke-width="1.5">
+    <ellipse cx="1340" cy="308" rx="130" ry="30"/>
+    <path d="M1210 308v124c0 17 58 30 130 30s130-13 130-30V308"/>
+  </g>
+  <text x="1340" y="490" fill="#A1A1AA" font-size="22" text-anchor="middle">searchable store</text>
+  <rect x="530" y="620" width="606" height="110" rx="12" fill="#141418" stroke="#27272A" stroke-width="1.5"/>
+  <circle cx="580" cy="675" r="10" fill="#6366F1"/>
+  <text x="612" y="668" fill="#F5F5F5" font-size="23" font-weight="500">Citation alerts</text>
+  <text x="612" y="702" fill="#71717A" font-size="19">fires when a tracked paper is published or cited</text>
+  <text x="120" y="790" fill="#3F3F46" font-size="20" letter-spacing="3">ORCHESTRATED BY n8n · DOCKER</text>
+</svg>
