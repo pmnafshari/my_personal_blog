@@ -1,0 +1,130 @@
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--sp-8);
+}
+
+.columnTitle {
+  margin-bottom: var(--sp-5);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--border);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.langTitle {
+  margin-top: var(--sp-8);
+}
+
+.timeline {
+  display: grid;
+  gap: var(--sp-6);
+}
+
+.entry {
+  position: relative;
+  padding-left: var(--sp-6);
+}
+
+/* Connecting line between markers */
+.entry:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 20px;
+  bottom: calc(var(--sp-6) * -1);
+  width: 1px;
+  background: var(--border);
+}
+
+.marker {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--surface-elevated);
+  border: 1px solid #3f3f46;
+}
+
+.markerCurrent {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.14);
+}
+
+.entryHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-2) var(--sp-4);
+}
+
+.entryTitle {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.entryMeta {
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+  white-space: nowrap;
+}
+
+.entrySubtitle {
+  margin-top: 3px;
+  color: var(--accent-hover);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+
+.entryDetail {
+  margin-top: var(--sp-3);
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  max-width: 60ch;
+}
+
+/* ---- Languages ---- */
+.languages {
+  display: grid;
+  gap: 1px;
+  background: var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.language {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-5);
+  background: var(--bg-secondary);
+}
+
+.language dt {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+
+.language dd {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.04em;
+}
+
+@media (min-width: 900px) {
+  .columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-9);
+  }
+}

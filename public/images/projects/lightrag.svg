@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" font-family="Inter, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1F1F22" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="#101014"/>
+  <rect width="1600" height="900" fill="url(#grid)" opacity=".55"/>
+  <g stroke="#27272A" stroke-width="1.5">
+    <path d="M420 250 640 400M640 400 470 610M640 400 900 320M900 320 1140 230M900 320 1080 520M1080 520 880 660M640 400 880 660M470 610 880 660M900 320 640 400"/>
+  </g>
+  <g stroke="#6366F1" stroke-width="2.5" stroke-opacity=".85">
+    <path d="M640 400 900 320M900 320 1080 520"/>
+  </g>
+  <g fill="#18181C" stroke="#3F3F46" stroke-width="2">
+    <circle cx="420" cy="250" r="26"/><circle cx="470" cy="610" r="26"/>
+    <circle cx="1140" cy="230" r="26"/><circle cx="880" cy="660" r="26"/>
+  </g>
+  <circle cx="640" cy="400" r="36" fill="#1a1a2e" stroke="#6366F1" stroke-width="2.5"/>
+  <circle cx="900" cy="320" r="36" fill="#1a1a2e" stroke="#6366F1" stroke-width="2.5"/>
+  <circle cx="1080" cy="520" r="32" fill="#1a1a2e" stroke="#8B5CF6" stroke-width="2.5"/>
+  <g font-size="20" fill="#A1A1AA">
+    <text x="612" y="470" text-anchor="middle">entity</text>
+    <text x="900" y="268" text-anchor="middle">relation</text>
+    <text x="1080" y="588" text-anchor="middle">answer span</text>
+  </g>
+  <text x="380" y="150" fill="#71717A" font-size="20" letter-spacing="3">KNOWLEDGE GRAPH</text>
+  <rect x="90" y="130" width="200" height="640" rx="12" fill="#141418" stroke="#27272A"/>
+  <text x="118" y="176" fill="#71717A" font-size="18" letter-spacing="2">CHUNKS</text>
+  <g fill="#1B1B1F"><rect x="118" y="200" width="144" height="86" rx="8"/><rect x="118" y="300" width="144" height="86" rx="8"/><rect x="118" y="500" width="144" height="86" rx="8"/><rect x="118" y="600" width="144" height="86" rx="8"/></g>
+  <rect x="118" y="400" width="144" height="86" rx="8" fill="#1a1a2e" stroke="#6366F1" stroke-opacity=".6"/>
+  <g fill="#3F3F46"><rect x="136" y="222" width="100" height="9" rx="4.5"/><rect x="136" y="240" width="72" height="9" rx="4.5"/>
+    <rect x="136" y="322" width="100" height="9" rx="4.5"/><rect x="136" y="340" width="60" height="9" rx="4.5"/>
+    <rect x="136" y="522" width="90" height="9" rx="4.5"/><rect x="136" y="622" width="104" height="9" rx="4.5"/></g>
+  <g fill="#818CF8"><rect x="136" y="422" width="100" height="9" rx="4.5"/><rect x="136" y="440" width="80" height="9" rx="4.5"/></g>
+  <path d="M262 443h96" stroke="#6366F1" stroke-width="2" stroke-dasharray="5 5"/>
+  <text x="1240" y="836" fill="#3F3F46" font-size="20" letter-spacing="3" text-anchor="end">HYBRID SEARCH: VECTOR + GRAPH</text>
+</svg>
