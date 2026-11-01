@@ -13,6 +13,30 @@
  */
 export const projects = [
   {
+    id: 'dentalgenai',
+    title: 'DentalGenAI — Private AI for Dental Clinics',
+    category: 'AI Systems',
+    period: '2026',
+    description:
+      'Records, notes and patients in one place. AI that runs on the clinic\'s own Mac, works offline, and waits for approval before anything is saved — CRM, patient portal, ERP, dictation and cited record Q&A.',
+    longDescription:
+      "DentalGenAI is a clinic's memory, kept in the clinic: one record per patient, an ERP for invoices, stock and files, and AI assistants that only answer from clinic information.",
+    problem:
+      'Dental practices hold sensitive patient data across scattered tools, and cloud AI is a hard sell when that data cannot leave the building.',
+    approach:
+      'Everything runs on the clinic\'s own Mac and works without internet. Messy dictated notes become structured records, but nothing is saved without review: the clinician sees exactly what changes, edits, then approves. Every action is logged with who and when, with role-based access and built-in backups.',
+    results:
+      'A product site with a walkthrough film, a three-tier plan structure and a live synthetic-data demo of both the staff panel and the patient portal.',
+    technologies: ['Generative AI', 'Speech-to-Text', 'Local-first AI', 'RAG', 'Healthcare'],
+    image: '/dentalgenai/media/dentalgenai-poster.jpg',
+    imageAlt: 'DentalGenAI walkthrough film poster',
+    demo: '/dentalgenai/index.html',
+    demoLabel: 'View project site',
+    github: '',
+    onHome: true,
+  },
+
+  {
     id: 'meningioma',
     title: 'Meningioma Grade Classification from AFM',
     category: 'Medical AI',
