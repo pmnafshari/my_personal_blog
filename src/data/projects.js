@@ -33,6 +33,7 @@ export const projects = [
     demo: '/dentalgenai/index.html',
     demoLabel: 'View project site',
     github: '',
+    featured: true,
     onHome: true,
   },
 
@@ -60,7 +61,6 @@ export const projects = [
     demo: '/thesis/index.html',
     demoLabel: 'View full results',
     github: '',
-    featured: true,
     onHome: true,
   },
 
